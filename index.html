@@ -1,109 +1,110 @@
----
-layout: default
-title: The Sheep Vote
----
-<header>
-	<div class="container">
-		<div class="column">
-			<div>
-				<h1 class="editable">Give sheep the vote</h1>
-				<p class="editable">Sheep are the backbone of the economy yet they receive no compensation.</p>
-				<div class="button">
-					<a href="#donate">Donate Now</a>
-				</div>
-			</div>
-		</div>
-		<div class="column">
-			<img src="{{ site.baseurl }}/images/sheep.jpg" alt="Sheep">
-		</div>
-	</div>
-</header>
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Welcome to My Homepage!</title>
+<style>
+  *{box-sizing:border-box} body{margin:0;background:#efefff;color:#222;font-family:"Times New Roman","Malgun Gothic",serif;font-size:14px}
+  a{color:#2447a8;text-decoration:none} a:hover{text-decoration:underline;color:#e34a8e}
+  .top{height:34px;background:#070b78;color:#fff;text-align:center;line-height:34px;font-size:18px;letter-spacing:.5px;border-bottom:3px double #fff}
+  .wrap{max-width:1180px;margin:0 auto;background:#fff;min-height:100vh;display:grid;grid-template-columns:220px 1fr;border-left:1px solid #aaa;border-right:1px solid #aaa}
+  .side{background:linear-gradient(#ece8ff,#e9e4ff);padding:18px 14px;border-right:2px ridge #c7c7d8}
+  .menu-title{text-align:center;color:#4d2d87;font-size:18px;margin:0 0 12px}
+  .menu a{display:block;margin:5px 0;padding:10px 12px;background:linear-gradient(#fff,#dfe4f3);border:3px outset #e7e7ef;color:#173f92;font-family:Arial,"Malgun Gothic",sans-serif;font-weight:700;font-size:16px}
+  .menu .ico{display:inline-block;width:26px;text-align:center;margin-right:6px}
+  .counter,.ie{background:#f8f6ff;border:2px ridge #c7b8ff;margin-top:26px;padding:10px;text-align:center}
+  .counter h3{margin:-10px -10px 10px;padding:7px;background:#ece9ff;color:#3153a5;font-size:14px}
+  .digits{font-family:monospace;font-size:25px;letter-spacing:3px;background:#fff;border:2px inset #ddd;padding:4px 6px;margin:4px auto 10px;display:inline-block;color:#e85a9b}
+  .digits.blue{color:#415bbd}
+  .main{padding:28px 36px 24px;background:#fff}
+  .hero{text-align:center}
+  .hero h1{margin:5px 0;color:#ef5a9a;font-size:38px;font-weight:500;letter-spacing:1px}
+  .hero p{margin:4px 0 16px;color:#295ec7;font-size:20px}
+  .pinkline{border:0;border-top:2px dotted #ff9dc5}
+  .icons{display:flex;justify-content:center;gap:34px;flex-wrap:wrap;padding:10px 0 22px;font-size:16px}
+  .grid{display:grid;grid-template-columns:minmax(0,2.1fr) minmax(220px,.9fr);gap:22px;align-items:start}
+  .box{border:2px solid #6888ef;border-radius:10px;overflow:hidden;background:#fff}
+  .box-title{padding:9px 12px;background:linear-gradient(90deg,#e8f1ff,#fff);color:#3153a5;font-size:18px;font-weight:700;border-bottom:1px solid #7a9be9}
+  .notices{list-style:none;padding:6px 18px 10px;margin:0}
+  .notices li{padding:9px 4px;border-bottom:1px dotted #8099e6}.notices li:last-child{border-bottom:0}.sq{color:#7d2fc2;margin-right:8px}
+  .fav{border-color:#ff9dc5}.fav .box-title{background:#fff4f9;color:#e65a97;text-align:center;border-color:#ffb3d0}.fav ul{list-style:none;padding:8px 18px 14px;margin:0}.fav li{padding:8px 0;border-bottom:1px dotted #ff9dc5;color:#3153a5}.heart{color:#f25498}
+  .welcome{margin-top:20px;border:2px solid #8faeed;border-radius:9px;background:linear-gradient(90deg,#fff,#f7fbff);padding:16px 20px;line-height:1.6}.welcome h2{font-size:19px;color:#3153a5;margin:0 0 7px;font-weight:500}.pink{color:#ee4e91}
+  .footer-links{margin-top:22px;border-top:1px solid #b7a7ef;border-bottom:1px solid #b7a7ef;padding:10px;text-align:center;color:#6a54b4}.footer-links span{margin:0 16px;color:#aaa}
+  .banners{display:grid;grid-template-columns:1.1fr .9fr 1.2fr;gap:14px;margin-top:16px}.banner{min-height:72px;border:2px ridge #d8d0f4;background:#faf7ff;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px}.bless{background:linear-gradient(#dff7ff,#f4fbff);font-size:24px;color:#8050c3;text-shadow:1px 1px #fff}
+  .copy{font-size:12px;color:#7356c0;margin-top:22px;line-height:1.7}
+  .cat{text-align:center;font-size:42px;padding:16px 0 5px}.speech{text-align:center;color:#e55a98;font-size:18px}
+  .badge{font-family:Arial,sans-serif;font-size:11px}.badge strong{font-size:13px}
+  @media(max-width:760px){.wrap{display:block}.side{border-right:0;border-bottom:2px ridge #c7c7d8}.main{padding:20px 14px}.grid{grid-template-columns:1fr}.banners{grid-template-columns:1fr}.hero h1{font-size:28px}.hero p{font-size:16px}.menu{display:grid;grid-template-columns:1fr 1fr;gap:4px}.menu a{margin:0}.counter,.ie{display:none}}
+</style>
+</head>
+<body>
+<div class="top">✣ ✳ &nbsp;&nbsp; Welcome to My Homepage... Since 2001.03.12 &nbsp;&nbsp; ✳ ✣</div>
+<div class="wrap">
+  <aside class="side">
+    <div class="menu-title">+ MENU +</div>
+    <nav class="menu">
+      <a href="#home"><span class="ico">🏠</span>HOME</a>
+      <a href="#profile"><span class="ico">🙂</span>PROFILE</a>
+      <a href="#family"><span class="ico">👨‍👩‍👧‍👦</span>FAMILY</a>
+      <a href="#photo"><span class="ico">📷</span>PHOTO</a>
+      <a href="#board"><span class="ico">📋</span>BOARD</a>
+      <a href="#guest"><span class="ico">♡</span>방명록</a>
+    </nav>
+    <div class="counter">
+      <h3>★ Visitor Counter ★</h3>
+      <b>TODAY</b><br><div class="digits">000128</div><br>
+      <b>TOTAL</b><br><div class="digits blue">012345</div><br>
+      <small>Since 2001.03.12</small>
+    </div>
+    <div class="ie badge">🌐<br><strong>Best viewed with<br>Microsoft Internet Explorer</strong><br>5.0 이상</div>
+  </aside>
 
-<div class="container">
-	<h2 class="editable" style="text-align: center;">Why sheep need the vote</h2>
+  <main class="main" id="home">
+    <section class="hero">
+      <h1>☆ WELCOME TO MY HOMEPAGE! ☆</h1>
+      <p>☆ 말씀과 컴퓨터를 좋아하는 사람의 작은 공간 ☆</p>
+    </section>
+    <hr class="pinkline">
+    <div class="icons"><span>📖 말씀</span><span>|</span><span>💻 컴퓨터</span><span>🎵 음악</span><span>📷 사진</span><span>✏️ 일기</span></div>
 
-	<ul class="thirds">
-		<li>
-			<div class="image">{% include icons/site.html icon="population" %}</div>
-			<h3 class="editable">Population</h3>
-			<p class="editable">New Zealand has a human population of just 4.5M while there are 70M sheep. </p>
-		</li>
+    <div class="grid">
+      <section class="box" id="board">
+        <div class="box-title">★ 공지사항 ★ <span style="float:right;font-size:12px;background:#fff;border:2px outset #ddd;padding:3px 8px">MORE ▶</span></div>
+        <ul class="notices">
+          <li><span class="sq">■</span>09/01 - 홈페이지를 새롭게 열었습니다. ^_^</li>
+          <li><span class="sq">■</span>08/28 - 추억의 2001년 감성으로 꾸미는 중입니다.</li>
+          <li><span class="sq">■</span>08/19 - 방명록에 글을 남겨주세요 ~</li>
+          <li><span class="sq">■</span>08/12 - 사진첩은 천천히 채워갈 예정입니다.</li>
+          <li><span class="sq">■</span>08/03 - 방문해 주셔서 감사합니다!</li>
+        </ul>
+      </section>
 
-		<li>
-			<div class="image">{% include icons/site.html icon="economy" %}</div>
-			<h3 class="editable">Economy</h3>
-			<p class="editable">Sheep are the backbone of the economy yet they receive no compensation.</p>
-		</li>
+      <aside class="box fav">
+        <div class="box-title">☆ MY FAVORITE ☆</div>
+        <ul><li><span class="heart">♥</span> 좋아하는 성경구절</li><li><span class="heart">♥</span> 좋아하는 음악</li><li><span class="heart">♥</span> 자주 가는 사이트</li><li><span class="heart">♥</span> 링크 모음</li></ul>
+        <div class="cat">(=^･ω･^=)♡</div><div class="speech">Have a Nice Day!</div><br>
+      </aside>
+    </div>
 
-		<li>
-			<div class="image">{% include icons/site.html icon="conditions" %}</div>
-			<h3 class="editable">Work Conditions</h3>
-			<p class="editable">Sheep are forced to eat grass every day of their life. How about some of variety?</p>
-		</li>
-	</ul>
+    <section class="welcome" id="profile">
+      <h2>WELCOME!! 🏠</h2>
+      안녕하세요! 제 홈페이지에 오신 것을 환영합니다.<br>
+      부족한 홈페이지지만 많이 찾아주시고<br>
+      <b>좋은 말씀과 유익한 정보</b> 함께 나눴으면 좋겠습니다.<br>
+      언제든지 <span class="pink">방명록</span>에 글 남겨주세요. 감사합니다! ^0^
+    </section>
+
+    <div class="footer-links"><a href="#home">🏠 처음으로</a><span>|</span><a href="#guest">📖 방명록</a><span>|</span><a href="mailto:myhome@example.com">✉ 메일</a><span>|</span><a href="#profile">💻 관리자에게</a><span>|</span><a href="#home">☆ 즐겨찾기 추가</a></div>
+
+    <div class="banners">
+      <div class="banner">✝️ <b style="margin-left:8px">Jesus</b>&nbsp;&nbsp; 예수님 안에서<br>참된 기쁨을 누리세요!</div>
+      <div class="banner">🖥️ &nbsp;배경음악이 흘러요 ♪<br><small>ON&nbsp;&nbsp;(끄시려면 클릭하세요)</small></div>
+      <div class="banner bless">☁️ God Bless You! 🌈</div>
+    </div>
+
+    <div class="copy">Copyright(c) 2001 My Homepage All Rights Reserved.<br>e-mail : myhome@hanmail.net</div>
+  </main>
 </div>
-
-<div class="container">
-	<div class="columns">
-		<div>
-			<img src="{{ site.baseurl }}/images/sheep2.jpg" alt="Sheep">
-		</div>
-		<div>
-			<h2 class="editable">Our Mission</h2>
-
-			<p class="editable">Leave no sheep behind. Our mission to give sheep the right to vote and have them represented in parliament. For too long sheep have been exploited for their warm wool and delicious meat. It's time to put our hooves down and baa for what's right. Give sheep the vote!</p>
-		</div>
-	</div>
-</div>
-
-<div class="container">
-	<hr>
-	<blockquote>
-		<p class="quote editable">The ultimate measure of a sheep is not where he stands in moments of comfort and convenience, but where he stands at times of challenge and controversy.</p>
-		<div class="attribute">
-			<p class="meta">
-				<span class="image"><img class="editable" src="{{ site.baseurl }}/images/wooly.jpg" alt="Wooly"></span>
-				<span class="author editable"><strong>Wooly McBaa</strong></span>
-			</p>
-		</div>
-	</blockquote>
-</div>
-
-<div class="darker">
-	<div class="container">
-		<h2 class="editable">Join us</h2>
-		<p class="editable" style="text-align: center;">Sign up to hear the latest news and progress in our fight for the sheep vote.</p>
-		<form action="{{ site.newsletter_action }}" method="post">
-			<input type="text" name="EMAIL" placeholder="Email">
-			<input type="submit" value="Sign up"/>
-		</form>
-	</div>
-</div>
-
-<div class="container" id="donate">
-	<h2 class="editable">Make a donation</h2>
-	<div class="donate">
-		{{ site.donation_embed }}
-	</div>
-</div>
-
-<div class="darker">
-	<div class="container">
-		<h2 class="editable">Updates</h2>
-		<p class="editor-link"><a href="cloudcannon:collections/_posts" class="btn"><strong>&#9998;</strong> Add Update</a></p>
-		<div class="posts">
-			{% for post in site.posts %}
-				<div class="post">
-					<div class="image" style="background-image: url({{ post.featured_image}})"></div>
-					<div class="post-content">
-						<p class="date">{{ post.date | date: '%B %d, %Y' }}</p>
-						<h3>{{ post.title }}</h3>
-
-						{{ post.content }}
-						<p class="editor-link"><a href="cloudcannon:collections/{{ post.path }}" class="btn"><strong>&#9998;</strong> Edit Update</a></p>
-					</div>
-				</div>
-			{% endfor %}
-		</div>
-	</div>
-</div>
+</body>
+</html>
