@@ -17,11 +17,11 @@
   "heroImage": "/assets/uploads/1788328879441-IMG_6855.jpg",
   "churchFrontImage": "/assets/uploads/1788324996092-IMG_4502.jpg",
   "churchSideImage": "/assets/uploads/1788325173972-IMG_4503.jpg",
-  "worshipImage": "",
+  "worshipImage": "/assets/uploads/1788390844007-IMG_9386.jpg",
   "fellowshipImage": "/assets/uploads/1788326948155-IMG_6002.jpg",
   "childrenImage": "/assets/uploads/1788326159781-IMG_5181.jpg",
   "pastorImage": "/assets/uploads/1788325571600-___________2026-09-02______2.06.06.jpg",
-  "kakaoQr": "",
+  "kakaoQr": "/assets/uploads/1788392512175-qrcode_120.jpg",
   "youtubeQr": "/assets/uploads/1788325526851-IMG_7359.jpg",
   "latestBulletin": {
     "date": "2026.08.30",
@@ -30,11 +30,29 @@
     "preacher": "이동호 목사"
   },
   "worship": [
-    {"name": "주일예배", "time": "주일 오전 11:00"},
-    {"name": "주일학교", "time": "주일 오전 9:30"},
-    {"name": "수요예배", "time": "수요일 오후 8:00"},
-    {"name": "저녁기도회", "time": "평일 오후 8:00"},
-    {"name": "사랑방 모임", "time": "주중 각 사랑방별"},
-    {"name": "절기·특별예배", "time": "공지사항 참고"}
+    {
+      "name": "주일예배",
+      "time": "주일 오전 11:00"
+    },
+    {
+      "name": "주일학교",
+      "time": "주일 오전 9:30"
+    },
+    {
+      "name": "수요예배",
+      "time": "수요일 오후 8:00"
+    },
+    {
+      "name": "저녁기도회",
+      "time": "평일 오후 8:00"
+    },
+    {
+      "name": "사랑방 모임",
+      "time": "주중 각 사랑방별"
+    },
+    {
+      "name": "절기·특별예배",
+      "time": "공지사항 참고"
+    }
   ]
 }
