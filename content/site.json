@@ -1,6 +1,10 @@
 {
   "churchName": "모현소망교회",
   "churchNameEn": "MOHYEON HOPE CHURCH",
+  "denomination": "대한예수교장로회",
+  "pastor": "이동호 목사",
+  "slogan": "성령과 진리로 예배드리는 교회",
+  "sloganVerse": "요한복음 4:24",
   "heroTitle": "말씀 안에서 함께 자라고\n사랑으로 세상을 섬기는 교회",
   "heroText": "하나님을 예배하고, 복음 안에서 서로를 세우며, 지역과 다음 세대를 품는 공동체를 꿈꿉니다.",
   "heroImage": "",
@@ -9,6 +13,12 @@
   "phone": "",
   "email": "",
   "kakao": "",
+  "latestBulletin": {
+    "date": "2026.08.30",
+    "sermonTitle": "굴러온 보리떡",
+    "scripture": "사사기 7:9-14",
+    "preacher": "이동호 목사"
+  },
   "worship": [
     {"name":"주일예배","time":"주일 오전 11:00"},
     {"name":"주일학교","time":"주일 오전 11:00"},
