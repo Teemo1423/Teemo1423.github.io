@@ -60,13 +60,24 @@
       if(document.querySelector('[data-bulletin]')){try{const sermons=(await get('/content/sermons.json')).slice().sort((a,b)=>String(b.date).localeCompare(String(a.date)));const latest=sermons[0];if(latest){const scripture=(latest.text||'').split('·')[0].trim();const t=document.querySelector('[data-bulletin-sermonTitle]');if(t)t.textContent=latest.title||'';const s=document.querySelector('[data-bulletin-scripture]');if(s)s.textContent=scripture||latest.text||'';const d=document.querySelector('[data-bulletin-date]');if(d)d.textContent=latest.date||'';const p=document.querySelector('[data-bulletin-preacher]');if(p)p.textContent=site.pastor||''}}catch(e){console.warn('latest sermon load failed',e)}}
     }catch(e){console.warn('CMS load failed',e)}
 
-    await renderGallery();const path=location.pathname;
-    if(path==='/'||path.endsWith('/index.html')){makeCardLink(document.querySelector('.feature-card.emphasis'),'/sermons.html#sermon-0','최신 설교 보기');const f=[...document.querySelectorAll('.feature-card')];if(f[1])makeCardLink(f[1],'/news.html','교회소식 보기');const v=[...document.querySelectorAll('.visual-card')];if(v[0])makeCardLink(v[0],'/about.html','교회 소개 보기');if(v[1])makeCardLink(v[1],'/visit.html','오시는 길 보기');const o=[...document.querySelectorAll('.overlay-card')];if(o[0])makeCardLink(o[0],'/worship.html','예배 안내 보기');if(o[1])makeCardLink(o[1],'/ministries.html','공동체 사역 보기');if(o[2])makeCardLink(o[2],'/gallery.html','다음세대 사진 보기');const c=[...document.querySelectorAll('.connect-card')];if(c[0])makeCardLink(c[0],'/visit.html','오시는 길 보기');if(c[1]&&site.kakao)makeCardLink(c[1],site.kakao,'카카오톡 채널 열기',true);if(c[2]&&site.youtube)makeCardLink(c[2],site.youtube,'YouTube 열기',true);document.querySelectorAll('.schedule .item').forEach(x=>makeCardLink(x,'/worship.html','예배 안내 보기'))}
-    if(path.endsWith('/about.html')){document.querySelectorAll('.about-photo').forEach(x=>makeCardLink(x,'/gallery.html','교회 사진첩 보기'));const cards=[...document.querySelectorAll('.vision-grid .card')];if(cards[0])makeCardLink(cards[0],'/worship.html','예배 안내 보기');if(cards[1])makeCardLink(cards[1],'/sermons.html','말씀과 설교 보기');if(cards[2])makeCardLink(cards[2],'/ministries.html','교육·사역 보기')}
-    if(path.endsWith('/staff.html'))document.querySelectorAll('.people-grid .card').forEach(x=>makeCardLink(x,'/ministries.html','교육·사역 보기'));
-    if(path.endsWith('/worship.html')){const hero=document.querySelector('.worship-heroimg');if(hero)makeCardLink(hero,'/gallery.html','예배 사진 보기');document.querySelectorAll('.schedule .item').forEach(x=>makeCardLink(x,'/visit.html','오시는 길 보기'))}
-    if(path.endsWith('/ministries.html'))document.querySelectorAll('.ministry-photo-card,.grid3 .card').forEach(x=>makeCardLink(x,'/gallery.html','사역 사진 보기'));
-    if(path.endsWith('/visit.html')){const loc=document.querySelector('.location-card');if(loc)makeCardLink(loc,'https://map.kakao.com/?q=%EB%AA%A8%ED%98%84%EC%86%8C%EB%A7%9D%EA%B5%90%ED%9A%8C','카카오맵에서 보기',true);const ch=[...document.querySelectorAll('.channel-card')];if(ch[0]&&site.kakao)makeCardLink(ch[0],site.kakao,'카카오톡 채널 열기',true);if(ch[1]&&site.youtube)makeCardLink(ch[1],site.youtube,'YouTube 열기',true)}
+    await renderGallery();
+    const path=location.pathname;
+
+    /* 카드 전체 링크는 사용자가 다음 행동을 자연스럽게 예상할 수 있는 경우에만 적용 */
+    if(path==='/'||path.endsWith('/index.html')){
+      makeCardLink(document.querySelector('.feature-card.emphasis'),'/sermons.html#sermon-0','최신 설교 보기');
+      const f=[...document.querySelectorAll('.feature-card')];if(f[1])makeCardLink(f[1],'/news.html','교회소식 보기');
+      const v=[...document.querySelectorAll('.visual-card')];if(v[0])makeCardLink(v[0],'/about.html','교회 소개 보기');if(v[1])makeCardLink(v[1],'/visit.html','오시는 길 보기');
+      const o=[...document.querySelectorAll('.overlay-card')];if(o[0])makeCardLink(o[0],'/worship.html','예배 안내 보기');if(o[1])makeCardLink(o[1],'/ministries.html','공동체 사역 보기');if(o[2])makeCardLink(o[2],'/gallery.html','다음세대 사진 보기');
+      const c=[...document.querySelectorAll('.connect-card')];if(c[0])makeCardLink(c[0],'/visit.html','오시는 길 보기');if(c[1]&&site.kakao)makeCardLink(c[1],site.kakao,'카카오톡 채널 열기',true);if(c[2]&&site.youtube)makeCardLink(c[2],site.youtube,'YouTube 열기',true);
+    }
+
+    /* 사진첩 사진은 클릭 시 실제 원본 사진을 여는 것이므로 링크 유지 */
+    /* 오시는 길의 위치/채널 카드는 목적지가 명확하므로 링크 유지 */
+    if(path.endsWith('/visit.html')){
+      const loc=document.querySelector('.location-card');if(loc)makeCardLink(loc,'https://map.kakao.com/?q=%EB%AA%A8%ED%98%84%EC%86%8C%EB%A7%9D%EA%B5%90%ED%9A%8C','카카오맵에서 보기',true);
+      const ch=[...document.querySelectorAll('.channel-card')];if(ch[0]&&site.kakao)makeCardLink(ch[0],site.kakao,'카카오톡 채널 열기',true);if(ch[1]&&site.youtube)makeCardLink(ch[1],site.youtube,'YouTube 열기',true);
+    }
   }
   main();
 })();
