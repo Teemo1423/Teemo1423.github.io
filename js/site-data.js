@@ -63,17 +63,15 @@
     await renderGallery();
     const path=location.pathname;
 
-    /* 카드 전체 링크는 사용자가 다음 행동을 자연스럽게 예상할 수 있는 경우에만 적용 */
+    /* 카드 전체 링크는 목적지가 명확하고 사용자가 클릭 결과를 예상할 수 있는 경우만 유지 */
     if(path==='/'||path.endsWith('/index.html')){
       makeCardLink(document.querySelector('.feature-card.emphasis'),'/sermons.html#sermon-0','최신 설교 보기');
       const f=[...document.querySelectorAll('.feature-card')];if(f[1])makeCardLink(f[1],'/news.html','교회소식 보기');
-      const v=[...document.querySelectorAll('.visual-card')];if(v[0])makeCardLink(v[0],'/about.html','교회 소개 보기');if(v[1])makeCardLink(v[1],'/visit.html','오시는 길 보기');
-      const o=[...document.querySelectorAll('.overlay-card')];if(o[0])makeCardLink(o[0],'/worship.html','예배 안내 보기');if(o[1])makeCardLink(o[1],'/ministries.html','공동체 사역 보기');if(o[2])makeCardLink(o[2],'/gallery.html','다음세대 사진 보기');
       const c=[...document.querySelectorAll('.connect-card')];if(c[0])makeCardLink(c[0],'/visit.html','오시는 길 보기');if(c[1]&&site.kakao)makeCardLink(c[1],site.kakao,'카카오톡 채널 열기',true);if(c[2]&&site.youtube)makeCardLink(c[2],site.youtube,'YouTube 열기',true);
     }
 
-    /* 사진첩 사진은 클릭 시 실제 원본 사진을 여는 것이므로 링크 유지 */
-    /* 오시는 길의 위치/채널 카드는 목적지가 명확하므로 링크 유지 */
+    /* 사진첩 사진은 원본 사진 보기라는 명확한 동작만 유지 */
+    /* 오시는 길의 위치/채널 카드 역시 목적지가 명확하므로 유지 */
     if(path.endsWith('/visit.html')){
       const loc=document.querySelector('.location-card');if(loc)makeCardLink(loc,'https://map.kakao.com/?q=%EB%AA%A8%ED%98%84%EC%86%8C%EB%A7%9D%EA%B5%90%ED%9A%8C','카카오맵에서 보기',true);
       const ch=[...document.querySelectorAll('.channel-card')];if(ch[0]&&site.kakao)makeCardLink(ch[0],site.kakao,'카카오톡 채널 열기',true);if(ch[1]&&site.youtube)makeCardLink(ch[1],site.youtube,'YouTube 열기',true);
