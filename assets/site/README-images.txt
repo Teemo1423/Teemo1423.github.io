@@ -1,0 +1,1 @@
+Direct image assets are stored as binary files in this folder to avoid browser base64 decoding failures.
