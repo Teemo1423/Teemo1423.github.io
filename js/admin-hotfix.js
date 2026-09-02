@@ -19,3 +19,10 @@ putText=async function(path,text,msg,shaOverride){
     throw e;
   }
 };
+
+/* Dedicated main-carousel editor extension. */
+(()=>{
+  const s=document.createElement('script');
+  s.src='/js/admin-carousel.js?v=carousel-editor1';
+  document.head.appendChild(s);
+})();
