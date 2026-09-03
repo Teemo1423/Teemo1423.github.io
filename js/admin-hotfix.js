@@ -1,23 +1,33 @@
-/* CMS save-conflict hotfix: always refresh the latest GitHub blob SHA before saving. */
+/* CMS save-conflict hotfix: fetch the newest blob SHA with cache disabled before every save. */
 putText=async function(path,text,msg,shaOverride){
-  async function attempt(){
-    let latest=null;
-    try{latest=await gh('/contents/'+path+'?ref='+BRANCH)}catch(e){
-      if(!String(e.message||e).includes('404'))throw e;
+  const api='https://api.github.com/repos/'+REPO;
+  const headers={Accept:'application/vnd.github+json',Authorization:'Bearer '+token,'X-GitHub-Api-Version':'2022-11-28'};
+  let lastErr=null;
+  for(let attempt=0;attempt<5;attempt++){
+    try{
+      const latestRes=await fetch(api+'/contents/'+path+'?ref='+encodeURIComponent(BRANCH)+'&_='+Date.now(),{headers,cache:'no-store'});
+      let latest=null;
+      if(latestRes.ok) latest=await latestRes.json();
+      else if(latestRes.status!==404) throw new Error((await latestRes.text())||latestRes.statusText);
+      const body={message:msg,content:utf8ToB64(text),branch:BRANCH};
+      if(latest&&latest.sha) body.sha=latest.sha;
+      const putRes=await fetch(api+'/contents/'+path,{method:'PUT',headers:{...headers,'Content-Type':'application/json'},cache:'no-store',body:JSON.stringify(body)});
+      if(putRes.ok){
+        const d=await putRes.json();
+        cache[path]=d.content.sha;
+        return d.content.sha;
+      }
+      const errText=(await putRes.text())||putRes.statusText;
+      if(putRes.status!==409) throw new Error(errText);
+      lastErr=new Error(errText);
+      await new Promise(r=>setTimeout(r,300*(attempt+1)));
+    }catch(e){
+      lastErr=e;
+      if(!String(e.message||e).includes('409')) throw e;
+      await new Promise(r=>setTimeout(r,300*(attempt+1)));
     }
-    const body={message:msg,content:utf8ToB64(text),branch:BRANCH};
-    if(latest&&latest.sha)body.sha=latest.sha;
-    const d=await gh('/contents/'+path,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-    cache[path]=d.content.sha;
-    return d.content.sha;
   }
-  try{return await attempt()}catch(e){
-    if(String(e.message||e).includes('409')){
-      await new Promise(r=>setTimeout(r,350));
-      return attempt();
-    }
-    throw e;
-  }
+  throw lastErr||new Error('저장 충돌이 계속 발생했습니다. 잠시 후 다시 시도해주세요.');
 };
 
 /* Transparent PNG QR codes were turning black during JPEG conversion.
