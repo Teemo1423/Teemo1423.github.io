@@ -3,10 +3,8 @@
     {label:'교회소개',href:'/about.html',items:[['인사말 · 교회소개','/about.html'],['섬기시는 사람들','/staff.html'],['예배안내','/worship.html'],['오시는 길','/visit.html']]},
     {label:'은혜의 말씀',href:'/sermons.html',items:[['주일예배 설교','/sermons.html']]},
     {label:'사랑방 모임',href:'/sarangbang.html',items:[]},
-    {label:'성가대',href:'/choir.html',items:[]},
-    {label:'교육·사역',href:'/ministries.html',items:[['교육·사역 홈','/ministries.html'],['주일학교','/sunday-school.html']]},
-    {label:'장년부',href:'/adults.html',items:[]},
-    {label:'청년부',href:'/young-adults.html',items:[]},
+    {label:'조직/부서',href:'/men-mission.html',items:[['남전도회','/men-mission.html'],['여전도회','/women-mission.html'],['성가대','/choir.html']]},
+    {label:'교회학교',href:'/sunday-school.html',items:[['주일학교','/sunday-school.html'],['청년부','/young-adults.html']]},
     {label:'교회소식',href:'/news.html',items:[['교회소식','/news.html'],['사진첩','/gallery.html']]}
   ];
   function injectStyles(){
@@ -43,7 +41,7 @@
       const item=document.createElement('div');item.className='navitem';const a=document.createElement('a');a.href=group.href;a.textContent=group.label;const all=[group.href,...group.items.map(x=>x[1])];if(all.some(h=>isActive(path,h)))a.classList.add('active');const dd=document.createElement('div');dd.className='dropdown';group.items.forEach(([label,href])=>{const x=document.createElement('a');x.href=href;x.textContent=label;if(isActive(path,href))x.classList.add('active');dd.appendChild(x)});item.append(a,dd);nav.appendChild(item)
     })
   }
-  function enhance(nav){if(!nav||nav.dataset.mobileStable==='6')return;nav.dataset.mobileStable='6';build(nav);const wrap=nav.closest('.nav');if(!wrap)return;let btn=wrap.querySelector('.mobile-menu-toggle');if(!btn){btn=document.createElement('button');btn.type='button';btn.className='mobile-menu-toggle';btn.setAttribute('aria-label','메뉴 열기');btn.setAttribute('aria-expanded','false');btn.innerHTML='<span></span><span></span><span></span>';const brand=wrap.querySelector('.brand');brand?brand.insertAdjacentElement('afterend',btn):wrap.insertBefore(btn,nav)}let backdrop=document.querySelector('.nav-backdrop');if(!backdrop){backdrop=document.createElement('div');backdrop.className='nav-backdrop';document.body.appendChild(backdrop)}
+  function enhance(nav){if(!nav||nav.dataset.mobileStable==='7')return;nav.dataset.mobileStable='7';build(nav);const wrap=nav.closest('.nav');if(!wrap)return;let btn=wrap.querySelector('.mobile-menu-toggle');if(!btn){btn=document.createElement('button');btn.type='button';btn.className='mobile-menu-toggle';btn.setAttribute('aria-label','메뉴 열기');btn.setAttribute('aria-expanded','false');btn.innerHTML='<span></span><span></span><span></span>';const brand=wrap.querySelector('.brand');brand?brand.insertAdjacentElement('afterend',btn):wrap.insertBefore(btn,nav)}let backdrop=document.querySelector('.nav-backdrop');if(!backdrop){backdrop=document.createElement('div');backdrop.className='nav-backdrop';document.body.appendChild(backdrop)}
     const close=()=>{nav.classList.remove('mobile-open');btn.classList.remove('is-open');backdrop.classList.remove('show');document.documentElement.classList.remove('menu-open');document.body.classList.remove('menu-open');btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label','메뉴 열기')};
     const open=()=>{nav.classList.add('mobile-open');btn.classList.add('is-open');backdrop.classList.add('show');document.documentElement.classList.add('menu-open');document.body.classList.add('menu-open');btn.setAttribute('aria-expanded','true');btn.setAttribute('aria-label','메뉴 닫기')};
     btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();nav.classList.contains('mobile-open')?close():open()},false);
