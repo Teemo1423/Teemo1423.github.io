@@ -1,1 +1,1 @@
-(()=>{const s=document.createElement('script');s.src='/js/admin-content-pro2.js?v=contentpro2';document.head.appendChild(s)})();
+(()=>{const load=src=>{const s=document.createElement('script');s.src=src;document.head.appendChild(s)};load('/js/admin-content-pro2.js?v=contentpro2');load('/js/admin-weekly.js?v=weekly1')})();
