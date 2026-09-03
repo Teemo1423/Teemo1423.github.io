@@ -1,77 +1,19 @@
 (()=>{
-  function injectMobileStyles(){
-    if(document.getElementById('mobileNavFix2'))return;
-    const style=document.createElement('style');
-    style.id='mobileNavFix2';
-    style.textContent=`
-      .mobile-menu-toggle{display:none;border:0;background:transparent;padding:8px;width:44px;height:44px;border-radius:12px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;color:var(--ink,#14231d)}
-      .mobile-menu-toggle span{display:block;width:23px;height:2px;background:currentColor;border-radius:2px;transition:.2s ease}
-      .mobile-menu-toggle.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-      .mobile-menu-toggle.is-open span:nth-child(2){opacity:0}
-      .mobile-menu-toggle.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-      @media(max-width:900px){
-        .site-header{position:sticky!important;top:0!important;z-index:1000!important;background:rgba(255,255,255,.98)!important}
-        .site-header .nav{position:relative!important;display:flex!important;align-items:center!important;justify-content:space-between!important;height:76px!important;min-height:76px!important;padding:8px 20px!important;gap:12px!important}
-        .site-header .brand{display:flex!important;align-items:center!important;min-width:0!important;width:auto!important;max-width:calc(100% - 56px)!important}
-        .site-header .brand-logo{width:40px!important;height:40px!important;flex:0 0 40px!important}
-        .site-header .brand-copy{min-width:0!important}
-        .site-header .brand-copy small{font-size:9px!important;white-space:nowrap!important}
-        .site-header .brand-copy strong{font-size:18px!important;white-space:nowrap!important}
-        .mobile-menu-toggle{display:flex!important;flex:0 0 44px!important;position:relative!important;z-index:1002!important}
-        .site-header .navlinks{position:absolute!important;top:76px!important;left:20px!important;right:20px!important;width:auto!important;display:none!important;flex-direction:column!important;align-items:stretch!important;gap:0!important;overflow:visible!important;white-space:normal!important;padding:10px!important;margin:0!important;background:#fff!important;border:1px solid var(--line,#e4e4df)!important;border-radius:16px!important;box-shadow:0 16px 42px rgba(20,54,41,.16)!important;z-index:1001!important;max-height:calc(100vh - 96px)!important;overflow-y:auto!important}
-        .site-header .navlinks.mobile-open{display:flex!important}
-        .site-header .navlinks>a,.site-header .navitem>a{display:flex!important;align-items:center!important;min-height:46px!important;padding:0 12px!important;border-radius:10px!important}
-        .site-header .navitem{display:block!important}
-        .site-header .dropdown{display:block!important;position:static!important;transform:none!important;opacity:1!important;visibility:visible!important;box-shadow:none!important;border:0!important;background:#f7faf8!important;border-radius:10px!important;min-width:0!important;padding:4px!important;margin:0 6px 6px!important}
-        .site-header .dropdown a{padding:9px 10px!important;font-size:13px!important}
-      }
-    `;
-    document.head.appendChild(style);
-  }
-
-  function enhance(nav){
-    if(!nav||nav.dataset.dropdownReady==='1')return;
-    nav.dataset.dropdownReady='1';
-    const header=nav.closest('.site-header');
-    const navWrap=nav.closest('.nav');
-    const links=[...nav.children].filter(el=>el.tagName==='A'||el.classList?.contains('navitem'));
-    const findDirect=text=>links.find(el=>el.tagName==='A'&&el.textContent.trim()===text);
-    const wrap=(anchor,items,key)=>{
-      if(!anchor||anchor.parentElement?.classList.contains('navitem'))return;
-      const item=document.createElement('div');item.className='navitem';item.dataset.navDropdown=key;
-      anchor.parentNode.insertBefore(item,anchor);item.appendChild(anchor);
-      const dd=document.createElement('div');dd.className='dropdown';
-      items.forEach(([label,href])=>{const a=document.createElement('a');a.href=href;a.textContent=label;dd.appendChild(a)});
-      item.appendChild(dd);
-    };
-    wrap(findDirect('교회소개'),[['교회 소개','/about.html'],['목회자 · 섬기시는 분','/staff.html']],'about');
-    wrap(findDirect('교육·사역'),[['교육·사역 홈','/ministries.html'],['주일학교','/sunday-school.html']],'ministries');
-
-    if(navWrap && !navWrap.querySelector('.mobile-menu-toggle')){
-      const btn=document.createElement('button');
-      btn.type='button';
-      btn.className='mobile-menu-toggle';
-      btn.setAttribute('aria-label','메뉴 열기');
-      btn.setAttribute('aria-expanded','false');
-      btn.innerHTML='<span></span><span></span><span></span>';
-      const brand=navWrap.querySelector('.brand');
-      if(brand) brand.insertAdjacentElement('afterend',btn); else navWrap.insertBefore(btn,nav);
-      const close=()=>{nav.classList.remove('mobile-open');btn.classList.remove('is-open');btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label','메뉴 열기')};
-      btn.addEventListener('click',e=>{
-        e.stopPropagation();
-        const open=!nav.classList.contains('mobile-open');
-        nav.classList.toggle('mobile-open',open);
-        btn.classList.toggle('is-open',open);
-        btn.setAttribute('aria-expanded',String(open));
-        btn.setAttribute('aria-label',open?'메뉴 닫기':'메뉴 열기');
-      });
-      nav.addEventListener('click',e=>{if(e.target.closest('a'))close()});
-      window.addEventListener('resize',()=>{if(window.innerWidth>900)close()},{passive:true});
-      document.addEventListener('click',e=>{if(window.innerWidth<=900&&header&&!header.contains(e.target))close()});
-    }
-  }
-  injectMobileStyles();
-  const run=()=>document.querySelectorAll('.navlinks').forEach(enhance);
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
-  new MutationObserver(run).observe(document.documentElement,{childList:true,subtree:true});
+  const menu=[
+    {label:'교회소개',href:'/about.html',items:[['인사말 · 교회소개','/about.html'],['섬기시는 사람들','/staff.html'],['예배안내','/worship.html'],['오시는 길','/visit.html']]},
+    {label:'은혜의 말씀',href:'/sermons.html',items:[['주일예배 설교','/sermons.html']]},
+    {label:'조직·부서',href:'/ministries.html',items:[['사랑방 모임','/sarangbang.html'],['성가대','/choir.html'],['청년부','/young-adults.html']]},
+    {label:'교회학교',href:'/sunday-school.html',items:[['주일학교','/sunday-school.html'],['교육·사역 홈','/ministries.html']]},
+    {label:'교회소식',href:'/news.html',items:[['교회소식','/news.html'],['사진첩','/gallery.html']]}
+  ];
+  function injectStyles(){if(document.getElementById('churchNavHierarchy'))return;const s=document.createElement('style');s.id='churchNavHierarchy';s.textContent=`
+    .navlinks{gap:24px}.navitem>a{font-weight:800}.dropdown{min-width:220px}.dropdown a{font-size:14px}
+    .mobile-menu-toggle{display:none;border:0;background:transparent;padding:8px;width:44px;height:44px;border-radius:12px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;color:var(--ink,#14231d)}
+    .mobile-menu-toggle span{display:block;width:23px;height:2px;background:currentColor;border-radius:2px;transition:.2s ease}.mobile-menu-toggle.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}.mobile-menu-toggle.is-open span:nth-child(2){opacity:0}.mobile-menu-toggle.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    @media(max-width:900px){.site-header{position:sticky!important;top:0!important;z-index:1000!important;background:rgba(255,255,255,.99)!important}.site-header .nav{position:relative!important;display:flex!important;align-items:center!important;justify-content:space-between!important;height:76px!important;min-height:76px!important;padding:8px 20px!important}.site-header .brand{max-width:calc(100% - 56px)!important}.site-header .brand-logo{width:40px!important;height:40px!important}.site-header .brand-copy small{font-size:9px!important}.site-header .brand-copy strong{font-size:18px!important}.mobile-menu-toggle{display:flex!important;z-index:1002!important}.site-header .navlinks{position:fixed!important;top:76px!important;right:0!important;bottom:0!important;left:auto!important;width:min(88vw,390px)!important;display:none!important;flex-direction:column!important;align-items:stretch!important;gap:0!important;padding:8px 0 28px!important;background:#fff!important;border-left:1px solid var(--line,#e4e4df)!important;border-radius:0!important;box-shadow:-18px 0 45px rgba(20,54,41,.16)!important;overflow-y:auto!important;white-space:normal!important;z-index:1001!important}.site-header .navlinks.mobile-open{display:flex!important}.site-header .navlinks:before{content:'모현소망교회 메뉴';display:block;padding:16px 22px 12px;font-size:13px;letter-spacing:.08em;color:var(--green,#2f6b4f);font-weight:900}.site-header .navitem{display:block!important;border-top:1px solid var(--line,#e4e4df)!important}.site-header .navitem>a{min-height:54px!important;padding:0 22px!important;font-size:17px!important;border-radius:0!important}.site-header .dropdown{display:block!important;position:static!important;transform:none!important;opacity:1!important;visibility:visible!important;box-shadow:none!important;border:0!important;background:#fafbf9!important;border-radius:0!important;min-width:0!important;padding:5px 0 10px!important;margin:0!important}.site-header .dropdown a{padding:10px 28px 10px 42px!important;font-size:14px!important;color:#33443c!important;position:relative}.site-header .dropdown a:before{content:'└';position:absolute;left:25px;color:#9aa69f}.site-header .dropdown a:hover{background:#f1f6f3!important}.nav-backdrop{display:none;position:fixed;inset:76px 0 0;background:rgba(12,25,20,.32);z-index:999}.nav-backdrop.show{display:block}}
+  `;document.head.appendChild(s)}
+  function build(nav){if(!nav)return;const path=location.pathname||'/';nav.innerHTML='';const home=document.createElement('a');home.href='/';home.textContent='홈';if(path==='/'||path.endsWith('/index.html'))home.classList.add('active');nav.appendChild(home);
+    menu.forEach(group=>{const item=document.createElement('div');item.className='navitem';const a=document.createElement('a');a.href=group.href;a.textContent=group.label;const all=[group.href,...group.items.map(x=>x[1])];if(all.some(h=>path===h||path.endsWith(h.replace(/^\//,''))))a.classList.add('active');const dd=document.createElement('div');dd.className='dropdown';group.items.forEach(([label,href])=>{const x=document.createElement('a');x.href=href;x.textContent=label;if(path===href||path.endsWith(href.replace(/^\//,'')))x.classList.add('active');dd.appendChild(x)});item.append(a,dd);nav.appendChild(item)});nav.dataset.dropdownReady='1'}
+  function enhance(nav){if(!nav)return;build(nav);const header=nav.closest('.site-header'),wrap=nav.closest('.nav');if(!wrap)return;let btn=wrap.querySelector('.mobile-menu-toggle');if(!btn){btn=document.createElement('button');btn.type='button';btn.className='mobile-menu-toggle';btn.setAttribute('aria-label','메뉴 열기');btn.innerHTML='<span></span><span></span><span></span>';const brand=wrap.querySelector('.brand');brand?brand.insertAdjacentElement('afterend',btn):wrap.insertBefore(btn,nav)}let backdrop=document.querySelector('.nav-backdrop');if(!backdrop){backdrop=document.createElement('div');backdrop.className='nav-backdrop';document.body.appendChild(backdrop)}const close=()=>{nav.classList.remove('mobile-open');btn.classList.remove('is-open');backdrop.classList.remove('show');btn.setAttribute('aria-expanded','false')};btn.onclick=e=>{e.stopPropagation();const open=!nav.classList.contains('mobile-open');nav.classList.toggle('mobile-open',open);btn.classList.toggle('is-open',open);backdrop.classList.toggle('show',open);btn.setAttribute('aria-expanded',String(open))};backdrop.onclick=close;nav.onclick=e=>{if(e.target.closest('a'))close()};window.addEventListener('resize',()=>{if(innerWidth>900)close()},{passive:true})}
+  injectStyles();const run=()=>document.querySelectorAll('.navlinks').forEach(enhance);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
 })();
