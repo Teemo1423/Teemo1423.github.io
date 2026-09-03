@@ -1,0 +1,53 @@
+[
+  {
+    "slug": "sarangbang",
+    "name": "사랑방 모임",
+    "label": "SMALL GROUP",
+    "subtitle": "말씀과 삶을 나누며 서로를 세우는 작은 공동체",
+    "intro": "주일에 선포된 말씀을 삶으로 이어가며, 서로의 이야기를 듣고 기도제목을 품는 모임입니다.",
+    "target": "전 교인",
+    "schedule": "주중 각 사랑방별",
+    "place": "각 사랑방 모임 장소",
+    "leader": "담당 교역자 및 사랑방장",
+    "contact": "",
+    "scripture": "",
+    "activities": "주일 말씀 나눔\n삶과 기도제목 나눔\n교제와 돌봄",
+    "prayer": "말씀 안에서 서로를 세우고, 삶의 자리에서 믿음을 함께 살아가도록",
+    "image": "/assets/uploads/1788326948155-IMG_6002.jpg",
+    "visible": true
+  },
+  {
+    "slug": "choir",
+    "name": "성가대",
+    "label": "CHOIR",
+    "subtitle": "찬양으로 하나님을 높이고 예배를 섬기는 공동체",
+    "intro": "정성으로 준비한 찬양을 통해 예배 가운데 하나님께 영광을 올려드리고 성도들의 예배를 돕습니다.",
+    "target": "성가대원 및 찬양으로 섬기기 원하는 성도",
+    "schedule": "주일예배 및 정기 연습",
+    "place": "본당 및 연습실",
+    "leader": "성가대 담당자",
+    "contact": "",
+    "scripture": "시편 96:1",
+    "activities": "주일예배 찬양\n절기·특별예배 찬양\n정기 연습과 교제",
+    "prayer": "기술보다 예배자의 마음으로 찬양하며 교회를 아름답게 섬기도록",
+    "image": "/assets/uploads/1788390844007-IMG_9386.jpg",
+    "visible": true
+  },
+  {
+    "slug": "young-adults",
+    "name": "청년부",
+    "label": "YOUNG ADULTS",
+    "subtitle": "말씀 안에서 함께 자라고 삶의 자리로 파송되는 청년 공동체",
+    "intro": "청년들이 예배와 말씀, 교제를 통해 복음 안에서 정체성을 세우고 일상과 사회 속에서 믿음을 살아가도록 함께합니다.",
+    "target": "청년",
+    "schedule": "모임 시간 추후 입력",
+    "place": "교회",
+    "leader": "담당 교역자",
+    "contact": "",
+    "scripture": "",
+    "activities": "예배와 말씀\n소그룹 나눔\n교제와 섬김\n청년 행사",
+    "prayer": "청년들이 복음 안에 든든히 서고 각자의 삶의 자리에서 그리스도를 드러내도록",
+    "image": "/assets/uploads/1788326948155-IMG_6002.jpg",
+    "visible": true
+  }
+]
