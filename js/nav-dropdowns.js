@@ -44,9 +44,9 @@
   function injectBottomNav(){
     document.querySelector('.mobile-bottom-nav')?.remove();
     const nav=document.createElement('nav');nav.className='mobile-bottom-nav';nav.setAttribute('aria-label','모바일 주요 메뉴');
-    const items=[['⌂','홈','/'],['▶','설교','/sermons.html'],['▤','소식','/news.html'],['▧','사진','/gallery.html'],['☰','더보기','/menu-v2.html']];
-    const morePaths=['/menu-v2.html','/menu.html','/about.html','/staff.html','/worship.html','/visit.html','/sarangbang.html','/men-mission.html','/women-mission.html','/choir.html','/sunday-school.html','/young-adults.html'];
-    items.forEach(([icon,label,href])=>{const a=document.createElement('a');a.href=href;a.innerHTML=`<span class="mb-icon" aria-hidden="true">${icon}</span><span>${label}</span>`;const isHome=href==='/'&&(path==='/'||path.endsWith('/index.html'));const isMore=href==='/menu-v2.html'&&morePaths.some(active);if(isHome||active(href)||isMore)a.classList.add('active');nav.appendChild(a)});
+    const items=[['⌂','홈','/'],['▶','설교','/sermons.html'],['▤','소식','/news.html'],['▧','사진','/gallery.html'],['☰','더보기','/menu.html']];
+    const morePaths=['/menu.html','/about.html','/staff.html','/worship.html','/visit.html','/sarangbang.html','/men-mission.html','/women-mission.html','/choir.html','/sunday-school.html','/young-adults.html'];
+    items.forEach(([icon,label,href])=>{const a=document.createElement('a');a.href=href;a.innerHTML=`<span class="mb-icon" aria-hidden="true">${icon}</span><span>${label}</span>`;const isHome=href==='/'&&(path==='/'||path.endsWith('/index.html'));const isMore=href==='/menu.html'&&morePaths.some(active);if(isHome||active(href)||isMore)a.classList.add('active');nav.appendChild(a)});
     document.body.appendChild(nav)
   }
 
