@@ -56,4 +56,4 @@
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
 })();
 
-(()=>{if(document.querySelector('script[data-site-image-adjust]'))return;const s=document.createElement('script');s.dataset.siteImageAdjust='1';s.src='/js/site-image-adjust.js?v=imageadjust1';document.head.appendChild(s)})();
+(()=>{if(document.querySelector('script[data-site-image-adjust]'))return;const s=document.createElement('script');s.dataset.siteImageAdjust='1';s.src='/js/site-image-adjust.js?v=imageadjust2';document.head.appendChild(s)})();
