@@ -28,6 +28,7 @@ section:not(.hero):not(.page-hero):not(.ministry-hero){background:transparent}
 .quick-icon{background:#edf6f0;border:1px solid #ddebe2;color:#2f7456}
 .feature-card.emphasis{background:linear-gradient(145deg,#326f55,#3d8062)!important;box-shadow:0 16px 34px rgba(40,94,69,.13)}
 .feature-card.emphasis .feature-meta span{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14)}
+#latestSermonTitle{color:#fff!important}
 .sermon-card{overflow:hidden}
 .sermon-thumb{background:#f0f5f1}
 .sermon-body{padding:28px}
