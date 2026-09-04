@@ -29,7 +29,9 @@
       .navlinks{gap:18px}.navitem>a{font-weight:800}.dropdown{min-width:220px}.dropdown a{font-size:14px}
       .mobile-menu-toggle,.nav-backdrop{display:none!important}.mobile-bottom-nav{display:none}
       @media(max-width:900px){
-        body{padding-bottom:calc(78px + env(safe-area-inset-bottom))!important}
+        body{padding-bottom:0!important}
+        main{padding-bottom:18px!important}
+        .site-footer{padding-bottom:calc(112px + env(safe-area-inset-bottom))!important}
         .site-header{position:sticky!important;top:0!important;z-index:1000!important;background:rgba(255,255,255,.98)!important}
         .site-header .nav{height:70px!important;min-height:70px!important;padding:8px 20px!important;display:flex!important;align-items:center!important;justify-content:center!important}
         .site-header .brand{max-width:100%!important;margin:auto!important}.site-header .brand-logo{width:38px!important;height:38px!important}.site-header .brand-copy strong{font-size:18px!important}.site-header .brand-copy small{font-size:8px!important}
