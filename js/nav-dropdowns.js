@@ -43,7 +43,7 @@
         .site-header .navlinks{display:none!important}
         .mobile-bottom-nav{display:grid!important;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:2000;background:rgba(255,255,255,.98);border-top:1px solid var(--line,#e4e4df);box-shadow:0 -8px 26px rgba(20,54,41,.10);padding:7px 6px calc(7px + env(safe-area-inset-bottom));min-height:72px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
         .mobile-bottom-nav a{display:flex;min-width:0;min-height:58px;align-items:center;justify-content:center;flex-direction:column;gap:3px;border-radius:12px;color:#66736d;font-size:11px;font-weight:800;line-height:1;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-        .mobile-bottom-nav a .mb-icon{width:24px;height:24px;display:grid;place-items:center;line-height:1}.mobile-bottom-nav a .mb-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}.mobile-bottom-nav a.active{color:var(--green,#2f6b4f);background:#eef5f1}.mobile-bottom-nav a:active{background:#e7f1eb;transform:scale(.97)}
+        .mobile-bottom-nav a .mb-icon{width:28px;height:28px;display:grid;place-items:center;line-height:1;font-size:22px;font-family:Arial,sans-serif}.mobile-bottom-nav a .mb-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}.mobile-bottom-nav a.active{color:var(--green,#2f6b4f);background:#eef5f1}.mobile-bottom-nav a:active{background:#e7f1eb;transform:scale(.97)}
       }
     `;document.head.appendChild(s)
   }
