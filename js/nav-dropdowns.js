@@ -1,10 +1,11 @@
 (()=>{
   const menu=[
-    {label:'교회소개',href:'/about.html',items:[['인사말 · 교회소개','/about.html'],['섬기시는 사람들','/staff.html'],['예배안내','/worship.html'],['오시는 길','/visit.html']]},
+    {label:'교회소개',href:'/about.html',items:[['인사말 · 교회소개','/about.html'],['섬기시는 사람들','/staff.html'],['예배안내','/worship.html'],['차량 운행 안내','/transport.html'],['오시는 길','/visit.html']]},
     {label:'은혜의 말씀',href:'/sermons.html',items:[['주일예배 설교','/sermons.html']]},
     {label:'사랑방 모임',href:'/sarangbang.html',items:[]},
     {label:'조직/부서',href:'/men-mission.html',items:[['남전도회','/men-mission.html'],['여전도회','/women-mission.html'],['성가대','/choir.html']]},
     {label:'교회학교',href:'/sunday-school.html',items:[['주일학교','/sunday-school.html'],['청년부','/young-adults.html']]},
+    {label:'선교·후원',href:'/mission-support.html',items:[]},
     {label:'교회소식',href:'/news.html',items:[['교회소식','/news.html'],['사진첩','/gallery.html']]}
   ];
   const path=location.pathname||'/';
@@ -59,7 +60,7 @@
     document.querySelector('.mobile-bottom-nav')?.remove();
     const nav=document.createElement('nav');nav.className='mobile-bottom-nav';nav.setAttribute('aria-label','모바일 주요 메뉴');
     const items=[['⌂','홈','/'],['▶','설교','/sermons.html'],[iconNews,'소식','/news.html'],[iconPhoto,'사진','/gallery.html'],['☰','더보기','/menu.html']];
-    const morePaths=['/menu.html','/about.html','/staff.html','/worship.html','/visit.html','/sarangbang.html','/men-mission.html','/women-mission.html','/choir.html','/sunday-school.html','/young-adults.html'];
+    const morePaths=['/menu.html','/about.html','/staff.html','/worship.html','/transport.html','/visit.html','/sarangbang.html','/men-mission.html','/women-mission.html','/choir.html','/sunday-school.html','/young-adults.html','/mission-support.html'];
     items.forEach(([icon,label,href])=>{const a=document.createElement('a');a.href=href;a.innerHTML=`<span class="mb-icon" aria-hidden="true">${icon}</span><span>${label}</span>`;const isHome=href==='/'&&(path==='/'||path.endsWith('/index.html'));const isMore=href==='/menu.html'&&morePaths.some(active);if(isHome||active(href)||isMore)a.classList.add('active');nav.appendChild(a)});
     document.body.appendChild(nav)
   }
@@ -69,4 +70,4 @@
 })();
 
 (()=>{if(document.querySelector('script[data-site-image-adjust]'))return;const s=document.createElement('script');s.dataset.siteImageAdjust='1';s.src='/js/site-image-adjust.js?v=imageadjust3';document.head.appendChild(s)})();
-(()=>{if(document.querySelector('script[data-church-info]'))return;const s=document.createElement('script');s.dataset.churchInfo='1';s.src='/js/church-info.js?v=churchinfo1';document.head.appendChild(s)})();
+(()=>{if(document.querySelector('script[data-church-info]'))return;const s=document.createElement('script');s.dataset.churchInfo='1';s.src='/js/church-info.js?v=churchinfo3';document.head.appendChild(s)})();
