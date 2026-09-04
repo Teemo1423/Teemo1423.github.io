@@ -28,10 +28,10 @@
         .site-header .navlinks{position:fixed!important;top:0!important;right:0!important;left:auto!important;width:min(88vw,390px)!important;height:100dvh!important;max-height:100dvh!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:0!important;padding:96px 0 28px!important;margin:0!important;background:#fff!important;border:0!important;border-left:1px solid var(--line,#e4e4df)!important;border-radius:0!important;box-shadow:-18px 0 45px rgba(20,54,41,.18)!important;overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scrolling:touch!important;overscroll-behavior:contain!important;touch-action:pan-y!important;white-space:normal!important;z-index:1401!important;transform:translate3d(102%,0,0)!important;opacity:1!important;visibility:visible!important;transition:transform .28s ease!important;pointer-events:none!important}
         .site-header .navlinks.mobile-open{transform:translate3d(0,0,0)!important;pointer-events:auto!important}
         .site-header .navlinks:before{content:'모현소망교회 메뉴';position:absolute;top:0;left:0;right:0;height:76px;display:flex;align-items:center;padding:0 22px;border-bottom:1px solid var(--line,#e4e4df);font-size:13px;letter-spacing:.08em;color:var(--green,#2f6b4f);font-weight:900;background:#fff}
-        .site-header .navlinks>a,.site-header .navitem>a{display:flex!important;align-items:center!important;min-height:54px!important;padding:0 22px!important;font-size:17px!important;font-weight:800!important;border-bottom:1px solid var(--line,#e4e4df)!important;border-radius:0!important}
-        .site-header .navitem{display:block!important}
+        .site-header .navlinks>a,.site-header .navitem>a{display:flex!important;align-items:center!important;min-height:54px!important;padding:0 22px!important;font-size:17px!important;font-weight:800!important;border-bottom:1px solid var(--line,#e4e4df)!important;border-radius:0!important;position:relative!important;z-index:2!important;pointer-events:auto!important;touch-action:manipulation!important}
+        .site-header .navitem{display:block!important;position:relative!important;z-index:2!important}
         .site-header .dropdown{display:block!important;position:static!important;transform:none!important;opacity:1!important;visibility:visible!important;box-shadow:none!important;border:0!important;background:#fafbf9!important;border-radius:0!important;min-width:0!important;padding:5px 0 10px!important;margin:0!important}
-        .site-header .dropdown a{display:block!important;padding:10px 28px 10px 42px!important;font-size:14px!important;color:#33443c!important;position:relative}.site-header .dropdown a:before{content:'└';position:absolute;left:25px;color:#9aa69f}
+        .site-header .dropdown a{display:block!important;padding:10px 28px 10px 42px!important;font-size:14px!important;color:#33443c!important;position:relative!important;z-index:2!important;pointer-events:auto!important;touch-action:manipulation!important}.site-header .dropdown a:before{content:'└';position:absolute;left:25px;color:#9aa69f;pointer-events:none!important}
         .nav-backdrop{display:block!important;position:fixed!important;inset:0!important;background:rgba(12,25,20,.34)!important;z-index:1399!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:opacity .25s ease,visibility .25s ease!important;touch-action:none!important}.nav-backdrop.show{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
       }
     `;
@@ -57,8 +57,8 @@
   }
 
   function enhance(nav){
-    if(!nav||nav.dataset.mobileStable==='8')return;
-    nav.dataset.mobileStable='8';
+    if(!nav||nav.dataset.mobileStable==='9')return;
+    nav.dataset.mobileStable='9';
     build(nav);
     const wrap=nav.closest('.nav');if(!wrap)return;
     let btn=wrap.querySelector('.mobile-menu-toggle');
@@ -94,7 +94,7 @@
     backdrop.addEventListener('click',close,false);
     backdrop.addEventListener('touchmove',e=>e.preventDefault(),{passive:false});
     nav.addEventListener('touchmove',e=>e.stopPropagation(),{passive:true});
-    nav.querySelectorAll('a[href]').forEach(link=>link.addEventListener('click',e=>{const href=link.getAttribute('href');if(!href)return;e.preventDefault();close();setTimeout(()=>window.location.assign(href),40)},false));
+    nav.querySelectorAll('a[href]').forEach(link=>link.addEventListener('click',()=>{close()},{passive:true}));
     window.addEventListener('resize',()=>{if(innerWidth>900)close()},{passive:true});
     document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
   }
