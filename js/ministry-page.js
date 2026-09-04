@@ -20,7 +20,7 @@
       if(q('minScripture')){q('minScripture').textContent=x.scripture||'';q('minScriptureWrap').hidden=!x.scripture;}
       if(q('minActivities'))q('minActivities').innerHTML=nl(x.activities||'');
       if(q('minPrayer'))q('minPrayer').textContent=x.prayer||'';
-      const hero=q('minImage');if(hero&&x.image)hero.style.backgroundImage=`linear-gradient(rgba(9,35,26,.16),rgba(9,35,26,.30)),url('${x.image}')`;
+      const hero=q('minImage');if(hero&&x.image){hero.style.backgroundImage=`url('${x.image}')`;hero.style.filter='brightness(1.18) contrast(1.03) saturate(1.04)';}
     }catch(e){console.warn('ministry data fallback',e)}
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
