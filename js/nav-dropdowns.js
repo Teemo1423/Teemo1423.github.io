@@ -2,7 +2,7 @@
   const menu=[
     {label:'교회소개',href:'/about.html',items:[['인사말 · 교회소개','/about.html'],['섬기시는 사람들','/staff.html'],['예배안내','/worship.html'],['차량 운행 안내','/transport.html'],['오시는 길','/visit.html']]},
     {label:'은혜의 말씀',href:'/sermons.html',items:[['주일예배 설교','/sermons.html']]},
-    {label:'사랑방 모임',href:'/sarangbang.html',items:[]},
+    {label:'사랑방 모임 예배',href:'/sarangbang.html',items:[]},
     {label:'조직/부서',href:'/men-mission.html',items:[['남전도회','/men-mission.html'],['여전도회','/women-mission.html'],['성가대','/choir.html']]},
     {label:'교회학교',href:'/sunday-school.html',items:[['주일학교','/sunday-school.html'],['청년부','/young-adults.html']]},
     {label:'선교·후원',href:'/mission-support.html',items:[]},
