@@ -4,7 +4,7 @@
     ['홈',['dashboard','weeklyHome','homeNotices','content','images']],
     ['교회소개',['missionInfo','worship','transportInfo']],
     ['은혜의 말씀',['sermons']],
-    ['사랑방 모임',['sarangbangEdit']],
+    ['사랑방 모임 예배',['sarangbangEdit']],
     ['조직/부서',['menMissionEdit','womenMissionEdit','choirEdit']],
     ['교회학교',['sundayPro','youngAdultsEdit']],
     ['선교·후원',['supportInfo']],
@@ -14,13 +14,13 @@
   const labels={
     dashboard:'대시보드',weeklyHome:'이번 주 말씀·주보',homeNotices:'이번 주 핵심 공지',content:'기본 콘텐츠',images:'이미지 슬롯',
     missionInfo:'사명선언문',worship:'예배안내 · 시간',transportInfo:'차량 운행 안내',sermons:'주일예배 설교',
-    sarangbangEdit:'사랑방 모임',menMissionEdit:'남전도회',womenMissionEdit:'여전도회',choirEdit:'성가대',
+    sarangbangEdit:'사랑방 모임 예배',menMissionEdit:'남전도회',womenMissionEdit:'여전도회',choirEdit:'성가대',
     sundayPro:'주일학교',youngAdultsEdit:'청년부',supportInfo:'선교·후원 관리',
     news:'교회소식',galleryPro:'사진첩',media:'미디어 라이브러리',
     universal:'페이지 전체 편집',design:'디자인·CSS'
   };
-  const sectionNo={'홈':'01','교회소개':'02','은혜의 말씀':'03','사랑방 모임':'04','조직/부서':'05','교회학교':'06','선교·후원':'07','교회소식':'08','고급 관리':'관리'};
-  const submenuGroups=new Set(['교회소개','사랑방 모임','조직/부서','교회학교','교회소식']);
+  const sectionNo={'홈':'01','교회소개':'02','은혜의 말씀':'03','사랑방 모임 예배':'04','조직/부서':'05','교회학교':'06','선교·후원':'07','교회소식':'08','고급 관리':'관리'};
+  const submenuGroups=new Set(['교회소개','사랑방 모임 예배','조직/부서','교회학교','교회소식']);
 
   function organize(){
     const nav=document.getElementById('sideNav');if(!nav)return;
