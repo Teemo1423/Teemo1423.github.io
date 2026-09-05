@@ -40,5 +40,19 @@
     "title": "주일예배 현장",
     "text": "성도들이 함께 말씀을 듣고 예배드리는 모습입니다.",
     "image": "/assets/uploads/1788324831084-IMG_9386.jpg"
+  },
+  {
+    "date": "2026.09",
+    "category": "교회",
+    "title": "자모실",
+    "text": "영유아와 부모님이 편안하게 예배드릴 수 있도록 마련된 공간입니다.",
+    "image": "/assets/uploads/jamo-room-202609.jpg"
+  },
+  {
+    "date": "2026.09",
+    "category": "교회",
+    "title": "루프탑 풋살장",
+    "text": "교제와 다음세대 활동을 위해 마련된 교회 루프탑 풋살장입니다.",
+    "image": "/assets/uploads/rooftop-futsal-202609.jpg"
   }
 ]
