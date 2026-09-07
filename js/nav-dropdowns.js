@@ -71,6 +71,7 @@
 
 (()=>{if(document.querySelector('script[data-site-image-adjust]'))return;const s=document.createElement('script');s.dataset.siteImageAdjust='1';s.src='/js/site-image-adjust.js?v=imageadjust3';document.head.appendChild(s)})();
 (()=>{if(document.querySelector('script[data-church-info]'))return;const s=document.createElement('script');s.dataset.churchInfo='1';s.src='/js/church-info.js?v=churchinfo3';document.head.appendChild(s)})();
+(()=>{if(document.querySelector('script[data-home-news-subtitle]'))return;const s=document.createElement('script');s.dataset.homeNewsSubtitle='1';s.src='/js/home-news-subtitle.js?v=newssubtitle1';document.head.appendChild(s)})();
 
 (()=>{
   const refreshLatest=async()=>{
