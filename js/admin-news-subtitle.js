@@ -5,7 +5,7 @@
   window.renderNews=function(){
     if(typeof baseRender==='function')baseRender();
     const list=document.getElementById('newsList');
-    if(!list||!Array.isArray(window.news))return;
+    if(!list||typeof news==='undefined'||!Array.isArray(news))return;
     [...list.querySelectorAll('.cms-item')].forEach((card,i)=>{
       const grid=card.querySelector('.item-grid');
       if(!grid||grid.querySelector('[data-news-subtitle]'))return;
@@ -21,7 +21,7 @@
   };
 
   window.addNews=function(){
-    if(Array.isArray(window.news)){
+    if(typeof news!=='undefined'&&Array.isArray(news)){
       news.unshift({date:new Date().toISOString().slice(0,10),title:'새 교회소식',subtitle:'',text:'내용을 입력하세요.',image:''});
       renderNews();dirty();
     }else if(typeof baseAdd==='function')baseAdd();
