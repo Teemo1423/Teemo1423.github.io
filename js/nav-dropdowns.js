@@ -102,3 +102,25 @@
   };
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',refreshLatest,{once:true});else refreshLatest();
 })();
+
+(()=>{
+  if(!(location.pathname==='/'||location.pathname.endsWith('/index.html')))return;
+  const shorten=()=>{
+    const el=document.getElementById('carouselNewsText');
+    if(!el)return;
+    const full=(el.dataset.fullText||el.textContent||'').trim();
+    if(!el.dataset.fullText)el.dataset.fullText=full;
+    const limit=88;
+    el.textContent=full.length>limit?full.slice(0,limit).trimEnd()+'…':full;
+  };
+  const start=()=>{
+    const el=document.getElementById('carouselNewsText');
+    if(!el)return;
+    shorten();
+    const obs=new MutationObserver(()=>{if(el.textContent!==el.dataset.fullText)shorten();else shorten()});
+    obs.observe(el,{childList:true,characterData:true,subtree:true});
+    setTimeout(shorten,300);
+    setTimeout(shorten,1200);
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+})();
