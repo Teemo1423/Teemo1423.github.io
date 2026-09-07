@@ -71,3 +71,34 @@
 
 (()=>{if(document.querySelector('script[data-site-image-adjust]'))return;const s=document.createElement('script');s.dataset.siteImageAdjust='1';s.src='/js/site-image-adjust.js?v=imageadjust3';document.head.appendChild(s)})();
 (()=>{if(document.querySelector('script[data-church-info]'))return;const s=document.createElement('script');s.dataset.churchInfo='1';s.src='/js/church-info.js?v=churchinfo3';document.head.appendChild(s)})();
+
+(()=>{
+  const refreshLatest=async()=>{
+    if(!(location.pathname==='/'||location.pathname.endsWith('/index.html')))return;
+    try{
+      const stamp=Date.now();
+      const [siteRes,sermonRes]=await Promise.all([
+        fetch('/content/site.json?v='+stamp,{cache:'no-store'}),
+        fetch('/content/sermons.json?v='+stamp,{cache:'no-store'})
+      ]);
+      const site=siteRes.ok?await siteRes.json():{};
+      const sermons=sermonRes.ok?await sermonRes.json():[];
+      const latest=site.latestBulletin||{};
+      const sermon=Array.isArray(sermons)&&sermons.length?sermons[0]:{};
+      const title=latest.sermonTitle||sermon.title||'';
+      const scripture=latest.scripture||((sermon.text||'').split(' · ')[0]||'');
+      const date=latest.date||sermon.date||'';
+      const preacher=latest.preacher||site.pastor||'';
+      const set=(id,val)=>{const el=document.getElementById(id);if(el&&val)el.textContent=val};
+      set('latestSermonTitle',title);
+      set('latestSermonScripture',scripture);
+      set('latestSermonDate',date);
+      set('latestSermonPreacher',preacher);
+      set('carouselSermonTitle',title);
+      set('carouselSermonDate',date);
+      set('carouselSermonScripture',scripture);
+      if(sermon.text)set('carouselSermonText',sermon.text);
+    }catch(e){}
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',refreshLatest,{once:true});else refreshLatest();
+})();
