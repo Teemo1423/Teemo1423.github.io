@@ -77,6 +77,41 @@
     }catch(e){console.warn('home news subtitle unavailable',e)}
   }
 
+  async function syncLatestSermonCard(){
+    const path=location.pathname||'/';
+    if(!(path==='/'||path.endsWith('/index.html')))return;
+    try{
+      const [sermonRes,siteRes]=await Promise.all([
+        fetch('/content/sermons.json?v='+Date.now(),{cache:'no-store'}),
+        fetch('/content/site.json?v='+Date.now(),{cache:'no-store'})
+      ]);
+      if(!sermonRes.ok)return;
+      const sermons=await sermonRes.json();
+      const site=siteRes.ok?await siteRes.json():{};
+      if(!Array.isArray(sermons)||!sermons.length)return;
+      const dateKey=v=>Number(String(v||'').replace(/\D/g,'').slice(0,8))||0;
+      const latest=[...sermons].sort((a,b)=>dateKey(b.date)-dateKey(a.date))[0]||{};
+      const scripture=String(latest.text||'').split('·')[0].trim();
+      const set=(id,value)=>{const el=document.getElementById(id);if(el&&value!=null&&el.textContent!==String(value))el.textContent=String(value)};
+      const patch=()=>{
+        set('latestSermonTitle',latest.title||'최근 설교');
+        set('latestSermonScripture',scripture||latest.text||'');
+        set('latestSermonDate',latest.date||'');
+        set('latestSermonPreacher',site.pastor||'이동호 목사');
+        const card=document.getElementById('latestSermonCard');
+        if(card)card.href='/sermons.html#sermon-0';
+      };
+      patch();
+      const target=document.getElementById('latestSermonCard')?.parentElement||document.querySelector('main');
+      if(target){
+        const observer=new MutationObserver(()=>patch());
+        observer.observe(target,{childList:true,subtree:true,characterData:true});
+        setTimeout(()=>observer.disconnect(),15000);
+      }
+      [100,300,700,1500,3000,6000].forEach(ms=>setTimeout(patch,ms));
+    }catch(e){console.warn('latest sermon sync unavailable',e)}
+  }
+
   const run=async()=>{
     applyGlobalTone();
     try{
@@ -84,6 +119,7 @@
       if(r.ok)applyIndividual(await r.json());
     }catch(e){console.warn('image adjustments unavailable',e)}
     applyHomeNewsSubtitle();
+    syncLatestSermonCard();
   };
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
 })();
