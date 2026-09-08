@@ -34,6 +34,9 @@
       .navlinks{gap:18px}.navitem>a{font-weight:800}.dropdown{min-width:220px}.dropdown a{font-size:14px}
       .quick-icon svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;display:block}
       .mobile-menu-toggle,.nav-backdrop{display:none!important}.mobile-bottom-nav{display:none}
+      .site-footer.unified-footer{background:#09251b;color:#dfe9e4;padding:72px 0 58px!important}
+      .unified-footer .footer-grid{display:grid;grid-template-columns:1.05fr 1.6fr .72fr;gap:64px;align-items:start}
+      .unified-footer .footer-brand small{display:block;letter-spacing:.14em;font-weight:800;font-size:13px;margin-bottom:4px}.unified-footer .footer-brand strong{display:block;font-size:31px;line-height:1.05;color:#eaf2ee}.unified-footer .footer-brand p{margin:34px 0 0;line-height:1.8;color:#aebdb6;font-size:15px}.unified-footer .footer-info{display:grid;gap:18px}.unified-footer .footer-info p{margin:0;color:#aebdb6;font-size:15px;line-height:1.55}.unified-footer .footer-info b{display:inline-block;min-width:58px;color:#edf4f0}.unified-footer .footer-links{display:grid;gap:17px}.unified-footer .footer-links a{color:#e4ece8;font-weight:800;font-size:16px}.unified-footer .footer-links a:hover{opacity:.78}
       @media(max-width:900px){
         body{padding-bottom:0!important}
         main{padding-bottom:18px!important}
@@ -45,8 +48,17 @@
         .mobile-bottom-nav{display:grid!important;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:2000;background:rgba(255,255,255,.98);border-top:1px solid var(--line,#e4e4df);box-shadow:0 -8px 26px rgba(20,54,41,.10);padding:7px 6px calc(7px + env(safe-area-inset-bottom));min-height:72px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
         .mobile-bottom-nav a{display:flex;min-width:0;min-height:58px;align-items:center;justify-content:center;flex-direction:column;gap:3px;border-radius:12px;color:#66736d;font-size:11px;font-weight:800;line-height:1;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
         .mobile-bottom-nav a .mb-icon{width:28px;height:28px;display:grid;place-items:center;line-height:1;font-size:22px;font-family:Arial,sans-serif}.mobile-bottom-nav a .mb-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}.mobile-bottom-nav a.active{color:var(--green,#2f6b4f);background:#eef5f1}.mobile-bottom-nav a:active{background:#e7f1eb;transform:scale(.97)}
+        .site-footer.unified-footer{padding:46px 0 calc(112px + env(safe-area-inset-bottom))!important}.unified-footer .footer-grid{grid-template-columns:1fr;gap:32px}.unified-footer .footer-brand strong{font-size:27px}.unified-footer .footer-brand p{margin-top:20px}.unified-footer .footer-links{grid-template-columns:1fr 1fr;gap:14px 18px}.unified-footer .footer-links a{font-size:14px}
       }
     `;document.head.appendChild(s)
+  }
+
+  function ensureFooter(){
+    if(path.endsWith('/admin.html'))return;
+    let footer=document.querySelector('.site-footer');
+    if(!footer){footer=document.createElement('footer');document.body.appendChild(footer)}
+    footer.className='site-footer unified-footer';
+    footer.innerHTML=`<div class="container footer-grid"><div class="footer-brand"><small>MOHYEON SOMANG CHURCH</small><strong>모현소망교회</strong><p>성령과 진리로 예배드리는 교회<br>요한복음 4:24</p></div><div class="footer-info"><p><b>교단</b> 대한예수교장로회</p><p><b>담임목사</b> 이동호 목사</p><p><b>주소</b> 경기 용인시 처인구 모현읍 백옥대로2332번길 21-5</p><p><b>전화</b> 031-332-3855</p></div><nav class="footer-links" aria-label="하단 메뉴"><a href="/about.html">교회소개</a><a href="/worship.html">예배안내</a><a href="/sermons.html">말씀과 설교</a><a href="/news.html">교회소식</a><a href="/gallery.html">사진첩</a><a href="/visit.html">오시는 길</a><a href="https://pf.kakao.com/_BYtgG" target="_blank" rel="noopener">카카오톡 채널 ↗</a><a href="https://youtube.com/channel/UCiGQ15zMavL6wrRaKZzydiQ?si=7lehv1JcI6BnWYHI" target="_blank" rel="noopener">YouTube ↗</a></nav></div>`;
   }
 
   function replaceQuickIcons(){
@@ -65,7 +77,7 @@
     document.body.appendChild(nav)
   }
 
-  function run(){injectStyles();document.querySelectorAll('.mobile-menu-toggle,.nav-backdrop').forEach(x=>x.remove());document.querySelectorAll('.navlinks').forEach(buildDesktop);replaceQuickIcons();injectBottomNav()}
+  function run(){injectStyles();document.querySelectorAll('.mobile-menu-toggle,.nav-backdrop').forEach(x=>x.remove());document.querySelectorAll('.navlinks').forEach(buildDesktop);replaceQuickIcons();ensureFooter();injectBottomNav()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
 })();
 
