@@ -49,21 +49,31 @@
       if(!r.ok)return;
       const items=await r.json();
       if(!Array.isArray(items)||!items.length)return;
-      const latest=[...items].sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')))[0];
-      const subtitle=String(latest?.subtitle||'').trim();
+      const dateKey=v=>Number(String(v||'').replace(/\D/g,'').slice(0,8))||0;
+      const latest=[...items].sort((a,b)=>dateKey(b.date)-dateKey(a.date))[0]||{};
+      const subtitle=String(latest.subtitle||'').trim();
       if(!subtitle)return;
+
       const patch=()=>{
-        const slide=[...document.querySelectorAll('.hero-slide')].find(el=>el.querySelector('.hero-label')?.textContent.trim()==='CHURCH NEWS');
-        const p=slide?.querySelector('.hero-glass-card p');
-        if(p&&p.textContent!==subtitle)p.textContent=subtitle;
+        const legacy=document.getElementById('carouselNewsText');
+        if(legacy&&legacy.textContent!==subtitle)legacy.textContent=subtitle;
+
+        document.querySelectorAll('.hero-slide').forEach(slide=>{
+          const label=slide.querySelector('.hero-label,.eyebrow');
+          if(!label||!String(label.textContent||'').toUpperCase().includes('CHURCH NEWS'))return;
+          const p=slide.querySelector('.hero-glass-card p,.glass-panel p');
+          if(p&&p.textContent!==subtitle)p.textContent=subtitle;
+        });
       };
+
       patch();
       const hero=document.querySelector('.hero');
       if(hero){
-        const observer=new MutationObserver(patch);
+        const observer=new MutationObserver(()=>patch());
         observer.observe(hero,{childList:true,subtree:true,characterData:true});
-        setTimeout(()=>observer.disconnect(),8000);
+        setTimeout(()=>observer.disconnect(),15000);
       }
+      [100,300,700,1500,3000,6000].forEach(ms=>setTimeout(patch,ms));
     }catch(e){console.warn('home news subtitle unavailable',e)}
   }
 
