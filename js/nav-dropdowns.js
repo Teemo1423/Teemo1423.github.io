@@ -103,3 +103,5 @@
   };
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',refreshLatest,{once:true});else refreshLatest();
 })();
+
+(()=>{if(document.querySelector('script[data-home-bfcache-fix]'))return;const s=document.createElement('script');s.dataset.homeBfcacheFix='1';s.src='/js/home-bfcache-fix.js?v=bfcache1';document.head.appendChild(s)})();
