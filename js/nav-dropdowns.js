@@ -68,8 +68,7 @@
   }
 
   function loadCommonImageAdjust(){if(document.querySelector('script[data-site-image-adjust]'))return;const s=document.createElement('script');s.dataset.siteImageAdjust='1';s.src='/js/site-image-adjust.js?v=imageadjust3';document.head.appendChild(s)}
-  function loadHomeRuntime(){if(!isHome||document.querySelector('script[data-home-runtime]'))return;const s=document.createElement('script');s.dataset.homeRuntime='1';s.src='/js/home-runtime.js?v=homeisolate1';document.head.appendChild(s)}
 
-  function run(){injectStyles();document.querySelectorAll('.mobile-menu-toggle,.nav-backdrop').forEach(x=>x.remove());document.querySelectorAll('.navlinks').forEach(buildDesktop);replaceQuickIcons();ensureFooter();injectBottomNav();loadCommonImageAdjust();loadHomeRuntime()}
+  function run(){injectStyles();document.querySelectorAll('.mobile-menu-toggle,.nav-backdrop').forEach(x=>x.remove());document.querySelectorAll('.navlinks').forEach(buildDesktop);replaceQuickIcons();ensureFooter();injectBottomNav();loadCommonImageAdjust()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
 })();
