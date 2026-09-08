@@ -15,6 +15,11 @@
       .hero.hero-glass{--global-photo-tone:rgba(255,255,255,.10)}
       .hero.hero-glass:after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:var(--global-photo-tone)}
       .hero.hero-glass>.container{position:relative;z-index:1}
+      @media(max-width:420px){
+        .unified-footer>.container{padding-left:12px!important;padding-right:12px!important}
+        .unified-footer .footer-info p:nth-child(3){font-size:12.5px!important;letter-spacing:-.04em;white-space:nowrap;line-height:1.45!important}
+        .unified-footer .footer-info p:nth-child(3) b{min-width:48px!important}
+      }
     `;
 
     document.querySelectorAll('main img').forEach(img=>{
