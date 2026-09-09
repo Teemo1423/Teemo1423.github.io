@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>모현소망교회 앱 미리보기</title>
+  <meta name="theme-color" content="#2f6b4f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="모현소망교회">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <style>
+    *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:#f4f7f5;color:#163327;min-height:100vh;display:grid;place-items:center;padding:24px}.card{width:min(560px,100%);background:#fff;border:1px solid #dfe8e2;border-radius:28px;padding:34px;box-shadow:0 24px 70px rgba(24,56,44,.12)}.mark{width:76px;height:76px;border-radius:22px;background:#eef5f1;display:grid;place-items:center;margin-bottom:22px}.mark img{width:54px;height:54px;object-fit:contain}h1{font-size:30px;line-height:1.2;margin:0 0 12px}p{line-height:1.7;color:#557066;margin:0 0 18px}.status{padding:14px 16px;border-radius:16px;background:#edf6f1;font-weight:700;margin:20px 0}.actions{display:flex;gap:10px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:999px;padding:13px 18px;font-weight:800;border:1px solid #2f6b4f}.primary{background:#2f6b4f;color:#fff}.secondary{color:#2f6b4f;background:#fff}.hint{font-size:14px;margin-top:22px;color:#71867e}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="mark"><img src="/assets/site/logo.png" alt="모현소망교회 로고"></div>
+    <h1>모현소망교회 앱 미리보기</h1>
+    <p>기존 홈페이지 화면은 건드리지 않고, 앱 설치 기능만 안전하게 시험하는 페이지입니다.</p>
+    <div class="status" id="status">PWA 기능 확인 중…</div>
+    <div class="actions">
+      <a class="btn primary" href="/">홈페이지 열기</a>
+      <a class="btn secondary" href="https://github.com/Teemo1423/Teemo1423.github.io">GitHub 저장소 보기</a>
+    </div>
+    <p class="hint">iPhone에서는 Safari의 공유 버튼 → ‘홈 화면에 추가’로 설치해 보세요. 설치 후 아이콘에서 열면 모현소망교회 홈페이지가 앱처럼 실행됩니다.</p>
+  </main>
+  <script>
+    const status = document.getElementById('status');
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js').then(() => {
+        status.textContent = '✓ 앱 설치 기반 기능이 정상 등록되었습니다.';
+      }).catch(() => {
+        status.textContent = '서비스 워커 등록을 확인하지 못했습니다.';
+      });
+    } else {
+      status.textContent = '이 브라우저는 서비스 워커를 지원하지 않습니다.';
+    }
+  </script>
+</body>
+</html>
