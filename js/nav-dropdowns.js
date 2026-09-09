@@ -68,7 +68,8 @@
   }
 
   function loadCommonImageAdjust(){if(document.querySelector('script[data-site-image-adjust]'))return;const s=document.createElement('script');s.dataset.siteImageAdjust='1';s.src='/js/site-image-adjust.js?v=imageadjust3';document.head.appendChild(s)}
+  function loadCommonSeo(){if(document.querySelector('script[data-site-seo]'))return;const s=document.createElement('script');s.dataset.siteSeo='1';s.src='/js/seo-meta.js?v=seo1';document.head.appendChild(s)}
 
-  function run(){injectStyles();document.querySelectorAll('.mobile-menu-toggle,.nav-backdrop').forEach(x=>x.remove());document.querySelectorAll('.navlinks').forEach(buildDesktop);replaceQuickIcons();ensureFooter();injectBottomNav();loadCommonImageAdjust()}
+  function run(){injectStyles();document.querySelectorAll('.mobile-menu-toggle,.nav-backdrop').forEach(x=>x.remove());document.querySelectorAll('.navlinks').forEach(buildDesktop);replaceQuickIcons();ensureFooter();injectBottomNav();loadCommonImageAdjust();loadCommonSeo()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
 })();
