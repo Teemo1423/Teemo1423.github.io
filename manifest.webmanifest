@@ -1,0 +1,19 @@
+{
+  "name": "모현소망교회",
+  "short_name": "모현소망교회",
+  "description": "모현소망교회 공식 홈페이지",
+  "lang": "ko-KR",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2f6b4f",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
