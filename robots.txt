@@ -1,5 +1,16 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
+Disallow: /preview-home.html
+
+User-agent: Googlebot
+Allow: /
+Disallow: /admin.html
+Disallow: /preview-home.html
+
+User-agent: Yeti
+Allow: /
+Disallow: /admin.html
+Disallow: /preview-home.html
 
 Sitemap: https://mohyeonsomang.org/sitemap.xml
