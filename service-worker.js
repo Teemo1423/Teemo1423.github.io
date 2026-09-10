@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mohyeonsomang-pwa-v4';
+const CACHE_NAME = 'mohyeonsomang-pwa-v5';
 const APP_SHELL = [
   '/',
   '/app-download.html',
