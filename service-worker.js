@@ -1,5 +1,17 @@
-const CACHE_NAME = 'mohyeonsomang-pwa-v1';
-const APP_SHELL = ['/', '/css/church.css', '/js/site-data.js', '/favicon.svg', '/apple-touch-icon.png'];
+const CACHE_NAME = 'mohyeonsomang-pwa-v2';
+const APP_SHELL = [
+  '/',
+  '/app.html',
+  '/app-download.html',
+  '/css/app.css',
+  '/js/app.js',
+  '/content/site.json',
+  '/content/sermons.json',
+  '/content/news.json',
+  '/favicon.svg',
+  '/apple-touch-icon.png',
+  '/assets/site/logo.png'
+];
 
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)).catch(() => null));
@@ -22,6 +34,6 @@ self.addEventListener('fetch', event => {
         caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy)).catch(() => null);
         return response;
       })
-      .catch(() => caches.match(event.request).then(cached => cached || caches.match('/')))
+      .catch(() => caches.match(event.request).then(cached => cached || caches.match('/app.html') || caches.match('/')))
   );
 });
