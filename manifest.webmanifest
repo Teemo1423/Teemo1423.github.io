@@ -3,11 +3,11 @@
   "short_name": "모현소망교회",
   "description": "모현소망교회 공식 앱",
   "lang": "ko-KR",
-  "start_url": "/app.html",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#f7f1e7",
-  "theme_color": "#f7f1e7",
+  "background_color": "#ffffff",
+  "theme_color": "#18382c",
   "icons": [
     {
       "src": "/apple-touch-icon-v2.png",
