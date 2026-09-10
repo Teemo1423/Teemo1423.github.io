@@ -1,7 +1,8 @@
-const CACHE_NAME = 'mohyeonsomang-pwa-v5';
+const CACHE_NAME = 'mohyeonsomang-pwa-v6';
 const APP_SHELL = [
   '/',
   '/app-download.html',
+  '/app-logo.svg',
   '/css/church.css',
   '/js/site-data.js',
   '/js/nav-dropdowns.js',
