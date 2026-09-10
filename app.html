@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>모현소망교회 앱</title>
+  <meta name="theme-color" content="#f7f1e7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="모현소망교회">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/app.css?v=1">
+</head>
+<body>
+  <div id="welcome" class="welcome" hidden>
+    <div class="welcome-mark"><img src="/assets/site/logo.png" alt="모현소망교회 로고"></div>
+    <p class="eyebrow">MOHYEON SOMANG CHURCH</p>
+    <h1>모현소망교회에<br>오신 것을 환영합니다</h1>
+    <p class="welcome-copy">말씀 안에서 함께 자라고 사랑으로 세상을 섬기는 공동체</p>
+    <button id="enterApp" class="primary-btn">시작하기</button>
+  </div>
+
+  <div id="appShell" class="app-shell">
+    <header class="app-header">
+      <a class="app-brand" href="/app.html" aria-label="앱 홈">
+        <img src="/assets/site/logo.png" alt="">
+        <div><small>MOHYEON SOMANG CHURCH</small><strong id="churchName">모현소망교회</strong></div>
+      </a>
+      <a class="round-action" href="/news.html" aria-label="교회소식">♡</a>
+    </header>
+
+    <main class="app-main">
+      <section class="hero-card">
+        <span class="pill">이번 주 예배</span>
+        <h1 id="heroTitle">말씀 안에서 함께 자라고<br>사랑으로 세상을 섬기는 교회</h1>
+        <p id="heroText">하나님을 예배하고 복음 안에서 서로를 세우는 공동체입니다.</p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="/worship.html">예배 안내</a>
+          <a class="soft-btn" href="/visit.html">오시는 길</a>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-head"><div><small>QUICK MENU</small><h2>바로가기</h2></div></div>
+        <div class="quick-grid">
+          <a href="/worship.html"><span>⛪</span><strong>예배안내</strong><small>시간과 장소</small></a>
+          <a href="/sermons.html"><span>▶</span><strong>주일설교</strong><small>말씀 다시보기</small></a>
+          <a href="/news.html"><span>▤</span><strong>교회소식</strong><small>주보와 공지</small></a>
+          <a href="/sunday-school.html"><span>☺</span><strong>주일학교</strong><small>다음세대</small></a>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-head"><div><small>THIS WEEK</small><h2>이번 주 말씀</h2></div><a href="/sermons.html">전체보기</a></div>
+        <a id="latestSermonCard" class="feature-card" href="/sermons.html#sermon-0">
+          <div class="feature-icon">✦</div>
+          <div class="feature-copy"><small id="sermonDate">최근 설교</small><h3 id="sermonTitle">말씀을 불러오는 중입니다</h3><p id="sermonText"></p></div>
+          <span class="arrow">›</span>
+        </a>
+      </section>
+
+      <section class="section-block">
+        <div class="section-head"><div><small>CHURCH NEWS</small><h2>교회 소식</h2></div><a href="/news.html">전체보기</a></div>
+        <a id="latestNewsCard" class="news-card" href="/news.html">
+          <div><small id="newsDate">새 소식</small><h3 id="newsTitle">교회 소식을 불러오는 중입니다</h3><p id="newsText"></p></div>
+          <span>›</span>
+        </a>
+      </section>
+
+      <section class="section-block community-card">
+        <small>TOGETHER</small>
+        <h2>함께하는 공동체</h2>
+        <p>사랑방과 다음세대 사역 소식을 만나보세요.</p>
+        <div class="community-links">
+          <a href="/sarangbang.html">사랑방</a>
+          <a href="/sunday-school.html">주일학교</a>
+          <a href="/ministries.html">교육·사역</a>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="앱 메뉴">
+      <a class="active" href="/app.html"><span>⌂</span><small>홈</small></a>
+      <a href="/sermons.html"><span>▣</span><small>말씀</small></a>
+      <a href="/news.html"><span>◎</span><small>소식</small></a>
+      <a href="/visit.html"><span>⌖</span><small>교회</small></a>
+    </nav>
+  </div>
+
+  <script src="/js/app.js?v=1"></script>
+</body>
+</html>
