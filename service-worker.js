@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mohyeonsomang-pwa-v3';
+const CACHE_NAME = 'mohyeonsomang-pwa-v4';
 const APP_SHELL = [
   '/',
   '/app-download.html',
@@ -12,6 +12,8 @@ const APP_SHELL = [
   '/apple-touch-icon-v2.png',
   '/assets/site/logo.png'
 ];
+
+const STANDALONE_CSS = `\n@media (display-mode: standalone){\n  .mobile-app-link,\n  .home-app-cta-wrap,\n  .nav-app-install{display:none!important;}\n}\n`;
 
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)).catch(() => null));
@@ -27,6 +29,26 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
+
+  const url = new URL(event.request.url);
+  if (url.origin === self.location.origin && url.pathname === '/css/church.css') {
+    event.respondWith(
+      fetch(event.request)
+        .then(async response => {
+          const css = await response.text();
+          const patched = new Response(css + STANDALONE_CSS, {
+            status: response.status,
+            statusText: response.statusText,
+            headers: {'Content-Type':'text/css; charset=utf-8'}
+          });
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, patched.clone())).catch(() => null);
+          return patched;
+        })
+        .catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
   event.respondWith(
     fetch(event.request)
       .then(response => {
