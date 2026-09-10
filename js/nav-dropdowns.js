@@ -15,15 +15,15 @@
   const iconNews=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h12.5a2 2 0 0 1 2 2V19H6a2 2 0 0 1-2-2V5.5Z"/><path d="M18.5 9.5H20a1 1 0 0 1 1 1V17a2 2 0 0 1-2 2h-.5"/><path d="M7 9h4M7 12h8M7 15h8"/></svg>`;
   const iconAlbum=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5h10.5a2 2 0 0 1 2 2V19H6a2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2Z"/><path d="M18.5 7.5H20a1 1 0 0 1 1 1V17a2 2 0 0 1-2 2h-.5"/><rect x="7.5" y="8" width="7.5" height="6.5" rx="1.3"/><path d="m8.5 13 2.2-2.2 1.6 1.6 1.5-1.5 1.2 1.2"/><circle cx="10" cy="9.8" r=".7"/></svg>`;
   const iconPhoto=`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2"/><circle cx="8" cy="9" r="1.4"/><path d="m5.5 17 4.2-4.3 3 3 2.2-2.2 3.6 3.5"/></svg>`;
-  const iconChurch=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M10 5h4M5 20V11l7-4 7 4v9M3 20h18M9 20v-6h6v6M6 12h2M16 12h2"/></svg>`;
-  const iconMap=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.5 6.5 5-2 7 2 5-2v13l-5 2-7-2-5 2v-13Z"/><path d="M8.5 4.5v13M15.5 6.5v13"/><path d="M12 13.5s-2.5-2.4-2.5-4.5a2.5 2.5 0 1 1 5 0c0 2.1-2.5 4.5-2.5 4.5Z"/><circle cx="12" cy="9" r=".7"/></svg>`;
+  const iconChurch=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8v4.1M10.1 4.7h3.8"/><path d="M6.1 20.2V11.4L12 7.3l5.9 4.1v8.8"/><path d="M3.8 20.2h16.4"/><path d="M9.2 20.2v-5.4c0-1.6 1.2-2.8 2.8-2.8s2.8 1.2 2.8 2.8v5.4"/><path d="M6.1 12.6H4.5v7.6M17.9 12.6h1.6v7.6"/></svg>`;
+  const iconMap=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.7 7 5.2-2.2 6.2 2.2 5.2-2.2v12.4l-5.2 2.2-6.2-2.2-5.2 2.2V7Z"/><path d="M8.9 4.8v12.4M15.1 7v12.4"/><path d="M12 14.4s3.1-2.8 3.1-5.3a3.1 3.1 0 1 0-6.2 0c0 2.5 3.1 5.3 3.1 5.3Z"/><circle cx="12" cy="9.1" r="1.05"/></svg>`;
 
   function buildDesktop(nav){if(!nav)return;nav.innerHTML='';const home=document.createElement('a');home.href='/';home.textContent='홈';if(isHome)home.classList.add('active');nav.appendChild(home);menu.forEach(group=>{if(!group.items.length){const a=document.createElement('a');a.href=group.href;a.textContent=group.label;if(active(group.href))a.classList.add('active');nav.appendChild(a);return;}const item=document.createElement('div');item.className='navitem';const a=document.createElement('a');a.href=group.href;a.textContent=group.label;if([group.href,...group.items.map(x=>x[1])].some(active))a.classList.add('active');const dd=document.createElement('div');dd.className='dropdown';group.items.forEach(([label,href])=>{const x=document.createElement('a');x.href=href;x.textContent=label;if(active(href))x.classList.add('active');dd.appendChild(x)});item.append(a,dd);nav.appendChild(item);});}
 
   function injectStyles(){document.getElementById('churchNavHierarchy')?.remove();const s=document.createElement('style');s.id='churchNavHierarchy';s.textContent=`
       .navlinks{gap:18px}.navitem>a{font-weight:800}.dropdown{min-width:220px}.dropdown a{font-size:14px}
       .mobile-app-link{display:none}
-      .quick-icon svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;display:block}
+      .quick-icon svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:block}
       .mobile-menu-toggle,.nav-backdrop{display:none!important}.mobile-bottom-nav{display:none}
       .site-footer.unified-footer{background:#09251b;color:#dfe9e4;padding:72px 0 58px!important}
       .unified-footer .footer-grid{display:grid;grid-template-columns:1.05fr 1.6fr .72fr;gap:64px;align-items:start}
