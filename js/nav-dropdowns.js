@@ -23,7 +23,6 @@
     menu.forEach(group=>{
       if(!group.items.length){
         const a=document.createElement('a');a.href=group.href;a.textContent=group.label;
-        if(group.href==='/app-download.html')a.classList.add('nav-app-install');
         if(active(group.href))a.classList.add('active');nav.appendChild(a);return;
       }
       const item=document.createElement('div');item.className='navitem';
@@ -40,7 +39,7 @@
     const s=document.createElement('style');s.id='churchNavHierarchy';
     s.textContent=`
       .navlinks{gap:18px}.navitem>a{font-weight:800}.dropdown{min-width:220px}.dropdown a{font-size:14px}
-      .nav-app-install{padding:9px 13px!important;border-radius:999px;background:#2f6b4f!important;color:#fff!important}.nav-app-install:hover{background:#285d45!important;opacity:1!important}
+      .mobile-app-link{display:none}
       .quick-icon svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;display:block}
       .mobile-menu-toggle,.nav-backdrop{display:none!important}.mobile-bottom-nav{display:none}
       .site-footer.unified-footer{background:#09251b;color:#dfe9e4;padding:72px 0 58px!important}
@@ -51,8 +50,9 @@
       @media(max-width:900px){
         body{padding-bottom:0!important}main{padding-bottom:18px!important}.site-footer{padding-bottom:calc(112px + env(safe-area-inset-bottom))!important}
         .site-header{position:sticky!important;top:0!important;z-index:1000!important;background:rgba(255,255,255,.98)!important}
-        .site-header .nav{height:70px!important;min-height:70px!important;padding:8px 20px!important;display:flex!important;align-items:center!important;justify-content:center!important;position:relative!important}
-        .site-header .brand{max-width:100%!important;margin:auto!important}.site-header .brand-logo{width:38px!important;height:38px!important}.site-header .brand-copy strong{font-size:18px!important}.site-header .brand-copy small{font-size:8px!important}.site-header .navlinks{display:none!important}
+        .site-header .nav{height:70px!important;min-height:70px!important;padding:8px 16px!important;display:flex!important;align-items:center!important;justify-content:center!important;position:relative!important}
+        .site-header .brand{max-width:calc(100% - 94px)!important;margin:auto!important}.site-header .brand-logo{width:38px!important;height:38px!important}.site-header .brand-copy strong{font-size:18px!important}.site-header .brand-copy small{font-size:8px!important}.site-header .navlinks{display:none!important}
+        .mobile-app-link{display:inline-flex!important;position:absolute;right:14px;top:50%;transform:translateY(-50%);align-items:center;justify-content:center;min-height:34px;padding:0 4px;color:#2f6b4f!important;background:transparent!important;font-size:12px;font-weight:900;text-decoration:none;white-space:nowrap}
         .mobile-bottom-nav{display:grid!important;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:2000;background:rgba(255,255,255,.98);border-top:1px solid var(--line,#e4e4df);box-shadow:0 -8px 26px rgba(20,54,41,.10);padding:7px 6px calc(7px + env(safe-area-inset-bottom));min-height:72px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
         .mobile-bottom-nav a{display:flex;min-width:0;min-height:58px;align-items:center;justify-content:center;flex-direction:column;gap:3px;border-radius:12px;color:#66736d;font-size:11px;font-weight:800;line-height:1;touch-action:manipulation;-webkit-tap-highlight-color:transparent}.mobile-bottom-nav a .mb-icon{width:28px;height:28px;display:grid;place-items:center;line-height:1;font-size:22px;font-family:Arial,sans-serif}.mobile-bottom-nav a .mb-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}.mobile-bottom-nav a.active{color:var(--green,#2f6b4f);background:#eef5f1}.mobile-bottom-nav a:active{background:#e7f1eb;transform:scale(.97)}
         .site-footer.unified-footer{padding:46px 0 calc(112px + env(safe-area-inset-bottom))!important}.unified-footer .footer-grid{grid-template-columns:1fr;gap:32px}.unified-footer .footer-brand strong{font-size:27px}.unified-footer .footer-brand p{margin-top:20px}.unified-footer .footer-links{grid-template-columns:1fr 1fr;gap:14px 18px}.unified-footer .footer-links a{font-size:14px}
@@ -73,6 +73,13 @@
     if(news)news.innerHTML=iconNews;if(gallery)gallery.innerHTML=iconAlbum;
   }
 
+  function injectMobileAppLink(){
+    document.querySelector('.mobile-app-link')?.remove();
+    const nav=document.querySelector('.site-header .nav');if(!nav)return;
+    const a=document.createElement('a');a.className='mobile-app-link';a.href='/app-download.html';a.textContent='앱 설치';
+    nav.appendChild(a);
+  }
+
   function injectBottomNav(){
     document.querySelector('.mobile-bottom-nav')?.remove();
     const nav=document.createElement('nav');nav.className='mobile-bottom-nav';nav.setAttribute('aria-label','모바일 주요 메뉴');
@@ -89,10 +96,9 @@
   function run(){
     injectStyles();
     document.querySelector('.home-app-cta-wrap')?.remove();
-    document.querySelector('.mobile-app-link')?.remove();
     document.querySelectorAll('.mobile-menu-toggle,.nav-backdrop').forEach(x=>x.remove());
     document.querySelectorAll('.navlinks').forEach(buildDesktop);
-    replaceQuickIcons();ensureFooter();injectBottomNav();loadCommonImageAdjust();loadCommonSeo();loadChannelPopup();
+    replaceQuickIcons();injectMobileAppLink();ensureFooter();injectBottomNav();loadCommonImageAdjust();loadCommonSeo();loadChannelPopup();
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
 })();
