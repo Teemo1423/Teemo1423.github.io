@@ -7,15 +7,14 @@
     @media(max-width:390px){.home-meditation-card{min-height:205px;padding:22px 18px}.home-meditation-card h2{font-size:26px}.home-meditation-summary{-webkit-line-clamp:2}}
   `;document.head.appendChild(style);
   function addNewcomer(){if(document.querySelector('.home-newcomer'))return;const connect=[...document.querySelectorAll('section')].find(s=>s.querySelector('.connect-strip'));if(!connect)return;const sec=document.createElement('section');sec.className='home-newcomer';sec.innerHTML=`<div class="container"><div class="home-newcomer-card"><div><div class="kicker">FIRST VISIT</div><h3>처음 오셨나요?</h3><p>예배시간부터 새가족 등록, 문의, 오시는 길까지 한 번에 안내해 드립니다.</p></div><a href="/newcomers.html">새가족 안내 보기 →</a></div></div>`;connect.parentNode.insertBefore(sec,connect)}
+  const scriptureOf=s=>String(s?.text||'').split('·')[0].trim();
   async function run(){
     addNewcomer();
     try{
-      const r=await fetch('/content/meditation.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('meditation');const d=await r.json();if(d.enabled===false)return;
+      const [mr,sr]=await Promise.all([fetch('/content/meditation.json?v='+Date.now(),{cache:'no-store'}),fetch('/content/sermons.json?v='+Date.now(),{cache:'no-store'})]);if(!mr.ok)throw new Error('meditation');const d=await mr.json();const sermons=sr.ok?await sr.json():[];const sermon=Array.isArray(sermons)?sermons[0]:null;if(sermon){d.title=sermon.title||d.title;d.scripture=scriptureOf(sermon)||d.scripture;d.date=sermon.date||d.date}if(d.enabled===false)return;
       const quick=document.querySelector('.quick-wrap');if(!quick||document.querySelector('.home-meditation'))return;
-      const sec=document.createElement('section');sec.className='home-meditation';
-      const image=String(d.image||'').trim();
-      sec.innerHTML=`<div class="container"><article class="home-meditation-card${image?' has-image':''}"${image?` style="background-image:url('${esc(image)}')"`:''}><div class="home-meditation-copy"><div class="home-meditation-label">WEEKLY MEDITATION · 이번 주 말씀묵상</div><h2>${esc(d.title||'이번 주 말씀묵상')}</h2><div class="home-meditation-scripture">${esc(d.scripture||'')}</div><p class="home-meditation-summary">${esc(d.summary||'')}</p></div><a class="home-meditation-link" href="/weekly-meditation.html">묵상 전체보기 →</a></article></div>`;
-      quick.insertAdjacentElement('afterend',sec);
+      const sec=document.createElement('section');sec.className='home-meditation';const image=String(d.image||'').trim();
+      sec.innerHTML=`<div class="container"><article class="home-meditation-card${image?' has-image':''}"${image?` style="background-image:url('${esc(image)}')"`:''}><div class="home-meditation-copy"><div class="home-meditation-label">WEEKLY MEDITATION · 이번 주 말씀묵상</div><h2>${esc(d.title||'이번 주 말씀묵상')}</h2><div class="home-meditation-scripture">${esc(d.scripture||'')}</div><p class="home-meditation-summary">${esc(d.summary||'')}</p></div><a class="home-meditation-link" href="/weekly-meditation.html">묵상 전체보기 →</a></article></div>`;quick.insertAdjacentElement('afterend',sec);
     }catch(e){console.warn('home meditation unavailable',e)}
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
