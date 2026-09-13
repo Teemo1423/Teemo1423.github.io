@@ -7,6 +7,8 @@
     '/':'모현소망교회 | 용인 모현읍 교회',
     '/about.html':'교회소개 | 모현소망교회',
     '/staff.html':'목회자 · 섬기시는 분 | 모현소망교회',
+    '/newcomers.html':'새가족 안내 | 모현소망교회',
+    '/weekly-meditation.html':'이번 주 말씀묵상 | 모현소망교회',
     '/worship.html':'예배안내 | 모현소망교회',
     '/transport.html':'차량 운행 안내 | 모현소망교회',
     '/visit.html':'오시는 길 | 모현소망교회',
@@ -24,9 +26,11 @@
     '/menu.html':'전체 메뉴 | 모현소망교회'
   };
   const descriptions={
-    '/':'경기도 용인시 처인구 모현읍 모현소망교회 공식 홈페이지입니다. 주일예배, 설교, 교회소식, 주일학교, 사랑방 모임과 오시는 길을 안내합니다.',
-    '/about.html':'모현소망교회의 비전과 신앙공동체의 방향, 교회 소개를 안내합니다.',
-    '/staff.html':'모현소망교회를 섬기는 담임목사와 교역자, 봉사 사역을 소개합니다.',
+    '/':'경기도 용인시 처인구 모현읍 모현소망교회 공식 홈페이지입니다. 주일예배, 설교, 이번 주 말씀묵상, 교회소식, 새가족 안내와 오시는 길을 확인하세요.',
+    '/about.html':'모현소망교회의 비전과 예배·교제·훈련·사역·선교의 사명, 신앙공동체의 방향을 소개합니다.',
+    '/staff.html':'모현소망교회 이동호 담임목사의 목회 인사와 목회 비전, 교회를 섬기는 분들을 소개합니다.',
+    '/newcomers.html':'모현소망교회에 처음 오시는 분을 위한 예배시간, 새가족 등록, 문의와 오시는 길 안내입니다.',
+    '/weekly-meditation.html':'모현소망교회의 이번 주 말씀묵상입니다. 주일 말씀을 본문과 핵심 적용으로 다시 묵상해 보세요.',
     '/worship.html':'모현소망교회 주일예배, 주일학교, 수요예배, 저녁기도회 등 예배 시간과 모임을 안내합니다.',
     '/transport.html':'모현소망교회 예배 참석을 위한 차량 운행과 신청 방법을 안내합니다.',
     '/visit.html':'경기도 용인시 처인구 모현읍 모현소망교회의 주소, 전화번호, 카카오맵, 카카오톡 채널과 오시는 길을 안내합니다.',
@@ -48,38 +52,9 @@
   if(titles[path])document.title=pageTitle;
   const setMeta=(attr,key,value)=>{let el=document.head.querySelector(`meta[${attr}="${key}"]`);if(!el){el=document.createElement('meta');el.setAttribute(attr,key);document.head.appendChild(el)}el.setAttribute('content',value)};
   const setLink=(rel,href)=>{let el=document.head.querySelector(`link[rel="${rel}"]`);if(!el){el=document.createElement('link');el.rel=rel;document.head.appendChild(el)}el.href=href};
-  setMeta('name','description',description);
-  setMeta('name','robots','index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1');
-  setMeta('name','googlebot','index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1');
-  setMeta('name','yeti','index,follow');
-  setMeta('property','og:type','website');
-  setMeta('property','og:site_name','모현소망교회');
-  setMeta('property','og:title',pageTitle);
-  setMeta('property','og:description',description);
-  setMeta('property','og:url',canonical);
-  setMeta('property','og:locale','ko_KR');
-  setMeta('property','og:image',origin+'/siteicon.png');
-  setMeta('name','twitter:card','summary');
-  setMeta('name','twitter:title',pageTitle);
-  setMeta('name','twitter:description',description);
-  setMeta('name','twitter:image',origin+'/siteicon.png');
-  setLink('canonical',canonical);
-  setLink('icon',origin+'/favicon.ico');
-  setLink('shortcut icon',origin+'/favicon.ico');
-  setLink('apple-touch-icon',origin+'/apple-touch-icon.png');
-  const navItems=[
-    ['교회소개','/about.html'],['섬기시는 분','/staff.html'],['예배안내','/worship.html'],['주일예배 설교','/sermons.html'],['교회소식','/news.html'],['주일학교','/sunday-school.html'],['사진첩','/gallery.html'],['오시는 길','/visit.html']
-  ];
-  const graph=[
-    {'@type':'WebSite','@id':origin+'/#website',url:origin+'/',name:'모현소망교회',alternateName:'MOHYEON SOMANG CHURCH',inLanguage:'ko-KR'},
-    {'@type':['Organization','Church'],'@id':origin+'/#church',name:'모현소망교회',alternateName:'MOHYEON SOMANG CHURCH',url:origin+'/',logo:origin+'/assets/site/logo.png',image:origin+'/siteicon.png',telephone:'031-332-3855',address:{'@type':'PostalAddress',streetAddress:'백옥대로2332번길 21-5',addressLocality:'용인시 처인구 모현읍',addressRegion:'경기도',addressCountry:'KR'},sameAs:['https://pf.kakao.com/_BYtgG','https://youtube.com/channel/UCiGQ15zMavL6wrRaKZzydiQ']},
-    {'@type':'ItemList','@id':origin+'/#main-navigation',name:'모현소망교회 주요 메뉴',itemListElement:navItems.map((n,i)=>({'@type':'SiteNavigationElement',position:i+1,name:n[0],url:origin+n[1]}))}
-  ];
-  if(path!=='/'){
-    const label=(titles[path]||'모현소망교회').split(' | ')[0];
-    graph.push({'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'홈',item:origin+'/'},{'@type':'ListItem',position:2,name:label,item:canonical}]});
-  }
-  let ld=document.head.querySelector('script[data-seo-jsonld="1"]');
-  if(!ld){ld=document.createElement('script');ld.type='application/ld+json';ld.dataset.seoJsonld='1';document.head.appendChild(ld)}
-  ld.textContent=JSON.stringify({'@context':'https://schema.org','@graph':graph});
+  setMeta('name','description',description);setMeta('name','robots','index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1');setMeta('name','googlebot','index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1');setMeta('name','yeti','index,follow');setMeta('property','og:type','website');setMeta('property','og:site_name','모현소망교회');setMeta('property','og:title',pageTitle);setMeta('property','og:description',description);setMeta('property','og:url',canonical);setMeta('property','og:locale','ko_KR');setMeta('property','og:image',origin+'/siteicon.png');setMeta('name','twitter:card','summary');setMeta('name','twitter:title',pageTitle);setMeta('name','twitter:description',description);setMeta('name','twitter:image',origin+'/siteicon.png');setLink('canonical',canonical);setLink('icon',origin+'/favicon.ico');setLink('shortcut icon',origin+'/favicon.ico');setLink('apple-touch-icon',origin+'/apple-touch-icon.png');
+  const navItems=[['교회소개','/about.html'],['섬기시는 분','/staff.html'],['새가족 안내','/newcomers.html'],['예배안내','/worship.html'],['이번 주 말씀묵상','/weekly-meditation.html'],['주일예배 설교','/sermons.html'],['교회소식','/news.html'],['사진첩','/gallery.html'],['오시는 길','/visit.html']];
+  const graph=[{'@type':'WebSite','@id':origin+'/#website',url:origin+'/',name:'모현소망교회',alternateName:'MOHYEON SOMANG CHURCH',inLanguage:'ko-KR'},{'@type':['Organization','Church'],'@id':origin+'/#church',name:'모현소망교회',alternateName:'MOHYEON SOMANG CHURCH',url:origin+'/',logo:origin+'/assets/site/logo.png',image:origin+'/siteicon.png',telephone:'031-332-3855',address:{'@type':'PostalAddress',streetAddress:'백옥대로2332번길 21-5',addressLocality:'용인시 처인구 모현읍',addressRegion:'경기도',addressCountry:'KR'},sameAs:['https://pf.kakao.com/_BYtgG','https://youtube.com/channel/UCiGQ15zMavL6wrRaKZzydiQ']},{'@type':'ItemList','@id':origin+'/#main-navigation',name:'모현소망교회 주요 메뉴',itemListElement:navItems.map((n,i)=>({'@type':'SiteNavigationElement',position:i+1,name:n[0],url:origin+n[1]}))}];
+  if(path!=='/'){const label=(titles[path]||'모현소망교회').split(' | ')[0];graph.push({'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'홈',item:origin+'/'},{'@type':'ListItem',position:2,name:label,item:canonical}]})}
+  let ld=document.head.querySelector('script[data-seo-jsonld="1"]');if(!ld){ld=document.createElement('script');ld.type='application/ld+json';ld.dataset.seoJsonld='1';document.head.appendChild(ld)}ld.textContent=JSON.stringify({'@context':'https://schema.org','@graph':graph});
 })();
