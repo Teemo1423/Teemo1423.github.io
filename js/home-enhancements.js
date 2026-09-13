@@ -13,6 +13,17 @@
     if(meta)meta.insertAdjacentElement('afterend',link);else card.appendChild(link);
     link.addEventListener('click',e=>e.stopPropagation());
   }
-  function run(){addNewcomer();addMeditationLink()}
+  function cleanHeroSermonMeta(){
+    document.querySelectorAll('.hero-slide').forEach(slide=>{
+      const label=slide.querySelector('.hero-label')?.textContent?.trim();
+      if(label!=='LATEST SERMON')return;
+      const meta=slide.querySelector('.hero-glass-meta');
+      if(!meta)return;
+      const spans=[...meta.querySelectorAll('span')];
+      if(spans.length>=3)spans[1].remove();
+    });
+  }
+  function run(){addNewcomer();addMeditationLink();cleanHeroSermonMeta()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
+  const observer=new MutationObserver(()=>cleanHeroSermonMeta());observer.observe(document.documentElement,{childList:true,subtree:true});setTimeout(()=>observer.disconnect(),5000);
 })();
