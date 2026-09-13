@@ -45,7 +45,7 @@
   function loadCommonImageAdjust(){loadScriptOnce('data-site-image-adjust','/js/site-image-adjust.js?v=imageadjust3')}
   function loadCommonSeo(){loadScriptOnce('data-site-seo','/js/seo-meta.js?v=seo2')}
   function loadChannelPopup(){if(isHome)loadScriptOnce('data-channel-popup','/js/channel-popup.js?v=channelpopup3')}
-  function loadContentEnhancements(){if(isHome)loadScriptOnce('data-home-enhancements','/js/home-enhancements.js?v=contentupgrade1');if(active('/staff.html'))loadScriptOnce('data-staff-enhancements','/js/staff-enhancements.js?v=contentupgrade1');if(active('/about.html'))loadScriptOnce('data-about-enhancements','/js/about-enhancements.js?v=contentupgrade1')}
+  function loadContentEnhancements(){if(isHome)loadScriptOnce('data-home-enhancements','/js/home-enhancements.js?v=meditationlink3');if(active('/staff.html'))loadScriptOnce('data-staff-enhancements','/js/staff-enhancements.js?v=contentupgrade1');if(active('/about.html'))loadScriptOnce('data-about-enhancements','/js/about-enhancements.js?v=contentupgrade1')}
   function run(){injectStyles();document.querySelector('.home-app-cta-wrap')?.remove();document.querySelectorAll('.mobile-menu-toggle,.nav-backdrop').forEach(x=>x.remove());document.querySelectorAll('.navlinks').forEach(buildDesktop);replaceQuickIcons();injectMobileAppLink();ensureFooter();injectBottomNav();loadCommonImageAdjust();loadCommonSeo();loadChannelPopup();loadContentEnhancements();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
 })();
