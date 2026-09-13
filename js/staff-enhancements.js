@@ -9,9 +9,9 @@
     if(d.pastorName){const name=document.querySelector('[data-site-text="pastor"]');if(name)name.textContent=d.pastorName}
     if(d.role){const role=document.querySelector('.pastor-role');if(role)role.textContent=d.role}
     if(d.image){const photo=document.querySelector('.pastor-photo');if(photo)photo.style.backgroundImage=`url('${String(d.image).replace(/'/g,"%27")}')`}
-    const oldMsg=content.querySelector(':scope > .pastor-message');if(oldMsg&&d.intro)oldMsg.textContent=d.intro;
+    const oldMsg=content.querySelector(':scope > .pastor-message');if(oldMsg){if(d.intro)oldMsg.textContent=d.intro;else oldMsg.remove()}
     const vision=Array.isArray(d.vision)?d.vision:[];
-    const wrap=document.createElement('div');wrap.id='pastorEnhancement';wrap.innerHTML=`${d.quote?`<p class="pastor-quote2">${esc(d.quote)}</p>`:''}${d.intro?`<p class="pastor-message">${esc(d.intro)}</p>`:''}${vision.length?`<div class="pastor-vision-box"><h3>목회 비전</h3><div class="pastor-vision-grid">${vision.map(x=>`<div class="pastor-vision-item"><b>${esc(x.title)}</b><span>${esc(x.text)}</span></div>`).join('')}</div></div>`:''}${d.bio?`<div class="pastor-career"><h3>담임목사 약력</h3><p>${esc(d.bio)}</p></div>`:''}${d.direction?`<div class="pastor-career"><b>목회 방향</b><br>${esc(d.direction)}</div>`:''}<a class="pastor-more" href="/about.html">교회 비전 함께 보기 →</a>`;
+    const wrap=document.createElement('div');wrap.id='pastorEnhancement';wrap.innerHTML=`${d.quote?`<p class="pastor-quote2">${esc(d.quote)}</p>`:''}${vision.length?`<div class="pastor-vision-box"><h3>목회 비전</h3><div class="pastor-vision-grid">${vision.map(x=>`<div class="pastor-vision-item"><b>${esc(x.title)}</b><span>${esc(x.text)}</span></div>`).join('')}</div></div>`:''}${d.bio?`<div class="pastor-career"><h3>담임목사 약력</h3><p>${esc(d.bio)}</p></div>`:''}${d.direction?`<div class="pastor-career"><b>목회 방향</b><br>${esc(d.direction)}</div>`:''}<a class="pastor-more" href="/about.html">교회 비전 함께 보기 →</a>`;
     content.appendChild(wrap);
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
