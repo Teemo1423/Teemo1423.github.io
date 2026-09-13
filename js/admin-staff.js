@@ -11,15 +11,16 @@
   window.deleteStaffVision=i=>{staffData.vision.splice(i,1);render();dirty()};
   window.clearStaffImage=()=>{staffData.image='';render();dirty()};
   window.quickUploadStaffImage=()=>{const inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.onchange=async()=>{const f=inp.files[0];if(!f)return;try{status('이미지 업로드 중...');staffData.image=await uploadBlob(await canvasJpeg(f),f.name);await loadImages();render();dirty();status('사진 적용 완료. 저장을 눌러주세요.')}catch(e){status('업로드 실패: '+e.message,false)}};inp.click()};
-  window.saveStaffData=async()=>{try{status('섬기시는 분들 저장 중...');await putJson('content/staff.json',staffData,'CMS: update staff page');clean();status('섬기시는 분들 저장 완료.')}catch(e){status('저장 실패: '+e.message,false)}};
-  const oldLoadAll=window.loadAll,oldSaveCurrent=window.saveCurrent,oldSelectMedia=window.selectMedia;
+  window.saveStaffData=async()=>{try{status('섬기시는 분들 저장 중...');await putJson('content/staff.json',staffData,'CMS: update staff page');clean();status('섬기시는 분들 저장 완료.')}catch(e){status('저장 실패: '+e.message,false);throw e}};
+  const oldLoadAll=window.loadAll,oldSaveCurrent=window.saveCurrent,oldSaveAll=window.saveAll,oldSelectMedia=window.selectMedia;
   function install(){
-    nav('staffInfo','섬기시는 분들','missionInfo');
-    page('staffInfo','<div id="staffEditorRoot"></div>');
+    nav('staffEdit','섬기시는 분들','content');
+    page('staffEdit','<div id="staffEditorRoot"></div>');
     const sel=document.getElementById('rawFileSelect');if(sel&&!Array.from(sel.options).some(o=>o.value==='content/staff.json')){const o=document.createElement('option');o.value='content/staff.json';o.textContent='섬기시는 분들 - staff.json';sel.appendChild(o)}
     window.selectMedia=function(path){if(typeof pickerTarget!=='undefined'&&pickerTarget==='staff:image'){staffData.image=path;render();dirty();closeMediaPicker();return}return oldSelectMedia(path)};
     window.loadAll=async function(){await oldLoadAll();try{staffData=await getJson('content/staff.json');window.staffData=staffData;norm();render()}catch(e){status('섬기시는 분들 로딩 실패: '+e.message,false)}};
-    window.saveCurrent=async function(){if(currentPage==='staffInfo')return saveStaffData();return oldSaveCurrent()}
+    window.saveCurrent=async function(){if(currentPage==='staffEdit')return saveStaffData();return oldSaveCurrent()};
+    window.saveAll=async function(){await oldSaveAll();await saveStaffData()}
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);else install();
 })();
