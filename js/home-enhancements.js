@@ -1,0 +1,19 @@
+(()=>{
+  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const style=document.createElement('style');style.id='homeEnhancementsStyles';style.textContent=`
+    .home-meditation{padding:72px 0 34px;background:#fff}.home-meditation-card{position:relative;overflow:hidden;min-height:430px;border-radius:32px;background:linear-gradient(115deg,#173c2d 0%,#24553f 58%,#789a78 100%);color:#fff;display:flex;align-items:flex-end;box-shadow:0 22px 60px rgba(17,56,41,.14)}.home-meditation-card.has-image{background-size:cover;background-position:center}.home-meditation-card.has-image:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,39,28,.88),rgba(10,39,28,.58) 60%,rgba(10,39,28,.3))}.home-meditation-card:before{content:'“';position:absolute;right:5%;top:-82px;font:700 360px Georgia;color:rgba(255,255,255,.07);z-index:1}.home-meditation-inner{position:relative;z-index:2;padding:52px;width:min(790px,92%)}.home-meditation-label{font-size:12px;letter-spacing:.18em;font-weight:900;color:#cfe3d6}.home-meditation-card h2{font-size:clamp(38px,5vw,62px);line-height:1.08;letter-spacing:-.05em;margin:14px 0 8px;color:#fff}.home-meditation-scripture{font-size:18px;font-weight:900;color:#d8e8dd;margin-bottom:18px}.home-meditation-summary{font-size:17px;line-height:1.85;color:#eef5f0;max-width:670px;margin:0}.home-meditation-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.home-meditation-btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 18px;border-radius:999px;background:#fff;color:#24553f;font-weight:900}.home-meditation-btn.alt{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.34)}
+    @media(max-width:820px){.home-meditation{padding:42px 0 20px}.home-meditation-card{min-height:500px;border-radius:24px}.home-meditation-inner{padding:30px 24px;width:100%}.home-meditation-card h2{font-size:40px}.home-meditation-scripture{font-size:16px}.home-meditation-summary{font-size:16px}.home-meditation-actions{display:grid;grid-template-columns:1fr}.home-meditation-btn{width:100%}}
+    @media(max-width:390px){.home-meditation-card h2{font-size:34px}.home-meditation-inner{padding:28px 20px}}
+  `;document.head.appendChild(style);
+  async function run(){
+    try{
+      const r=await fetch('/content/meditation.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('meditation');const d=await r.json();if(d.enabled===false)return;
+      const quick=document.querySelector('.quick-wrap');if(!quick||document.querySelector('.home-meditation'))return;
+      const sec=document.createElement('section');sec.className='home-meditation';
+      const image=String(d.image||'').trim();
+      sec.innerHTML=`<div class="container"><article class="home-meditation-card${image?' has-image':''}"${image?` style="background-image:url('${esc(image)}')"`:''}><div class="home-meditation-inner"><div class="home-meditation-label">${esc(d.label||'WEEKLY MEDITATION')} · 이번 주 말씀묵상</div><h2>${esc(d.title||'이번 주 말씀묵상')}</h2><div class="home-meditation-scripture">${esc(d.scripture||'')}</div><p class="home-meditation-summary">${esc(d.summary||'')}</p><div class="home-meditation-actions"><a class="home-meditation-btn" href="/weekly-meditation.html">말씀 묵상 전체보기 →</a><a class="home-meditation-btn alt" href="/sermons.html#sermon-0">이번 주 설교 보기</a></div></div></article></div>`;
+      quick.insertAdjacentElement('afterend',sec);
+    }catch(e){console.warn('home meditation unavailable',e)}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
+})();
