@@ -1,0 +1,11 @@
+(()=>{
+  const style=document.createElement('style');style.id='aboutEnhancementStyles';style.textContent=`
+    .mission5{margin-top:58px}.mission5-head{margin-bottom:24px}.mission5-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.mission5-item{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px 18px;min-height:190px}.mission5-item span{font-size:12px;font-weight:900;color:var(--green)}.mission5-item h3{font-size:22px;margin:8px 0}.mission5-item p{font-size:14px;line-height:1.75;color:var(--muted);margin:0}@media(max-width:980px){.mission5-grid{grid-template-columns:repeat(2,1fr)}.mission5-item:last-child{grid-column:1/-1}}@media(max-width:560px){.mission5{margin-top:42px}.mission5-grid{grid-template-columns:1fr}.mission5-item:last-child{grid-column:auto}.mission5-item{min-height:0}}
+  `;document.head.appendChild(style);
+  function run(){
+    const c=document.querySelector('main section:last-of-type .container')||document.querySelector('main .container');if(!c||document.getElementById('mission5'))return;
+    const box=document.createElement('section');box.className='mission5';box.id='mission5';box.innerHTML=`<div class="mission5-head"><div class="kicker">OUR CALLING</div><h2 class="section-title">모현소망교회 사명선언문</h2><p class="section-lead">하나님께서 우리 공동체에 맡기신 다섯 가지 부르심을 따라 예배하고, 사랑하며, 배우고, 섬기고, 복음을 전합니다.</p></div><div class="mission5-grid"><article class="mission5-item"><span>01</span><h3>예배</h3><p>하나님의 기쁨을 위해 지음 받은 공동체로 마음과 삶을 다해 예배합니다.</p></article><article class="mission5-item"><span>02</span><h3>교제</h3><p>하나님의 가족으로 부름 받아 서로 사랑하고 돌보며 함께 자랍니다.</p></article><article class="mission5-item"><span>03</span><h3>훈련</h3><p>그리스도의 제자로 부름 받아 말씀을 배우고 삶으로 순종합니다.</p></article><article class="mission5-item"><span>04</span><h3>사역</h3><p>이웃을 섬기도록 부름 받아 받은 은사로 교회와 지역을 섬깁니다.</p></article><article class="mission5-item"><span>05</span><h3>선교</h3><p>복음을 전하기 위해 부름 받아 지역과 열방을 향해 나아갑니다.</p></article></div>`;
+    c.appendChild(box);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
+})();
