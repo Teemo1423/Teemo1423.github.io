@@ -9,7 +9,7 @@
     document.querySelector('.home-meditation')?.remove();
     const card=document.getElementById('latestSermonCard');if(!card||card.querySelector('.sermon-meditation-link'))return;
     const meta=card.querySelector('.feature-meta');
-    const link=document.createElement('a');link.className='sermon-meditation-link';link.href='/weekly-meditation.html';link.innerHTML=`<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4.5 6.5c4.6-.9 8.4.1 11.5 3v16c-3.1-2.9-6.9-3.9-11.5-3V6.5Z"/><path d="M27.5 6.5c-4.6-.9-8.4.1-11.5 3v16c3.1-2.9 6.9-3.9 11.5-3V6.5Z"/></svg><span>이번 주 말씀묵상 보기</span><span class="sermon-meditation-arrow">→</span>`;
+    const link=document.createElement('a');link.className='sermon-meditation-link';link.href='/weekly-meditation.html?v=meddirect2';link.innerHTML=`<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4.5 6.5c4.6-.9 8.4.1 11.5 3v16c-3.1-2.9-6.9-3.9-11.5-3V6.5Z"/><path d="M27.5 6.5c-4.6-.9-8.4.1-11.5 3v16c3.1-2.9 6.9-3.9 11.5-3V6.5Z"/></svg><span>이번 주 말씀묵상 보기</span><span class="sermon-meditation-arrow">→</span>`;
     if(meta)meta.insertAdjacentElement('afterend',link);else card.appendChild(link);
     link.addEventListener('click',e=>e.stopPropagation());
   }
