@@ -1,0 +1,11 @@
+(()=>{
+  const style=document.createElement('style');style.id='staffEnhancementStyles';style.textContent=`
+    .pastor-vision-box{margin-top:28px;padding:24px;border-radius:22px;background:#f1f6f3}.pastor-vision-box h3{margin:0 0 12px;font-size:22px}.pastor-vision-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}.pastor-vision-item{padding:18px;border-radius:16px;background:#fff;border:1px solid var(--line)}.pastor-vision-item b{display:block;color:var(--green);margin-bottom:5px}.pastor-career{margin-top:24px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);line-height:1.85}.pastor-quote2{font-size:23px;line-height:1.55;font-weight:850;letter-spacing:-.03em;color:var(--ink);margin:24px 0}.pastor-more{display:inline-flex;margin-top:18px;padding:11px 17px;border-radius:999px;background:var(--green);color:#fff;font-weight:850}@media(max-width:760px){.pastor-vision-grid{grid-template-columns:1fr}.pastor-quote2{font-size:20px}.pastor-vision-box{padding:20px}}
+  `;document.head.appendChild(style);
+  function run(){
+    const content=document.querySelector('.pastor-content');if(!content||document.getElementById('pastorEnhancement'))return;
+    const wrap=document.createElement('div');wrap.id='pastorEnhancement';wrap.innerHTML=`<p class="pastor-quote2">“모든 족속으로 제자 삼으라”는 주님의 지상명령을 따라, 예수님의 온전한 제자로 세워지는 교회를 꿈꿉니다.</p><p class="pastor-message">한 영혼을 소중히 여기며 예배와 말씀 안에서 성도가 자라고, 서로를 사랑으로 섬기며, 지역과 다음 세대에 복음을 전하는 공동체를 세워갑니다.</p><div class="pastor-vision-box"><h3>목회 비전</h3><div class="pastor-vision-grid"><div class="pastor-vision-item"><b>영육치유</b><span>상한 영혼을 품고 회복을 돕습니다.</span></div><div class="pastor-vision-item"><b>제자양육</b><span>말씀으로 예수님의 제자를 세웁니다.</span></div><div class="pastor-vision-item"><b>복음전파</b><span>지역과 세상에 복음을 전합니다.</span></div></div></div><div class="pastor-career"><b>목회 방향</b><br>예배 · 말씀 · 공동체 · 다음세대 · 선교가 균형을 이루며 그리스도의 제자로 함께 성장하는 교회를 지향합니다.<br><small>상세 학력과 주요 사역 약력은 교회 공식 자료 기준으로 순차 보완합니다.</small></div><a class="pastor-more" href="/about.html">교회 비전 함께 보기 →</a>`;
+    content.appendChild(wrap);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
+})();
