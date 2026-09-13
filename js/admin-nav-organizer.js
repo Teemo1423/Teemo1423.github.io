@@ -1,7 +1,7 @@
 (()=>{
   // 공개 홈페이지 전체메뉴와 같은 순서/하위 카테고리로 관리자 사이드바 구성
   const groups=[
-    ['홈',['dashboard','weeklyHome','homeNotices','content','images']],
+    ['홈',['dashboard','weeklyHome','content','images']],
     ['교회소개',['staffEdit','missionInfo','worship','transportInfo']],
     ['은혜의 말씀',['sermons']],
     ['사랑방 모임 예배',['sarangbangEdit']],
@@ -12,7 +12,7 @@
     ['고급 관리',['universal','design']]
   ];
   const labels={
-    dashboard:'대시보드',weeklyHome:'이번 주 말씀·주보',homeNotices:'이번 주 핵심 공지',content:'기본 콘텐츠',images:'이미지 슬롯',
+    dashboard:'대시보드',weeklyHome:'이번 주 말씀·주보',content:'기본 콘텐츠',images:'이미지 슬롯',
     staffEdit:'섬기시는 분들',missionInfo:'사명선언문',worship:'예배안내 · 시간',transportInfo:'차량 운행 안내',sermons:'주일예배 설교',
     sarangbangEdit:'사랑방 모임 예배',menMissionEdit:'남전도회',womenMissionEdit:'여전도회',choirEdit:'성가대',
     sundayPro:'주일학교',youngAdultsEdit:'청년부',supportInfo:'선교·후원 관리',
@@ -24,6 +24,7 @@
 
   function organize(){
     const nav=document.getElementById('sideNav');if(!nav)return;
+    nav.querySelector('button[data-page="homeNotices"]')?.remove();
     const buttons={};nav.querySelectorAll('button[data-page]').forEach(b=>buttons[b.dataset.page]=b);
     nav.querySelectorAll('.nav-section-label').forEach(x=>x.remove());
     groups.forEach(([title,ids])=>{
