@@ -2,7 +2,7 @@
   // 공개 홈페이지 전체메뉴와 같은 순서/하위 카테고리로 관리자 사이드바 구성
   const groups=[
     ['홈',['dashboard','weeklyHome','homeNotices','content','images']],
-    ['교회소개',['missionInfo','worship','transportInfo']],
+    ['교회소개',['staffEdit','missionInfo','worship','transportInfo']],
     ['은혜의 말씀',['sermons']],
     ['사랑방 모임 예배',['sarangbangEdit']],
     ['조직/부서',['menMissionEdit','womenMissionEdit','choirEdit']],
@@ -13,7 +13,7 @@
   ];
   const labels={
     dashboard:'대시보드',weeklyHome:'이번 주 말씀·주보',homeNotices:'이번 주 핵심 공지',content:'기본 콘텐츠',images:'이미지 슬롯',
-    missionInfo:'사명선언문',worship:'예배안내 · 시간',transportInfo:'차량 운행 안내',sermons:'주일예배 설교',
+    staffEdit:'섬기시는 분들',missionInfo:'사명선언문',worship:'예배안내 · 시간',transportInfo:'차량 운행 안내',sermons:'주일예배 설교',
     sarangbangEdit:'사랑방 모임 예배',menMissionEdit:'남전도회',womenMissionEdit:'여전도회',choirEdit:'성가대',
     sundayPro:'주일학교',youngAdultsEdit:'청년부',supportInfo:'선교·후원 관리',
     news:'교회소식',galleryPro:'사진첩',media:'미디어 라이브러리',
