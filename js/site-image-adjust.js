@@ -8,6 +8,18 @@
     style.textContent=`
       main img:not(.brand-logo):not([src*="logo"]):not([src*="qr"]):not([src*="QR"]),.visual-img,.overlay-card,.notice img,.sermon-card img,.gallery-card img,.gallery-item img,[data-site-image]:not(.hero),.staff-photo,.ministry-photo,.sunday-school-photo{filter:${photoFilter}!important}
       .hero.hero-glass{--global-photo-tone:rgba(255,255,255,.10)}.hero.hero-glass:after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:var(--global-photo-tone)}.hero.hero-glass>.container{position:relative;z-index:1}
+      @media(min-width:1181px){
+        .site-header .nav{padding-left:28px!important;padding-right:28px!important;gap:30px!important}
+        .site-header .brand{display:grid!important;grid-template-columns:52px 225px!important;column-gap:12px!important;align-items:center!important;flex:0 0 289px!important;width:289px!important;min-width:289px!important;max-width:289px!important}
+        .site-header .brand-logo{width:52px!important;height:52px!important;max-width:52px!important;object-fit:contain!important}
+        .site-header .brand-copy{display:flex!important;flex-direction:column!important;width:225px!important;min-width:225px!important;max-width:225px!important;overflow:visible!important}
+        .site-header .brand-copy small{display:block!important;width:auto!important;font-size:10px!important;letter-spacing:.105em!important;line-height:1.15!important;white-space:nowrap!important;word-break:keep-all!important}
+        .site-header .brand-copy strong{display:block!important;width:auto!important;font-size:20px!important;letter-spacing:-.045em!important;line-height:1.15!important;white-space:nowrap!important;word-break:keep-all!important}
+        .site-header .navlinks.staggered-nav{padding-right:0!important}
+        .staggered-nav .nav-row{grid-template-columns:repeat(5,minmax(0,1fr))!important}
+        .staggered-nav .nav-row-top{width:90%!important;margin-left:0!important;margin-right:10%!important;transform:none!important}
+        .staggered-nav .nav-row-bottom{width:90%!important;margin-left:10%!important;margin-right:0!important;transform:none!important}
+      }
       @media(max-width:420px){.unified-footer>.container{padding-left:12px!important;padding-right:12px!important}.unified-footer .footer-info p:nth-child(3){font-size:12.5px!important;letter-spacing:-.04em;white-space:nowrap;line-height:1.45!important}.unified-footer .footer-info p:nth-child(3) b{min-width:48px!important}}
     `;
     document.querySelectorAll('main img').forEach(img=>{const src=(img.getAttribute('src')||'').toLowerCase();if(src.includes('logo')||src.includes('qr'))return;img.style.filter=photoFilter;});
