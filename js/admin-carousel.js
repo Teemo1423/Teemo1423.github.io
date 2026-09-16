@@ -33,16 +33,19 @@
     inp.onchange=async()=>{const f=inp.files?.[0];if(!f)return;try{status('캐러셀 이미지 업로드 중...');const p=await uploadBlob(await canvasJpeg(f),f.name);setValue(c,p);await loadImages();status('캐러셀 이미지 적용 완료. 저장을 눌러주세요.')}catch(e){status('업로드 실패: '+e.message,false)}};
     inp.click();
   };
+  function openCarousel(){
+    currentPage='carousel';document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.dataset.page==='carousel'));document.querySelectorAll('#sideNav button').forEach(x=>x.classList.toggle('active',x.dataset.page==='carousel'));
+    document.getElementById('pageTitle').textContent='메인 캐러셀';document.getElementById('pageDesc').textContent='메인 배너 1·2·3번의 배경 이미지를 각각 관리합니다.';renderCarouselEditor();window.scrollTo({top:0,behavior:'smooth'});
+  }
+  window.openCarouselEditor=openCarousel;
   function install(){
     const nav=document.getElementById('sideNav'),editor=document.getElementById('editor');if(!nav||!editor)return;
-    if(!nav.querySelector('[data-page="carousel"]')){
-      const b=document.createElement('button');b.dataset.page='carousel';b.textContent='메인 캐러셀';
+    let b=nav.querySelector('[data-page="carousel"]');
+    if(!b){
+      b=document.createElement('button');b.dataset.page='carousel';b.textContent='메인 캐러셀';
       const imageBtn=nav.querySelector('[data-page="images"]');if(imageBtn?.nextSibling)nav.insertBefore(b,imageBtn.nextSibling);else nav.appendChild(b);
-      b.addEventListener('click',()=>{
-        currentPage='carousel';document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.dataset.page==='carousel'));document.querySelectorAll('#sideNav button').forEach(x=>x.classList.toggle('active',x===b));
-        document.getElementById('pageTitle').textContent='메인 캐러셀';document.getElementById('pageDesc').textContent='메인 배너 1·2·3번의 배경 이미지를 각각 관리합니다.';renderCarouselEditor();window.scrollTo({top:0,behavior:'smooth'});
-      });
     }
+    b.onclick=e=>{e.preventDefault();e.stopPropagation();openCarousel()};
     if(!editor.querySelector('[data-page="carousel"]')){
       const s=document.createElement('section');s.className='page';s.dataset.page='carousel';s.innerHTML='<section class="card"><div class="section-head"><div><h2>메인 캐러셀 배경</h2><p class="muted">각 슬라이드의 배경을 독립적으로 교체합니다. 2번은 최신 설교, 3번은 최신 교회소식의 대표 이미지와 연결됩니다.</p></div></div><div id="carouselEditorGrid" class="slot-grid"></div></section>';
       const savebar=editor.querySelector('.savebar');editor.insertBefore(s,savebar||null);
@@ -52,6 +55,7 @@
       window.__carouselSelectWrapped=true;
       window.selectMedia=function(path){oldSelect(path);setTimeout(renderCarouselEditor,0)};
     }
+    setTimeout(renderCarouselEditor,0);
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);else install();
 })();
