@@ -14,14 +14,14 @@
       .hero.hero-glass:after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:var(--global-photo-tone)}
       .hero.hero-glass>.container{position:relative;z-index:1}
       @media(min-width:901px){
-        .site-header .nav{gap:18px!important;min-height:96px!important;height:96px!important;align-items:center!important;padding-top:8px!important;padding-bottom:8px!important}
-        .site-header .navlinks.staggered-nav{display:grid!important;grid-template-rows:max-content max-content!important;grid-auto-rows:max-content!important;row-gap:4px!important;column-gap:0!important;align-content:center!important;align-self:center!important;height:auto!important;min-height:0!important;flex:1!important;font-size:17px!important;white-space:nowrap!important}
-        .site-header .staggered-nav .nav-row{display:flex!important;align-items:center!important;gap:clamp(18px,1.55vw,28px)!important;min-height:30px!important;line-height:1.25!important;white-space:nowrap!important}
+        .site-header .nav{gap:16px!important;min-height:82px!important;height:82px!important;align-items:center!important;padding-top:5px!important;padding-bottom:5px!important}
+        .site-header .navlinks.staggered-nav{display:grid!important;grid-template-rows:1fr 1fr!important;row-gap:0!important;align-content:center!important;align-self:center!important;height:58px!important;min-height:58px!important;flex:1!important;font-size:16px!important;white-space:nowrap!important}
+        .site-header .staggered-nav .nav-row{display:flex!important;align-items:center!important;gap:clamp(15px,1.3vw,23px)!important;min-height:29px!important;height:29px!important;line-height:1!important;white-space:nowrap!important}
         .site-header .staggered-nav .nav-row-top{justify-content:flex-start!important;padding-left:0!important}
-        .site-header .staggered-nav .nav-row-bottom{justify-content:flex-start!important;padding-left:clamp(30px,3vw,54px)!important}
-        .site-header .staggered-nav .nav-row>a,.site-header .staggered-nav .nav-row>.navitem,.site-header .staggered-nav .nav-row>.navitem>a{position:relative!important;transform:none!important;margin:0!important;white-space:nowrap!important;word-break:keep-all!important;font-weight:800!important;letter-spacing:-.015em!important}
+        .site-header .staggered-nav .nav-row-bottom{justify-content:flex-start!important;padding-left:clamp(28px,2.8vw,48px)!important}
+        .site-header .staggered-nav .nav-row>a,.site-header .staggered-nav .nav-row>.navitem,.site-header .staggered-nav .nav-row>.navitem>a{position:relative!important;transform:none!important;margin:0!important;white-space:nowrap!important;word-break:keep-all!important;font-weight:800!important;letter-spacing:-.02em!important}
       }
-      @media(min-width:901px) and (max-width:1180px){.site-header .nav{height:90px!important;min-height:90px!important;gap:10px!important}.site-header .navlinks.staggered-nav{font-size:15px!important;row-gap:3px!important}.site-header .staggered-nav .nav-row{gap:12px!important;min-height:27px!important}.site-header .staggered-nav .nav-row-bottom{padding-left:24px!important}}
+      @media(min-width:901px) and (max-width:1180px){.site-header .nav{height:78px!important;min-height:78px!important;gap:9px!important}.site-header .navlinks.staggered-nav{font-size:14px!important;height:54px!important;min-height:54px!important}.site-header .staggered-nav .nav-row{gap:10px!important;min-height:27px!important;height:27px!important}.site-header .staggered-nav .nav-row-bottom{padding-left:22px!important}}
       @media(max-width:420px){.unified-footer>.container{padding-left:12px!important;padding-right:12px!important}.unified-footer .footer-info p:nth-child(3){font-size:12.5px!important;letter-spacing:-.04em;white-space:nowrap;line-height:1.45!important}.unified-footer .footer-info p:nth-child(3) b{min-width:48px!important}}
     `;
     document.querySelectorAll('main img').forEach(img=>{const src=(img.getAttribute('src')||'').toLowerCase();if(src.includes('logo')||src.includes('qr'))return;img.style.filter=photoFilter;});
