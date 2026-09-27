@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mohyeonsomang-pwa-v6';
+const CACHE_NAME = 'mohyeonsomang-pwa-v9-news-refresh';
 const APP_SHELL = [
   '/',
   '/app-download.html',
@@ -47,6 +47,11 @@ self.addEventListener('fetch', event => {
         })
         .catch(() => caches.match(event.request))
     );
+    return;
+  }
+
+  if (url.origin === self.location.origin && (url.pathname === '/content/news.json' || url.pathname === '/' || url.pathname === '/index.html')) {
+    event.respondWith(fetch(event.request, {cache:'no-store'}).catch(() => caches.match(event.request).then(cached => cached || caches.match('/'))));
     return;
   }
 
