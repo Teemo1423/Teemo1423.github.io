@@ -69,22 +69,3 @@ section:not(.hero):not(.page-hero):not(.ministry-hero){background:transparent}
   .grid3{gap:16px}
   .card,.panel,.feature-card{padding:22px}
 }
-
-/* Home carousel clean editorial cards */
-@media(max-width:900px){
-.hero.hero-glass{min-height:650px!important;background-position:center!important;background-size:cover!important}
-.hero.hero-glass:before{background:linear-gradient(180deg,rgba(9,31,23,.22),rgba(9,31,23,.62))!important}
-.hero-glass .hero-carousel-shell{min-height:650px!important;padding:0 24px!important}
-.hero-glass .hero-carousel-viewport{min-height:650px!important}
-.hero-glass .hero-slide{align-items:flex-start!important;padding-top:56px!important}
-.hero-glass .hero-glass-card{width:100%!important;max-width:none!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;color:#fff!important}
-.hero-glass .hero-label{font-size:12px!important;letter-spacing:.28em!important;margin-bottom:22px!important}
-.hero-glass .hero-glass-card h1{font-size:44px!important;line-height:1.08!important;letter-spacing:-.05em!important;margin:0 0 22px!important;color:#fff!important}
-.hero-glass .hero-glass-card p{font-size:17px!important;line-height:1.7!important;color:rgba(255,255,255,.92)!important;max-width:560px}
-.hero-glass .hero-glass-meta{gap:8px!important;margin-top:22px!important}
-.hero-glass .hero-glass-meta span{font-size:13px!important;padding:8px 11px!important;border-radius:999px!important;background:rgba(255,255,255,.13)!important;border:1px solid rgba(255,255,255,.32)!important;color:#fff!important}
-.hero-glass .hero-glass-actions{margin-top:24px!important}
-.hero-glass .hero-glass-actions a{min-height:50px!important;padding:0 20px!important;border-radius:999px!important}
-.hero-glass .hero-carousel-controls{bottom:24px!important}
-}
-@media(max-width:520px){.hero.hero-glass,.hero-glass .hero-carousel-shell,.hero-glass .hero-carousel-viewport{min-height:620px!important}.hero-glass .hero-glass-card h1{font-size:40px!important}}
