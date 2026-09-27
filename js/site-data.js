@@ -48,7 +48,7 @@
     let sermons=[],news=[];
     try{[sermons,news]=await Promise.all([get('/content/sermons.json'),get('/content/news.json')])}catch(e){console.warn('hero carousel data fallback',e)}
     const latestSermon=Array.isArray(sermons)?[...sermons].sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')))[0]:null;
-    const latestNews=Array.isArray(news)?[...news].sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')))[0]:null;
+    const latestNews=Array.isArray(news)&&news.length?news[0]:null;
     const scripture=latestSermon?String(latestSermon.text||'').split('·')[0].trim():'';
     const slides=[
       {label:'WELCOME TO MOHYEON SOMANG CHURCH',title:site.heroTitle||'말씀 안에서 함께 자라고\n사랑으로 세상을 섬기는 교회',text:site.heroText||'',image:site.heroImage||site.churchFrontImage||'',meta:[site.denomination,site.pastor,site.slogan].filter(Boolean),actions:[['예배 안내','/worship.html',false],['교회 소개','/about.html',true]]},
