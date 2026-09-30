@@ -7,13 +7,21 @@
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "backgroundColor": "#f7f1e7",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#f7f1e7"
+    },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "org.mohyeonsomang.church"
+      "bundleIdentifier": "org.mohyeonsomang.church",
+      "icon": "./assets/icon.png"
     },
     "android": {
       "package": "org.mohyeonsomang.church",
       "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#f7f1e7"
       }
     },
