@@ -6,12 +6,16 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
+    "backgroundColor": "#f7f1e7",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "org.mohyeonsomang.church"
     },
     "android": {
-      "package": "org.mohyeonsomang.church"
+      "package": "org.mohyeonsomang.church",
+      "adaptiveIcon": {
+        "backgroundColor": "#f7f1e7"
+      }
     },
     "plugins": ["expo-router"]
   }
