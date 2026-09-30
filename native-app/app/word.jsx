@@ -1,3 +1,5 @@
-import { View,Text,StyleSheet } from 'react-native';
-export default function Word(){return <View style={s.p}><Text style={s.h}>말씀</Text><Text style={s.t}>주일설교와 말씀묵상이 이곳에 연결됩니다.</Text></View>}
-const s=StyleSheet.create({p:{flex:1,padding:24,paddingTop:70,backgroundColor:'#f7f1e7'},h:{fontSize:30,fontWeight:'800',color:'#18382c'},t:{marginTop:15,fontSize:16,color:'#5f6f67'}});
+import { useEffect,useState } from 'react';import { ScrollView,View,Text,StyleSheet,ActivityIndicator } from 'react-native';
+const URL='https://mohyeonsomang.org/content/sermons.json';
+export default function Word(){const [items,setItems]=useState(null);useEffect(()=>{fetch(URL+'?v='+Date.now()).then(r=>r.json()).then(x=>setItems([...x].sort((a,b)=>String(b.date||'').localeCompare(String(a.date||''))))).catch(()=>setItems([]))},[]);
+return <ScrollView style={s.p} contentContainerStyle={s.c}><Text style={s.h}>말씀</Text><Text style={s.sub}>모현소망교회 주일설교</Text>{!items&&<ActivityIndicator style={{marginTop:30}}/>}{items?.map((x,i)=><View key={(x.date||'')+i} style={s.card}><Text style={s.date}>{x.date}</Text><Text style={s.title}>{x.title||'주일설교'}</Text>{x.text?<Text style={s.text}>{x.text}</Text>:null}</View>)}</ScrollView>}
+const s=StyleSheet.create({p:{flex:1,backgroundColor:'#f7f1e7'},c:{padding:24,paddingTop:70,paddingBottom:40},h:{fontSize:30,fontWeight:'800',color:'#18382c'},sub:{marginTop:7,color:'#697970'},card:{backgroundColor:'#fff',borderRadius:22,padding:20,marginTop:14},date:{fontSize:12,fontWeight:'700',color:'#718078'},title:{fontSize:20,fontWeight:'800',color:'#18382c',marginTop:7},text:{fontSize:14,lineHeight:22,color:'#5f6f67',marginTop:9}});
