@@ -1,0 +1,3 @@
+import { View,Text,StyleSheet } from 'react-native';
+export default function News(){return <View style={s.p}><Text style={s.h}>소식</Text><Text style={s.t}>교회소식 · 주일학교 · 사랑방 소식을 한곳에서 보여줄 예정입니다.</Text></View>}
+const s=StyleSheet.create({p:{flex:1,padding:24,paddingTop:70,backgroundColor:'#f7f1e7'},h:{fontSize:30,fontWeight:'800',color:'#18382c'},t:{marginTop:15,fontSize:16,lineHeight:25,color:'#5f6f67'}});
