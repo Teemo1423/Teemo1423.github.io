@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "모현소망교회",
+    "slug": "mohyeon-somang-church",
+    "scheme": "mohyeonsomang",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "org.mohyeonsomang.church"
+    },
+    "android": {
+      "package": "org.mohyeonsomang.church"
+    },
+    "plugins": ["expo-router"]
+  }
+}
