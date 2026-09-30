@@ -1,0 +1,3 @@
+import { View,Text,StyleSheet } from 'react-native';
+export default function Church(){return <View style={s.p}><Text style={s.h}>교회</Text><Text style={s.t}>예배시간 · 오시는 길 · 교회 소개 · 연락처를 제공합니다.</Text><View style={s.card}><Text style={s.name}>모현소망교회</Text><Text style={s.line}>경기도 용인시 처인구 모현읍 백옥대로 2332번길 21-5</Text><Text style={s.line}>031-332-3855</Text></View></View>}
+const s=StyleSheet.create({p:{flex:1,padding:24,paddingTop:70,backgroundColor:'#f7f1e7'},h:{fontSize:30,fontWeight:'800',color:'#18382c'},t:{marginTop:15,fontSize:16,color:'#5f6f67'},card:{marginTop:28,backgroundColor:'#fff',padding:22,borderRadius:22},name:{fontSize:20,fontWeight:'800',color:'#18382c'},line:{marginTop:10,fontSize:14,lineHeight:21,color:'#5f6f67'}});
