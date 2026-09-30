@@ -1,3 +1,5 @@
-import { View,Text,StyleSheet } from 'react-native';
-export default function News(){return <View style={s.p}><Text style={s.h}>소식</Text><Text style={s.t}>교회소식 · 주일학교 · 사랑방 소식을 한곳에서 보여줄 예정입니다.</Text></View>}
-const s=StyleSheet.create({p:{flex:1,padding:24,paddingTop:70,backgroundColor:'#f7f1e7'},h:{fontSize:30,fontWeight:'800',color:'#18382c'},t:{marginTop:15,fontSize:16,lineHeight:25,color:'#5f6f67'}});
+import { useEffect,useState } from 'react';import { ScrollView,View,Text,StyleSheet,ActivityIndicator } from 'react-native';
+const URL='https://mohyeonsomang.org/content/news.json';
+export default function News(){const [items,setItems]=useState(null);useEffect(()=>{fetch(URL+'?v='+Date.now()).then(r=>r.json()).then(x=>setItems([...x].sort((a,b)=>String(b.date||'').localeCompare(String(a.date||''))))).catch(()=>setItems([]))},[]);
+return <ScrollView style={s.p} contentContainerStyle={s.c}><Text style={s.h}>소식</Text><Text style={s.sub}>홈페이지에 등록된 교회소식이 자동으로 반영됩니다.</Text>{!items&&<ActivityIndicator style={{marginTop:30}}/>}{items?.map((x,i)=><View key={(x.date||'')+i} style={s.card}><Text style={s.date}>{x.date}</Text><Text style={s.title}>{x.title||'교회소식'}</Text>{x.text?<Text style={s.text}>{x.text}</Text>:null}</View>)}</ScrollView>}
+const s=StyleSheet.create({p:{flex:1,backgroundColor:'#f7f1e7'},c:{padding:24,paddingTop:70,paddingBottom:40},h:{fontSize:30,fontWeight:'800',color:'#18382c'},sub:{marginTop:7,lineHeight:21,color:'#697970'},card:{backgroundColor:'#fff',borderRadius:22,padding:20,marginTop:14},date:{fontSize:12,fontWeight:'700',color:'#718078'},title:{fontSize:19,fontWeight:'800',color:'#18382c',marginTop:7},text:{fontSize:14,lineHeight:22,color:'#5f6f67',marginTop:9}});
