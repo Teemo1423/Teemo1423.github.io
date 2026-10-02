@@ -22,3 +22,20 @@ a,.btn,.text-link,.channel-actions a,.about-tabs a,.gallery-filter button,.quick
   .hero.hero-glass .hero-carousel-viewport{min-height:400px!important}
   .hero.hero-glass .hero-slide{min-height:0!important}
 }
+
+
+/* Mobile hero polish: fixed composition across all carousel slides. */
+@media(max-width:760px){
+  .hero.hero-glass{min-height:0!important}
+  .hero.hero-glass .hero-carousel-shell{padding:24px 0 56px!important}
+  .hero.hero-glass .hero-carousel-viewport{min-height:610px!important;height:610px!important;display:block!important}
+  .hero.hero-glass .hero-slide{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important}
+  .hero.hero-glass .hero-slide.active{display:flex!important;align-items:center!important}
+  .hero.hero-glass .hero-glass-card{width:100%!important;min-height:560px!important;max-height:560px!important;box-sizing:border-box!important;padding:32px 24px 30px!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;overflow:hidden!important}
+  .hero.hero-glass .hero-glass-card .hero-label{margin-bottom:14px!important}
+  .hero.hero-glass .hero-glass-card h1{font-size:clamp(34px,9.5vw,42px)!important;line-height:1.12!important;margin:0 0 18px!important;word-break:keep-all!important}
+  .hero.hero-glass .hero-glass-card p{font-size:16px!important;line-height:1.75!important;display:-webkit-box!important;-webkit-line-clamp:3!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+  .hero.hero-glass .hero-glass-meta{margin-top:20px!important}
+  .hero.hero-glass .hero-glass-actions{margin-top:auto!important;padding-top:22px!important}
+  .hero.hero-glass .hero-carousel-controls{bottom:0!important;z-index:5!important}
+}
