@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mohyeonsomang-pwa-v10-hero-editorial';
+const CACHE_NAME = 'mohyeonsomang-pwa-v11-stable-web';
 const APP_SHELL = [
   '/',
   '/app-download.html',
