@@ -25,7 +25,7 @@
   window.renderNews=function(){
     normalizeAll();const e=document.querySelector('#newsList');if(!e)return;
     const f=typeof newsFilter==='string'?newsFilter:'all';
-    const rows=news.map((x,i)=>({x,i})).filter(({x})=>f==='all'||(f==='story'?String(x.category||x.type||'').toLowerCase()==='story':String(x.category||x.type||'').toLowerCase()!=='story'));
+    const rows=news.map((x,i)=>({x,i})).filter(({x})=>f==='all'||(f==='story'?String(x.category||x.type||'').toLowerCase()==='story':String(x.category||x.type||'').toLowerCase()!=='story')).sort((a,b)=>String(b.x.date||'').localeCompare(String(a.x.date||'')));
     const et=document.getElementById('newsEditorTitle'),ed=document.getElementById('newsEditorDesc');
     if(et)et.textContent=f==='story'?'모현소망 이야기':f==='notice'?'주보 · 공지':'전체 교회소식';
     if(ed)ed.textContent=f==='story'?'교회 밖에서도 이어지는 모현소망교회의 이야기를 관리합니다.':f==='notice'?'주보와 일반 공지·행사를 관리합니다.':'공지와 모현소망 이야기를 한눈에 관리합니다.';
