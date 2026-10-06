@@ -78,10 +78,10 @@ section:not(.hero):not(.page-hero):not(.ministry-hero){background:transparent}
   .container{padding-left:16px;padding-right:16px}
   .page-hero,.ministry-hero{padding:34px 0 30px!important;margin-bottom:4px}
   .page-hero .container,.ministry-hero .container{padding-left:24px;padding-right:24px}
-  .page-hero h1,.ministry-hero h1{font-size:34px!important;line-height:1.16;margin:5px 0 7px}
-  .page-hero p,.ministry-hero p{font-size:16px;line-height:1.6}
-  .section-title{font-size:30px;line-height:1.22;margin-bottom:8px}
-  .section-lead{font-size:15px;line-height:1.6;margin-bottom:24px}
+  .page-hero h1,.ministry-hero h1{line-height:1.16;margin:5px 0 7px}
+  .page-hero p,.ministry-hero p{line-height:1.6}
+  .section-title{line-height:1.22;margin-bottom:8px}
+  .section-lead{line-height:1.6;margin-bottom:24px}
   .grid3,.feature-grid,.schedule,.content-grid{gap:12px}
   .card,.panel,.feature-card{padding:18px;border-radius:20px!important}
   .card h3,.panel h3{margin:5px 0 7px}
@@ -94,8 +94,8 @@ section:not(.hero):not(.page-hero):not(.ministry-hero){background:transparent}
   .sermon-list{gap:12px}
   .sermon-card{border-radius:20px!important}
   .sermon-body{padding:17px}
-  .sermon-body h3{margin:3px 0 6px;font-size:22px}
-  .feature-card h3{font-size:27px;margin:5px 0 7px}
+  .sermon-body h3{margin:3px 0 6px}
+  .feature-card h3{margin:5px 0 7px}
   .feature-meta{margin-top:11px;gap:7px}
   .feature-meta span{padding:5px 8px}
   .photo-copy{padding:15px 17px 18px}
