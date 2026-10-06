@@ -69,3 +69,36 @@ section:not(.hero):not(.page-hero):not(.ministry-hero){background:transparent}
   .grid3{gap:16px}
   .card,.panel,.feature-card{padding:22px}
 }
+
+
+/* ===== Mobile compact layout v1 (2026-10) =====
+   PC untouched: compress vertical space without shrinking readable type. */
+@media(max-width:820px){
+  section{padding:42px 0}
+  .container{padding-left:16px;padding-right:16px}
+  .page-hero,.ministry-hero{padding:34px 0 30px!important;margin-bottom:4px}
+  .page-hero .container,.ministry-hero .container{padding-left:24px;padding-right:24px}
+  .page-hero h1,.ministry-hero h1{font-size:34px!important;line-height:1.16;margin:5px 0 7px}
+  .page-hero p,.ministry-hero p{font-size:16px;line-height:1.6}
+  .section-title{font-size:30px;line-height:1.22;margin-bottom:8px}
+  .section-lead{font-size:15px;line-height:1.6;margin-bottom:24px}
+  .grid3,.feature-grid,.schedule,.content-grid{gap:12px}
+  .card,.panel,.feature-card{padding:18px;border-radius:20px!important}
+  .card h3,.panel h3{margin:5px 0 7px}
+  .schedule .item{padding:17px}
+  .schedule b{margin-bottom:3px}
+  .quick-wrap{margin-top:-22px}
+  .quick-menu{border-radius:20px!important}
+  .quick-menu a{padding:15px 10px}
+  .quick-icon{width:42px;height:42px;margin-bottom:6px}
+  .sermon-list{gap:12px}
+  .sermon-card{border-radius:20px!important}
+  .sermon-body{padding:17px}
+  .sermon-body h3{margin:3px 0 6px;font-size:22px}
+  .feature-card h3{font-size:27px;margin:5px 0 7px}
+  .feature-meta{margin-top:11px;gap:7px}
+  .feature-meta span{padding:5px 8px}
+  .photo-copy{padding:15px 17px 18px}
+  .cta{padding:24px;border-radius:20px!important}
+  .notice{padding:17px 0}
+}
