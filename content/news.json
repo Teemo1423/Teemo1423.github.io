@@ -32,7 +32,9 @@
     "externalUrl": "https://youtu.be/vmXKB7BQdws",
     "youtubeId": "vmXKB7BQdws",
     "image": "https://i.ytimg.com/vi/vmXKB7BQdws/hqdefault.jpg",
-    "sortOrder": 98
+    "sortOrder": 98,
+    "mediaCredit": "영상 출처: CTS",
+    "mediaCreditUrl": "https://youtu.be/vmXKB7BQdws"
   },
   {
     "date": "2023.04.13",
@@ -45,7 +47,9 @@
     "externalUrl": "https://youtu.be/6KvozGDVc-A",
     "youtubeId": "6KvozGDVc-A",
     "image": "https://i.ytimg.com/vi/6KvozGDVc-A/hqdefault.jpg",
-    "sortOrder": 99
+    "sortOrder": 99,
+    "mediaCredit": "영상 출처: CTS",
+    "mediaCreditUrl": "https://youtu.be/6KvozGDVc-A"
   },
   {
     "date": "2023.01.20",
@@ -58,7 +62,9 @@
     "externalUrl": "https://youtu.be/0tFPehAxuXA",
     "youtubeId": "0tFPehAxuXA",
     "image": "https://i.ytimg.com/vi/0tFPehAxuXA/hqdefault.jpg",
-    "sortOrder": 97
+    "sortOrder": 97,
+    "mediaCredit": "영상 출처: CTS",
+    "mediaCreditUrl": "https://youtu.be/0tFPehAxuXA"
   },
   {
     "date": "2026.10",
