@@ -27,5 +27,5 @@
   }
   function run(){addNewcomer();addCTS();addMeditationLink();cleanHeroSermonMeta()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
-  const observer=new MutationObserver(()=>cleanHeroSermonMeta());observer.observe(document.documentElement,{childList:true,subtree:true});setTimeout(()=>observer.disconnect(),5000);
+  const observer=new MutationObserver(()=>{cleanHeroSermonMeta();addMeditationLink()});observer.observe(document.documentElement,{childList:true,subtree:true});setTimeout(()=>observer.disconnect(),10000);setTimeout(addMeditationLink,500);setTimeout(addMeditationLink,1500);setTimeout(addMeditationLink,3000);
 })();
