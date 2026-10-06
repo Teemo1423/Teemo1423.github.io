@@ -8,12 +8,8 @@
   function addNewcomer(){if(document.querySelector('.home-newcomer'))return;const connect=[...document.querySelectorAll('section')].find(s=>s.querySelector('.connect-strip'));if(!connect)return;const sec=document.createElement('section');sec.className='home-newcomer';sec.innerHTML=`<div class="container"><div class="home-newcomer-card"><div><div class="kicker">FIRST VISIT</div><h3>처음 오셨나요?</h3><p>예배시간부터 새가족 등록, 문의, 오시는 길까지 한 번에 안내해 드립니다.</p></div><a href="/newcomers.html">새가족 안내 보기 →</a></div></div>`;connect.parentNode.insertBefore(sec,connect)}
   function addCTS(){if(document.querySelector('.home-cts'))return;const newsCard=[...document.querySelectorAll('.feature-card')].find(el=>el.textContent.includes('이번 주 교회소식'));if(!newsCard)return;const weeklySection=newsCard.closest('section');if(!weeklySection)return;const sec=document.createElement('section');sec.className='home-cts';sec.innerHTML=`<div class="container"><div class="home-cts-grid"><a class="home-cts-thumb" href="https://youtu.be/0tFPehAxuXA?si=nH2nQW9UFcG66bV-" target="_blank" rel="noopener" aria-label="CTS 신앙에세이 우린 사랑만 하며 살아야 합니다 영상 보기"><span class="home-cts-play">▶</span></a><div class="home-cts-copy"><div class="kicker">FEATURED · CTS 신앙에세이</div><h2>우린 사랑만 하며 살아야 합니다</h2><p>CTS 신앙에세이에서 전하는 이동호 담임목사의 짧은 신앙 이야기입니다.</p><div class="home-cts-actions"><a href="https://youtu.be/0tFPehAxuXA?si=nH2nQW9UFcG66bV-" target="_blank" rel="noopener">▶ 영상 보기</a><a class="secondary" href="/staff.html#cts-faith-essay">CTS 신앙에세이 2편 보기 →</a></div></div></div></div>`;weeklySection.insertAdjacentElement('afterend',sec)}
   function addMeditationLink(){
-    const card=document.getElementById('latestSermonCard');if(!card)return;
-    if(card.querySelector('.sermon-meditation-link'))return;
-    const meta=card.querySelector('.feature-meta');
-    const link=document.createElement('a');link.className='sermon-meditation-link';link.href='/weekly-meditation.html?v=meddirect2';link.innerHTML=`<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4.5 6.5c4.6-.9 8.4.1 11.5 3v16c-3.1-2.9-6.9-3.9-11.5-3V6.5Z"/><path d="M27.5 6.5c-4.6-.9-8.4.1-11.5 3v16c3.1-2.9 6.9-3.9 11.5-3V6.5Z"/></svg><span>이번 주 말씀묵상 보기</span><span class="sermon-meditation-arrow">→</span>`;
-    if(meta)meta.insertAdjacentElement('afterend',link);else card.appendChild(link);
-    link.addEventListener('click',e=>e.stopPropagation());
+    /* The meditation CTA is static in index.html. Do not inject a second copy. */
+    return;
   }
   function cleanHeroSermonMeta(){
     document.querySelectorAll('.hero-slide').forEach(slide=>{
