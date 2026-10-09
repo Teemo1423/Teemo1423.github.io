@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mohyeonsomang-pwa-v13-clean-html';
+const CACHE_NAME = 'mohyeonsomang-pwa-v14-fresh-admin';
 const APP_SHELL = [
   '/',
   '/app-download.html',
@@ -50,8 +50,8 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  if (url.origin === self.location.origin && (url.pathname === '/content/news.json' || url.pathname === '/' || url.pathname === '/index.html' || url.pathname.endsWith('.html'))) {
-    event.respondWith(fetch(new Request(event.request, {cache:'reload'})).catch(() => caches.match(event.request).then(cached => cached || caches.match('/'))));
+  if (url.origin === self.location.origin && (url.pathname === '/content/news.json' || url.pathname === '/admin.html' || url.pathname.startsWith('/js/admin') || url.pathname === '/' || url.pathname === '/index.html' || url.pathname.endsWith('.html'))) {
+    event.respondWith(fetch(new Request(event.request, {cache:'no-store'})).catch(() => caches.match(event.request).then(cached => cached || caches.match('/'))));
     return;
   }
 
