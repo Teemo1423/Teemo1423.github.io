@@ -25,7 +25,7 @@
   window.renderNews=function(){
     normalizeAll();const e=document.querySelector('#newsList');if(!e)return;
     const f=typeof newsFilter==='string'?newsFilter:'all';
-    const rows=news.map((x,i)=>({x,i})).filter(({x})=>f==='all'||(f==='story'?String(x.category||x.type||'').toLowerCase()==='story':String(x.category||x.type||'').toLowerCase()!=='story')).sort((a,b)=>String(b.x.date||'').localeCompare(String(a.x.date||'')));
+    const rows=news.map((x,i)=>({x,i})).filter(({x})=>f==='all'||(f==='story'?String(x.category||x.type||'').toLowerCase()==='story':String(x.category||x.type||'').toLowerCase()!=='story')).sort((a,b)=>String(b.x.date||'').localeCompare(String(a.x.date||'')) || a.i-b.i);
     const et=document.getElementById('newsEditorTitle'),ed=document.getElementById('newsEditorDesc');
     if(et)et.textContent=f==='story'?'모현소망 이야기':f==='notice'?'주보 · 공지':'전체 교회소식';
     if(ed)ed.textContent=f==='story'?'교회 밖에서도 이어지는 모현소망교회의 이야기를 관리합니다.':f==='notice'?'주보와 일반 공지·행사를 관리합니다.':'공지와 모현소망 이야기를 한눈에 관리합니다.';
@@ -38,11 +38,11 @@
       const old=document.getElementById('storyTypePicker');if(old){old.remove();return}
       const box=document.createElement('div');box.id='storyTypePicker';box.innerHTML='<div style="position:fixed;inset:0;background:rgba(10,28,21,.42);z-index:9998"></div><div style="position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(420px,calc(100vw - 36px));background:#fff;border-radius:24px;padding:22px;z-index:9999;box-shadow:0 24px 70px rgba(0,0,0,.2)"><h3 style="margin:0 0 8px;font-size:22px">게시물 유형 선택</h3><p style="margin:0 0 18px;color:#718078">어떤 이야기를 등록할까요?</p><div style="display:grid;gap:10px"><button type="button" onclick="createStoryPost(\'youtube\')" style="min-height:58px;font-size:16px;font-weight:800">🎬 YouTube 영상 게시물</button><button type="button" onclick="createStoryPost(\'article\')" style="min-height:58px;font-size:16px;font-weight:800">🖼️ 일반 · 기사 게시물</button><button type="button" class="ghost" onclick="document.getElementById(\'storyTypePicker\').remove()">취소</button></div></div>';document.body.appendChild(box);return;
     }
-    news.unshift({date:new Date().toISOString().slice(0,10),title:'새 교회소식',subtitle:'',text:'',body:'',image:'',category:'notice'});renderNews();dirty();
+    news.unshift({date:new Date().toLocaleDateString('sv-SE'),title:'새 교회소식',subtitle:'',text:'',body:'',image:'',category:'notice'});renderNews();dirty();
   };
   window.createStoryPost=function(type){
     document.getElementById('storyTypePicker')?.remove();
-    const youtube=type==='youtube';news.unshift({date:new Date().toISOString().slice(0,10),title:youtube?'새 YouTube 이야기':'새 모현소망 이야기',subtitle:'',text:'',body:'',image:'',externalUrl:'',category:'story',postType:youtube?'youtube':'article'});renderNews();dirty();window.scrollTo({top:0,behavior:'smooth'});
+    const youtube=type==='youtube';news.unshift({date:new Date().toLocaleDateString('sv-SE'),title:youtube?'새 YouTube 이야기':'새 모현소망 이야기',subtitle:'',text:'',body:'',image:'',externalUrl:'',category:'story',postType:youtube?'youtube':'article'});renderNews();dirty();window.scrollTo({top:0,behavior:'smooth'});
   };
 
   const baseSaveNews=window.saveNews;
