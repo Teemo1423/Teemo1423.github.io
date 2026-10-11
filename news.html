@@ -25,8 +25,8 @@
     Array.prototype.forEach.call(pager.querySelectorAll('button[data-p]:not(:disabled)'),function(b){b.onclick=function(){page=Number(b.getAttribute('data-p'));render()}});
   }
   tabs.forEach(function(t){t.onclick=function(){filter=t.getAttribute('data-filter')||'all';page=1;render()}});
-  var params0=new URLSearchParams(location.search),q=params0.get('category'),wanted0=params0.get('post');if(q==='story'||q==='notice')filter=q;
-  fetch('/content/news.json?v=direct-notice-20261007',{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('news');return r.json()}).then(function(data){items=Array.isArray(data)?data:[];if(wanted0){if(q==='story'||q==='notice')filter=q;var list=current(),idx=list.findIndex(function(n){return String(n.title||'')===wanted0});if(idx>=0)page=Math.floor(idx/PER_PAGE)+1}render()}).catch(function(e){console.error(e);box.innerHTML='<div class="news-empty">교회소식을 불러오지 못했습니다.</div>'});
+  var params0=new URLSearchParams(location.search),q=params0.get('category'),wanted0=params0.get('post');if(q==='story'||q==='notice')filter=q;else if(wanted0)filter='notice';
+  fetch('/content/news.json?v=direct-notice-20261007',{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('news');return r.json()}).then(function(data){items=Array.isArray(data)?data:[];if(wanted0){if(q==='story'||q==='notice')filter=q;else filter='notice';var list=current(),idx=list.findIndex(function(n){return String(n.title||'')===wanted0});if(idx>=0)page=Math.floor(idx/PER_PAGE)+1}render()}).catch(function(e){console.error(e);box.innerHTML='<div class="news-empty">교회소식을 불러오지 못했습니다.</div>'});
 })();
 </script><script src="/js/nav-dropdowns.js?v=remove-media-public-20261007"></script><!-- deployment-refresh:2026-10-06 -->
 </body></html>
