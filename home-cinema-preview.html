@@ -314,6 +314,11 @@ body.compact-preview .first-visit a,body.compact-preview [class*="first-visit"] 
 .hero-slide{background-position:center center!important;align-items:center!important}
 .hero-slide:before{background:linear-gradient(90deg,rgba(8,23,20,.68) 0%,rgba(8,23,20,.35) 45%,rgba(8,23,20,.04) 100%)!important}
 .hero-slide .container{padding:0 7.5vw!important;max-width:100%!important}
+.hero-slide .glass-panel{display:block!important;visibility:visible!important;opacity:1!important;transform:none!important;position:relative!important;z-index:10!important;color:#fff!important}
+.hero-slide .glass-panel *{visibility:visible!important;opacity:1!important}
+.hero-slide .glass-panel h1,.hero-slide .glass-panel h2,.hero-slide .glass-panel p,.hero-slide .glass-panel .eyebrow{color:#fff!important}
+.hero-slide .container{z-index:10!important}
+.hero-slide:before{z-index:1!important;pointer-events:none!important}
 .glass-panel{width:min(1150px,90vw)!important;max-width:none!important;padding:0!important;background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border:0!important;border-radius:0!important;box-shadow:none!important}
 .glass-panel h1{font-size:clamp(58px,5.5vw,92px)!important;line-height:1.12!important;font-weight:900!important;letter-spacing:-.055em!important;max-width:1150px!important;text-shadow:0 3px 24px rgba(0,0,0,.25)}
 .glass-panel h2{font-size:clamp(52px,5vw,82px)!important;line-height:1.14!important;font-weight:900!important;letter-spacing:-.05em!important;text-shadow:0 3px 24px rgba(0,0,0,.25)}
