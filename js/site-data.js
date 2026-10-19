@@ -93,12 +93,6 @@
       await initHeroCarousel(site);
     }catch(e){console.warn('CMS load failed',e)}
 
-    if((location.pathname==='/'||location.pathname.endsWith('/index.html'))){
-      const firstHero=document.querySelector('.hero-slide[data-bg="site"] .hero-actions');
-      if(firstHero&&!firstHero.querySelector('a[href="/staff.html"]')){
-        const a=document.createElement('a');a.className='hero-btn alt';a.href='/staff.html';a.textContent='소개 인사';firstHero.appendChild(a);
-      }
-    }
     await renderGallery();
     const path=location.pathname;
     if(path==='/'||path.endsWith('/index.html')){
