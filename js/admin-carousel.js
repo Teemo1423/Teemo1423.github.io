@@ -66,7 +66,19 @@
       window.__carouselLoadWrapped=true;
       window.loadAll=async function(...args){const result=await oldLoadAll.apply(this,args);renderCarouselEditor();return result};
     }
-    setTimeout(renderCarouselEditor,0);
+    // The editor extension may load while login/loadAll is still in progress.
+    // Refresh when the underlying sermon/news data arrives, including on iOS Safari.
+    let lastSignature='';
+    const refreshIfChanged=()=>{
+      if(!document.getElementById('carouselEditorGrid'))return;
+      const signature=[Array.isArray(sermons)?sermons.length:-1,Array.isArray(news)?news.length:-1,
+        Array.isArray(sermons)?latestIndex(sermons):-1,Array.isArray(news)?latestIndex(news):-1].join(':');
+      if(signature!==lastSignature){lastSignature=signature;renderCarouselEditor()}
+    };
+    refreshIfChanged();
+    window.addEventListener('focus',refreshIfChanged);
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshIfChanged()});
+    setInterval(refreshIfChanged,700);
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);else install();
 })();
