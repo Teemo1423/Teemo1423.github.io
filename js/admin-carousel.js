@@ -12,24 +12,24 @@
   }
   function refFor(c){
     if(c.type==='site') return {value:site?.[c.field]||'',target:`site:${c.field}`};
-    const arr=c.type==='news'?news:sermons,idx=latestIndex(arr);
-    return {value:idx>=0?(arr[idx]?.image||''):'',target:idx>=0?`${c.type}:${idx}`:''};
+    const override=c.type==='sermons'?'carouselSermonImage':'carouselNewsImage';
+    return {value:site?.[override]||'',target:`site:${override}`};
+
   }
   function setValue(c,v){
-    if(c.type==='site') site[c.field]=v;
-    else {const arr=c.type==='news'?news:sermons,idx=latestIndex(arr);if(idx>=0)arr[idx].image=v}
+    site[c.type==='site'?c.field:(c.type==='sermons'?'carouselSermonImage':'carouselNewsImage')]=v;
     dirty();renderCarouselEditor();
   }
   window.renderCarouselEditor=function(){
     const box=document.getElementById('carouselEditorGrid');if(!box)return;
-    box.innerHTML=cfg.map((c,i)=>{const r=refFor(c),v=r.value;return `<article class="slot-card"><div class="slot-head"><b>${c.label}</b><span>16:9 권장</span></div><p class="hint">${c.desc}</p><div class="slot-preview" style="${v?`background-image:url('${v}?v=${Date.now()}')`:''}"></div><input value="${v||''}" placeholder="이미지 경로" oninput="carouselSet(${i},this.value)"><div class="slot-actions"><button class="ghost" ${r.target?'':'disabled'} onclick="carouselPick(${i})">기존 이미지</button><button ${r.target?'':'disabled'} onclick="carouselUpload(${i})">새 이미지</button><button class="ghost" ${r.target?'':'disabled'} onclick="carouselClear(${i})">비우기</button></div>${!r.target?'<p class="hint">먼저 설교/교회소식을 1개 이상 등록하세요.</p>':''}</article>`}).join('');
+    box.innerHTML=cfg.map((c,i)=>{const r=refFor(c),v=r.value;return `<article class="slot-card"><div class="slot-head"><b>${c.label}</b><span>16:9 권장</span></div><p class="hint">${c.desc}</p><div class="slot-preview" style="${v?`background-image:url('${v}?v=${Date.now()}')`:''}"></div><input value="${v||''}" placeholder="이미지 경로" oninput="carouselSet(${i},this.value)"><div class="slot-actions"><button class="ghost" ${r.target?'':'disabled'} onclick="carouselPick(${i})">기존 이미지</button><button ${r.target?'':'disabled'} onclick="carouselUpload(${i})">새 이미지</button><button class="ghost" ${r.target?'':'disabled'} onclick="carouselClear(${i})">비우기</button></div></article>`}).join('');
   };
   window.carouselSet=(i,v)=>setValue(cfg[i],v);
   // Carousel backgrounds are stored in different JSON files; save the active source.
   const oldSaveCurrent=window.saveCurrent;
   if(typeof oldSaveCurrent==='function')window.saveCurrent=async function(...args){
     if(currentPage!=='carousel')return oldSaveCurrent.apply(this,args);
-    try{status('캐러셀 저장 중...');await saveSite();await saveSermons();await saveNews();clean();status('캐러셀 저장 완료.')}catch(e){status('저장 실패: '+e.message,false)}
+    try{status('캐러셀 저장 중...');await saveSite();clean();status('캐러셀 저장 완료.')}catch(e){status('저장 실패: '+e.message,false)}
   };
   window.carouselPick=i=>{const r=refFor(cfg[i]);if(r.target)openMediaPicker(r.target)};
   window.carouselClear=i=>setValue(cfg[i],'');
@@ -53,7 +53,7 @@
     }
     b.onclick=e=>{e.preventDefault();e.stopPropagation();openCarousel()};
     if(!editor.querySelector('[data-page="carousel"]')){
-      const s=document.createElement('section');s.className='page';s.dataset.page='carousel';s.innerHTML='<section class="card"><div class="section-head"><div><h2>메인 캐러셀 배경</h2><p class="muted">각 슬라이드의 배경을 독립적으로 교체합니다. 2번은 최신 설교, 3번은 최신 교회소식의 대표 이미지와 연결됩니다.</p></div></div><div id="carouselEditorGrid" class="slot-grid"></div></section>';
+      const s=document.createElement('section');s.className='page';s.dataset.page='carousel';s.innerHTML='<section class="card"><div class="section-head"><div><h2>메인 캐러셀 배경</h2><p class="muted">각 슬라이드의 배경을 독립적으로 교체합니다. 2번과 3번은 게시물 대표 이미지와 별도로 설정되며, 비우면 최신 게시물 이미지가 사용됩니다.</p></div></div><div id="carouselEditorGrid" class="slot-grid"></div></section>';
       const savebar=editor.querySelector('.savebar');editor.insertBefore(s,savebar||null);
     }
     const oldSelect=window.selectMedia;
