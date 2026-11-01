@@ -52,8 +52,8 @@
     const scripture=latestSermon?String(latestSermon.text||'').split('·')[0].trim():'';
     const slides=[
       {label:'WELCOME TO MOHYEON SOMANG CHURCH',title:site.heroTitle||'말씀 안에서 함께 자라고\n사랑으로 세상을 섬기는 교회',text:site.heroText||'',image:site.heroImage||site.churchFrontImage||'',meta:[site.denomination,site.pastor,site.slogan].filter(Boolean),actions:[['예배 안내','/worship.html',false],['교회 소개','/about.html',true]]},
-      latestSermon&&{label:'LATEST SERMON',title:latestSermon.title||'최근 설교',text:latestSermon.text||'',image:latestSermon.image||site.worshipImage||site.heroImage||'',meta:[latestSermon.date,scripture,site.pastor].filter(Boolean),actions:[['설교 보기','/sermons.html#sermon-0',false]]},
-      latestNews&&{label:'CHURCH NEWS',title:latestNews.title||'교회소식',text:latestNews.text||'',image:latestNews.image||site.churchFrontImage||site.heroImage||'',meta:[latestNews.date,'모현소망교회'].filter(Boolean),actions:[['교회소식 보기','/news.html?category=notice&post='+encodeURIComponent(String(latestNews.title||'')),false],['사진첩','/gallery.html',true]]}
+      latestSermon&&{label:'LATEST SERMON',title:latestSermon.title||'최근 설교',text:latestSermon.text||'',image:site.carouselSermonImage||latestSermon.image||site.worshipImage||site.heroImage||'',meta:[latestSermon.date,scripture,site.pastor].filter(Boolean),actions:[['설교 보기','/sermons.html#sermon-0',false]]},
+      latestNews&&{label:'CHURCH NEWS',title:latestNews.title||'교회소식',text:latestNews.text||'',image:site.carouselNewsImage||latestNews.image||site.churchFrontImage||site.heroImage||'',meta:[latestNews.date,'모현소망교회'].filter(Boolean),actions:[['교회소식 보기','/news.html?category=notice&post='+encodeURIComponent(String(latestNews.title||'')),false],['사진첩','/gallery.html',true]]}
     ].filter(Boolean);
     if(!slides.length)return;
     hero.classList.add('hero-glass');
