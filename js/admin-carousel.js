@@ -21,10 +21,10 @@
   }
   window.renderCarouselEditor=function(){
     const box=document.getElementById('carouselEditorGrid');if(!box)return;
-    const field=(c,i,mobile)=>{const r=refFor(c,mobile),v=r.value,ratio=mobile?'1:1':'16:9';
+    const field=(c,i,mobile)=>{const r=refFor(c,mobile),v=r.value,ratio=mobile?'1:1 (1080 × 1080px)':'16:9 (1920 × 1080px)';
       const display=v||(!mobile?'':refFor(c,false).value);
       const preview=display?`background-image:url("${esc(display)}")`:'';
-      return `<div class="carousel-device"><div class="slot-head"><b>${mobile?'📱 모바일 이미지':'🖥️ PC 이미지'}</b><span>${ratio}</span></div><div class="slot-preview" style="${preview};aspect-ratio:${mobile?'1/1':'16/9'};height:auto;background-size:cover;background-position:center"></div><label>${mobile?'모바일 이미지 경로 (비우면 PC 이미지 사용)':'PC 이미지 경로'}</label><input value="${esc(v)}" placeholder="${mobile?'미등록 시 PC 이미지 사용':'이미지 경로'}" oninput="carouselSet(${i},this.value,${mobile})"><div class="slot-actions"><button class="ghost" onclick="carouselPick(${i},${mobile})">기존 이미지</button><button onclick="carouselUpload(${i},${mobile})">새 이미지</button><button class="ghost" onclick="carouselClear(${i},${mobile})">비우기</button></div></div>`;
+      return `<div class="carousel-device"><div class="slot-head"><b>${mobile?'📱 모바일 이미지':'🖥️ PC 이미지 · 가로형'}</b><span>${ratio}</span></div><div class="slot-preview" style="${preview};aspect-ratio:${mobile?'1/1':'16/9'};height:auto;background-size:cover;background-position:center"></div><label>${mobile?'모바일 이미지 경로 (비우면 PC 이미지 사용)':'PC 이미지 경로'}</label><input value="${esc(v)}" placeholder="${mobile?'미등록 시 PC 이미지 사용':'이미지 경로'}" oninput="carouselSet(${i},this.value,${mobile})"><div class="slot-actions"><button class="ghost" onclick="carouselPick(${i},${mobile})">기존 이미지</button><button onclick="carouselUpload(${i},${mobile})">새 이미지</button><button class="ghost" onclick="carouselClear(${i},${mobile})">비우기</button></div></div>`;
     };
     box.innerHTML=cfg.map((c,i)=>`<article class="slot-card" style="width:100%;max-width:none"><h3>${c.label}</h3><p class="hint">${c.desc}</p><div class="carousel-device-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:18px">${field(c,i,false)}${field(c,i,true)}</div></article>`).join('');
   };
@@ -45,7 +45,7 @@
   };
   function openCarousel(){
     currentPage='carousel';document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.dataset.page==='carousel'));document.querySelectorAll('#sideNav button').forEach(x=>x.classList.toggle('active',x.dataset.page==='carousel'));
-    document.getElementById('pageTitle').textContent='메인 캐러셀';document.getElementById('pageDesc').textContent='메인 배너 1·2·3번의 PC(16:9)·모바일(1:1) 이미지를 각각 관리합니다.';renderCarouselEditor();window.scrollTo({top:0,behavior:'smooth'});
+    document.getElementById('pageTitle').textContent='메인 캐러셀';document.getElementById('pageDesc').textContent='메인 배너 1·2·3번의 PC 16:9 (1920×1080px) · 모바일 1:1 (1080×1080px) 이미지를 각각 관리합니다.';renderCarouselEditor();window.scrollTo({top:0,behavior:'smooth'});
   }
   window.openCarouselEditor=openCarousel;
   function install(){
