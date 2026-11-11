@@ -63,7 +63,7 @@ canvasJpeg=async function(file){
 };
 
 /* Dedicated main-carousel editor extension. */
-(()=>{const s=document.createElement('script');s.src='/js/admin-carousel.js?v=carousel-dual-device-20261112';document.head.appendChild(s)})();
+(()=>{const s=document.createElement('script');s.src='/js/admin-carousel.js?v=carousel-ratio-label-20261112';document.head.appendChild(s)})();
 
 /* Church news subtitle editor extension. */
 (()=>{const s=document.createElement('script');s.src='/js/admin-news-subtitle.js?v=newssubtitle1';document.head.appendChild(s)})();
