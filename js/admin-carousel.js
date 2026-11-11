@@ -1,8 +1,8 @@
 (()=>{
   const cfg=[
-    {key:'welcome',label:'1번 · 교회 메인',desc:'Welcome 배너 배경',type:'site',field:'heroImage'},
-    {key:'sermon',label:'2번 · 최신 설교',desc:'최신 설교 캐러셀 배경',type:'sermons'},
-    {key:'news',label:'3번 · 교회소식',desc:'최신 교회소식 캐러셀 배경',type:'news'}
+    {key:'welcome',label:'1번 · 교회 메인',desc:'Welcome 배너 배경',type:'site',field:'heroImage',mobileField:'heroImageMobile'},
+    {key:'sermon',label:'2번 · 최신 설교',desc:'최신 설교 캐러셀 배경',type:'sermons',mobileField:'carouselSermonImageMobile'},
+    {key:'news',label:'3번 · 교회소식',desc:'최신 교회소식 캐러셀 배경',type:'news',mobileField:'carouselNewsImageMobile'}
   ];
   function latestIndex(arr){
     if(!Array.isArray(arr)||!arr.length)return -1;
@@ -10,38 +10,42 @@
     for(let i=1;i<arr.length;i++) if(String(arr[i]?.date||'').localeCompare(String(arr[best]?.date||''))>0) best=i;
     return best;
   }
-  function refFor(c){
-    if(c.type==='site') return {value:site?.[c.field]||'',target:`site:${c.field}`};
-    const override=c.type==='sermons'?'carouselSermonImage':'carouselNewsImage';
-    return {value:site?.[override]||'',target:`site:${override}`};
-
+  const imageKey=(c,mobile=false)=>mobile?c.mobileField:(c.type==='site'?c.field:(c.type==='sermons'?'carouselSermonImage':'carouselNewsImage'));
+  function refFor(c,mobile=false){
+    const key=imageKey(c,mobile);
+    return {value:site?.[key]||'',target:`site:${key}`};
   }
-  function setValue(c,v){
-    site[c.type==='site'?c.field:(c.type==='sermons'?'carouselSermonImage':'carouselNewsImage')]=v;
+  function setValue(c,v,mobile=false){
+    site[imageKey(c,mobile)]=v;
     dirty();renderCarouselEditor();
   }
   window.renderCarouselEditor=function(){
     const box=document.getElementById('carouselEditorGrid');if(!box)return;
-    box.innerHTML=cfg.map((c,i)=>{const r=refFor(c),v=r.value;return `<article class="slot-card"><div class="slot-head"><b>${c.label}</b><span>16:9 권장</span></div><p class="hint">${c.desc}</p><div class="slot-preview" style="${v?`background-image:url('${v}?v=${Date.now()}')`:''}"></div><input value="${v||''}" placeholder="이미지 경로" oninput="carouselSet(${i},this.value)"><div class="slot-actions"><button class="ghost" ${r.target?'':'disabled'} onclick="carouselPick(${i})">기존 이미지</button><button ${r.target?'':'disabled'} onclick="carouselUpload(${i})">새 이미지</button><button class="ghost" ${r.target?'':'disabled'} onclick="carouselClear(${i})">비우기</button></div></article>`}).join('');
+    const field=(c,i,mobile)=>{const r=refFor(c,mobile),v=r.value,ratio=mobile?'1:1':'16:9';
+      const display=v||(!mobile?'':refFor(c,false).value);
+      const preview=display?`background-image:url("${esc(display)}")`:'';
+      return `<div class="carousel-device"><div class="slot-head"><b>${mobile?'📱 모바일 이미지':'🖥️ PC 이미지'}</b><span>${ratio}</span></div><div class="slot-preview" style="${preview};aspect-ratio:${mobile?'1/1':'16/9'};height:auto;background-size:cover;background-position:center"></div><label>${mobile?'모바일 이미지 경로 (비우면 PC 이미지 사용)':'PC 이미지 경로'}</label><input value="${esc(v)}" placeholder="${mobile?'미등록 시 PC 이미지 사용':'이미지 경로'}" oninput="carouselSet(${i},this.value,${mobile})"><div class="slot-actions"><button class="ghost" onclick="carouselPick(${i},${mobile})">기존 이미지</button><button onclick="carouselUpload(${i},${mobile})">새 이미지</button><button class="ghost" onclick="carouselClear(${i},${mobile})">비우기</button></div></div>`;
+    };
+    box.innerHTML=cfg.map((c,i)=>`<article class="slot-card" style="width:100%;max-width:none"><h3>${c.label}</h3><p class="hint">${c.desc}</p><div class="carousel-device-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:18px">${field(c,i,false)}${field(c,i,true)}</div></article>`).join('');
   };
-  window.carouselSet=(i,v)=>setValue(cfg[i],v);
+  window.carouselSet=(i,v,mobile=false)=>setValue(cfg[i],v,mobile);
   // Carousel backgrounds are stored in different JSON files; save the active source.
   const oldSaveCurrent=window.saveCurrent;
   if(typeof oldSaveCurrent==='function')window.saveCurrent=async function(...args){
     if(currentPage!=='carousel')return oldSaveCurrent.apply(this,args);
     try{status('캐러셀 저장 중...');await saveSite();clean();status('캐러셀 저장 완료.')}catch(e){status('저장 실패: '+e.message,false)}
   };
-  window.carouselPick=i=>{const r=refFor(cfg[i]);if(r.target)openMediaPicker(r.target)};
-  window.carouselClear=i=>setValue(cfg[i],'');
-  window.carouselUpload=i=>{
-    const c=cfg[i],r=refFor(c);if(!r.target)return;
+  window.carouselPick=(i,mobile=false)=>{const r=refFor(cfg[i],mobile);if(r.target)openMediaPicker(r.target)};
+  window.carouselClear=(i,mobile=false)=>setValue(cfg[i],'',mobile);
+  window.carouselUpload=(i,mobile=false)=>{
+    const c=cfg[i],r=refFor(c,mobile);if(!r.target)return;
     const inp=document.createElement('input');inp.type='file';inp.accept='image/*';
-    inp.onchange=async()=>{const f=inp.files?.[0];if(!f)return;try{status('캐러셀 이미지 업로드 중...');const p=await uploadBlob(await canvasJpeg(f),f.name);setValue(c,p);await loadImages();status('캐러셀 이미지 적용 완료. 저장을 눌러주세요.')}catch(e){status('업로드 실패: '+e.message,false)}};
+    inp.onchange=async()=>{const f=inp.files?.[0];if(!f)return;try{status('캐러셀 이미지 업로드 중...');const p=await uploadBlob(await canvasJpeg(f),f.name);setValue(c,p,mobile);await loadImages();status('캐러셀 이미지 적용 완료. 저장을 눌러주세요.')}catch(e){status('업로드 실패: '+e.message,false)}};
     inp.click();
   };
   function openCarousel(){
     currentPage='carousel';document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.dataset.page==='carousel'));document.querySelectorAll('#sideNav button').forEach(x=>x.classList.toggle('active',x.dataset.page==='carousel'));
-    document.getElementById('pageTitle').textContent='메인 캐러셀';document.getElementById('pageDesc').textContent='메인 배너 1·2·3번의 배경 이미지를 각각 관리합니다.';renderCarouselEditor();window.scrollTo({top:0,behavior:'smooth'});
+    document.getElementById('pageTitle').textContent='메인 캐러셀';document.getElementById('pageDesc').textContent='메인 배너 1·2·3번의 PC(16:9)·모바일(1:1) 이미지를 각각 관리합니다.';renderCarouselEditor();window.scrollTo({top:0,behavior:'smooth'});
   }
   window.openCarouselEditor=openCarousel;
   function install(){
@@ -53,7 +57,7 @@
     }
     b.onclick=e=>{e.preventDefault();e.stopPropagation();openCarousel()};
     if(!editor.querySelector('[data-page="carousel"]')){
-      const s=document.createElement('section');s.className='page';s.dataset.page='carousel';s.innerHTML='<section class="card"><div class="section-head"><div><h2>메인 캐러셀 배경</h2><p class="muted">각 슬라이드의 배경을 독립적으로 교체합니다. 2번과 3번은 게시물 대표 이미지와 별도로 설정되며, 비우면 최신 게시물 이미지가 사용됩니다.</p></div></div><div id="carouselEditorGrid" class="slot-grid"></div></section>';
+      const s=document.createElement('section');s.className='page';s.dataset.page='carousel';s.innerHTML='<section class="card"><div class="section-head"><div><h2>메인 캐러셀 배경</h2><p class="muted">각 슬라이드의 PC(16:9)·모바일(1:1) 이미지를 독립적으로 등록합니다. 모바일 이미지를 비우면 PC 이미지가 표시됩니다. 2·3번 PC 이미지를 비우면 최신 게시물 이미지를 사용합니다.</p></div></div><div id="carouselEditorGrid" class="slot-grid"></div></section>';
       const savebar=editor.querySelector('.savebar');editor.insertBefore(s,savebar||null);
     }
     const oldSelect=window.selectMedia;
