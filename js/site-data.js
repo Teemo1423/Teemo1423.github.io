@@ -23,7 +23,7 @@
     if(!el)return;
     if(!src){if(el.tagName==='IMG')el.style.display='none';return}
     if(el.tagName==='IMG'){el.style.display='block';el.src=src;el.onerror=()=>{el.style.display='none'}}
-    else{el.style.backgroundImage=el.classList.contains('about-photo')?`url('${src}')`:`linear-gradient(rgba(10,35,26,.18),rgba(10,35,26,.34)),url('${src}')`;const test=new Image();test.onerror=()=>{el.style.backgroundImage='linear-gradient(135deg,#dfe9e3,#eff4f0)'};test.src=src}
+    else{el.style.backgroundImage=el.matches('.about-photo,.worship-heroimg')?`url('${src}')`:`linear-gradient(rgba(10,35,26,.18),rgba(10,35,26,.34)),url('${src}')`;const test=new Image();test.onerror=()=>{el.style.backgroundImage='linear-gradient(135deg,#dfe9e3,#eff4f0)'};test.src=src}
   }
 
   function makeCardLink(el,href,label='자세히 보기',external=false){
