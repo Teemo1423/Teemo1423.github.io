@@ -51,11 +51,54 @@
     @media(min-width:901px) and (max-width:1250px){.site-header .nav{min-height:72px!important;padding:7px 16px!important;gap:16px!important}.site-header .brand{flex-basis:230px!important;width:230px!important;min-width:230px!important;max-width:230px!important;gap:9px!important}.site-header .brand-logo{width:42px!important;height:42px!important;min-width:42px!important;max-width:42px!important;flex-basis:42px!important}.site-header .brand-copy{flex-basis:179px!important;width:179px!important;min-width:179px!important;max-width:179px!important}.site-header .brand-copy small{width:179px!important;font-size:8px!important;letter-spacing:.1em!important;margin-bottom:4px!important}.site-header .brand-copy strong{width:179px!important;font-size:18px!important}.site-header .navlinks.staggered-nav{font-size:14px!important;padding-right:0!important}.staggered-nav .nav-row{height:27px!important;min-height:27px!important;grid-template-rows:27px!important}.staggered-nav .nav-row>a,.staggered-nav .nav-row>.navitem,.staggered-nav .nav-row>.navitem>a{height:27px!important;min-height:27px!important}.staggered-nav .navitem:after{top:27px!important;height:24px!important}.staggered-nav .dropdown{top:39px!important}}
     .quick-icon{color:#27815d!important;background:#eef7f1!important;border:1px solid #d6eadf!important}.quick-icon svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;display:block}.mobile-menu-toggle,.nav-backdrop{display:none!important}.mobile-bottom-nav{display:none}
     @media(max-width:900px){body{padding-bottom:0!important}main{padding-bottom:18px!important}.site-header{position:sticky!important;top:0!important;z-index:1000!important;background:rgba(255,255,255,.98)!important}.site-header .nav{height:70px!important;min-height:70px!important;padding:8px 16px!important;display:flex!important;align-items:center!important;justify-content:center!important;position:relative!important}.site-header .brand{max-width:calc(100% - 94px)!important;margin:auto!important}.site-header .brand-logo{width:38px!important;height:38px!important}.site-header .brand-copy strong{font-size:18px!important;white-space:nowrap!important}.site-header .brand-copy small{font-size:8px!important;white-space:nowrap!important}.site-header .navlinks{display:none!important}.mobile-app-link{display:inline-flex!important;position:absolute;right:14px;top:50%;transform:translateY(-50%);align-items:center;justify-content:center;min-height:34px;padding:0 4px;color:#2f6b4f!important;background:transparent!important;font-size:12px;font-weight:900;text-decoration:none;white-space:nowrap}.mobile-bottom-nav{display:grid!important;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:2000;background:rgba(255,255,255,.98);border-top:1px solid var(--line,#e4e4df);box-shadow:0 -8px 26px rgba(20,54,41,.10);padding:7px 6px calc(7px + env(safe-area-inset-bottom));min-height:72px}.mobile-bottom-nav a{display:flex;min-width:0;min-height:58px;align-items:center;justify-content:center;flex-direction:column;gap:3px;border-radius:12px;color:#66736d;font-size:11px;font-weight:800;line-height:1}.mobile-bottom-nav a .mb-icon{width:28px;height:28px;display:grid;place-items:center;font-size:22px}.mobile-bottom-nav a .mb-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.75}.mobile-bottom-nav a.active{color:var(--green,#2f6b4f);background:#eef5f1}}
+    /* Floating glass bottom navigation: mobile only */
+    @media(max-width:900px){
+      body{padding-bottom:calc(110px + env(safe-area-inset-bottom))!important}
+      main{padding-bottom:24px!important}
+      .mobile-bottom-nav{
+        display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;
+        position:fixed!important;left:14px!important;right:14px!important;
+        bottom:calc(12px + env(safe-area-inset-bottom))!important;
+        width:auto!important;max-width:580px!important;margin:0 auto!important;
+        padding:6px!important;min-height:74px!important;box-sizing:border-box!important;
+        border:1px solid rgba(255,255,255,.84)!important;border-radius:999px!important;
+        background:rgba(247,251,249,.79)!important;
+        -webkit-backdrop-filter:blur(22px) saturate(175%)!important;
+        backdrop-filter:blur(22px) saturate(175%)!important;
+        box-shadow:0 10px 36px rgba(18,55,42,.15),inset 0 1px 1px rgba(255,255,255,.96)!important;
+        isolation:isolate!important;overflow:hidden!important;
+      }
+      .mobile-bottom-nav:before{
+        content:'';position:absolute;z-index:0;pointer-events:none;
+        top:6px;bottom:6px;left:6px;width:calc((100% - 12px)/5);
+        box-sizing:border-box;border-radius:999px;
+        background:rgba(218,234,225,.86);
+        border:1px solid rgba(255,255,255,.76);
+        box-shadow:inset 0 1px 2px rgba(255,255,255,.88),0 2px 8px rgba(29,78,56,.08);
+        transform:translateX(calc(var(--nav-active-index,0)*100%));
+        transition:transform .28s cubic-bezier(.22,1,.36,1)!important;
+      }
+      .mobile-bottom-nav a{
+        position:relative!important;z-index:1!important;
+        min-height:60px!important;padding:7px 0!important;gap:3px!important;
+        border-radius:999px!important;background:transparent!important;
+        color:#61736b!important;font-size:11px!important;font-weight:750!important;
+        transition:color .2s ease,transform .2s ease!important;
+        -webkit-tap-highlight-color:transparent!important;
+      }
+      .mobile-bottom-nav a.active{background:transparent!important;color:#276b4d!important}
+      .mobile-bottom-nav a:active{transform:scale(.95)}
+      .mobile-bottom-nav a:focus-visible{outline:2px solid #287452;outline-offset:-4px}
+      .mobile-bottom-nav a .mb-icon{width:27px!important;height:27px!important;font-size:23px!important}
+      .mobile-bottom-nav a .mb-icon svg{width:24px!important;height:24px!important}
+    }
+    @media(max-width:360px){.mobile-bottom-nav{left:8px!important;right:8px!important}.mobile-bottom-nav a{font-size:10px!important}}
+    @media(prefers-reduced-motion:reduce){.mobile-bottom-nav:before,.mobile-bottom-nav a{transition:none!important}}
   `;document.head.appendChild(s);}
   function ensureFooter(){if(path.endsWith('/admin.html'))return;let footer=document.querySelector('.site-footer');if(!footer){footer=document.createElement('footer');document.body.appendChild(footer)}footer.className='site-footer unified-footer';}
   function replaceQuickIcons(){const worship=document.querySelector('.quick-menu a[href="/worship.html"] .quick-icon');const sermon=document.querySelector('.quick-menu a[href="/sermons.html"] .quick-icon');const news=document.querySelector('.quick-menu a[href="/news.html"] .quick-icon');const gallery=document.querySelector('.quick-menu a[href="/gallery.html"] .quick-icon');const visit=document.querySelector('.quick-menu a[href="/visit.html"] .quick-icon');if(worship)worship.innerHTML=iconChurch;if(sermon)sermon.innerHTML=iconPlay;if(news)news.innerHTML=iconNews;if(gallery)gallery.innerHTML=iconAlbum;if(visit)visit.innerHTML=iconMap;}
   function injectMobileAppLink(){document.querySelector('.mobile-app-link')?.remove();if(isStandalone)return;const nav=document.querySelector('.site-header .nav');if(!nav)return;const a=document.createElement('a');a.className='mobile-app-link';a.href='/app-download.html';a.textContent='앱 설치';nav.appendChild(a);}
-  function injectBottomNav(){document.querySelector('.mobile-bottom-nav')?.remove();const nav=document.createElement('nav');nav.className='mobile-bottom-nav';nav.setAttribute('aria-label','모바일 주요 메뉴');const items=[['⌂','홈','/'],[iconPlay,'설교','/sermons.html'],[iconNews,'소식','/news.html'],[iconPhoto,'사진','/gallery.html'],['☰','더보기','/menu.html']];const morePaths=['/menu.html','/about.html','/staff.html','/newcomers.html','/weekly-meditation.html','/worship.html','/transport.html','/visit.html','/sarangbang.html','/men-mission.html','/women-mission.html','/choir.html','/sunday-school.html','/young-adults.html','/mission-support.html','/app-download.html'];items.forEach(([icon,label,href])=>{const a=document.createElement('a');a.href=href;a.innerHTML=`<span class="mb-icon" aria-hidden="true">${icon}</span><span>${label}</span>`;const isMore=href==='/menu.html'&&morePaths.some(active);if(active(href)||isMore)a.classList.add('active');nav.appendChild(a)});document.body.appendChild(nav);}
+  function injectBottomNav(){document.querySelector('.mobile-bottom-nav')?.remove();const nav=document.createElement('nav');nav.className='mobile-bottom-nav';nav.setAttribute('aria-label','모바일 주요 메뉴');const items=[['⌂','홈','/'],[iconPlay,'설교','/sermons.html'],[iconNews,'소식','/news.html'],[iconPhoto,'사진','/gallery.html'],['☰','더보기','/menu.html']];const morePaths=['/menu.html','/about.html','/staff.html','/newcomers.html','/weekly-meditation.html','/worship.html','/transport.html','/visit.html','/sarangbang.html','/men-mission.html','/women-mission.html','/choir.html','/sunday-school.html','/young-adults.html','/mission-support.html','/app-download.html'];items.forEach(([icon,label,href])=>{const a=document.createElement('a');a.href=href;a.innerHTML=`<span class="mb-icon" aria-hidden="true">${icon}</span><span>${label}</span>`;const isMore=href==='/menu.html'&&morePaths.some(active);if(active(href)||isMore)a.classList.add('active');nav.appendChild(a)});const links=[...nav.querySelectorAll('a')];const current=Math.max(0,links.findIndex(a=>a.classList.contains('active')));nav.style.setProperty('--nav-active-index',String(current));document.body.appendChild(nav);let previous=null;try{previous=sessionStorage.getItem('church-nav-last-index');sessionStorage.removeItem('church-nav-last-index')}catch(e){}if(previous!==null&&/^[0-4]$/.test(previous)&&Number(previous)!==current){nav.style.setProperty('--nav-active-index',previous);requestAnimationFrame(()=>requestAnimationFrame(()=>nav.style.setProperty('--nav-active-index',String(current))))}links.forEach((a,i)=>a.addEventListener('click',()=>{nav.style.setProperty('--nav-active-index',String(i));try{sessionStorage.setItem('church-nav-last-index',String(current))}catch(e){}}));}
   function loadScriptOnce(attr,src){if(document.querySelector(`script[${attr}]`))return;const s=document.createElement('script');s.src=src;s.setAttribute(attr,'1');document.body.appendChild(s);}
   function loadCommonImageAdjust(){loadScriptOnce('data-site-image-adjust','/js/site-image-adjust.js?v=imageadjust3')}
   function loadCommonSeo(){loadScriptOnce('data-site-seo','/js/seo-meta.js?v=navseo2')}
