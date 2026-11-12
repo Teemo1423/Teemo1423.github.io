@@ -131,7 +131,7 @@
       body.church-pwa-mode{padding-bottom:calc(90px + env(safe-area-inset-bottom))!important}
     }
     @media(max-width:900px) and (display-mode:standalone){.mobile-bottom-nav{bottom:calc(24px + env(safe-area-inset-bottom))!important}}
-    @media(max-width:900px) and (display-mode:standalone){body.compact-preview .mobile-bottom-nav{bottom:calc(env(safe-area-inset-bottom) - 24px)!important}}
+    
     @media(max-width:360px){.mobile-bottom-nav{left:8px!important;right:8px!important}.mobile-bottom-nav a{font-size:10px!important}}
     @media(prefers-reduced-motion:reduce){.mobile-bottom-nav:before,.mobile-bottom-nav a{transition:none!important}}
   `;document.head.appendChild(s);}
@@ -160,7 +160,7 @@
     });
     const finish=(e,cancel)=>{
       if(!drag||drag.id!==e.pointerId)return;
-      const state=drag;drag=null;nav.classList.remove('nav-pressed','nav-dragging');
+      const state=drag;drag=null;nav.classList.remove('nav-pressed','nav-dragging');try{if(nav.hasPointerCapture(e.pointerId))nav.releasePointerCapture(e.pointerId)}catch(err){}
       if(!state.moved){if(cancel||state.vertical)setPill(current,false);return}
       suppressClick=true;setTimeout(()=>{suppressClick=false},450);
       if(cancel){setPill(current,false);return}
@@ -174,6 +174,7 @@
     };
     nav.addEventListener('pointerup',e=>finish(e,false));
     nav.addEventListener('pointercancel',e=>finish(e,true));
+    window.addEventListener('blur',()=>{drag=null;nav.classList.remove('nav-pressed','nav-dragging');nav.style.setProperty('--nav-active-index',String(Math.max(0,links.findIndex(a=>a.classList.contains('active')))))});
     nav.addEventListener('click',e=>{if(suppressClick){e.preventDefault();e.stopImmediatePropagation()}},true);
   }
   function loadScriptOnce(attr,src){if(document.querySelector(`script[${attr}]`))return;const s=document.createElement('script');s.src=src;s.setAttribute(attr,'1');document.body.appendChild(s);}
