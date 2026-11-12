@@ -63,7 +63,7 @@
         position:fixed!important;left:14px!important;right:14px!important;
         bottom:calc(12px + env(safe-area-inset-bottom))!important;
         width:auto!important;max-width:580px!important;margin:0 auto!important;
-        padding:6px!important;min-height:74px!important;box-sizing:border-box!important;
+        padding:4px!important;min-height:58px!important;box-sizing:border-box!important;
         border:1px solid rgba(255,255,255,.84)!important;border-radius:999px!important;
         background:rgba(255,255,255,.24)!important;
         -webkit-backdrop-filter:blur(12px) saturate(140%)!important;
@@ -73,7 +73,7 @@
       }
       .mobile-bottom-nav:before{
         content:'';position:absolute;z-index:0;pointer-events:none;
-        top:6px;bottom:6px;left:6px;width:calc((100% - 12px)/5);
+        top:4px;bottom:4px;left:4px;width:calc((100% - 8px)/5);
         box-sizing:border-box;border-radius:999px;
         background:rgba(218,234,225,.38);
         border:1px solid rgba(255,255,255,.76);
@@ -83,9 +83,9 @@
       }
       .mobile-bottom-nav a{
         position:relative!important;z-index:1!important;
-        min-height:60px!important;padding:7px 0!important;gap:3px!important;
+        min-height:50px!important;padding:4px 0!important;gap:1px!important;
         border-radius:999px!important;background:transparent!important;
-        color:#61736b!important;font-size:11px!important;font-weight:750!important;
+        color:#61736b!important;font-size:10px!important;font-weight:750!important;
         transition:color .2s ease,transform .2s ease!important;
         -webkit-tap-highlight-color:transparent!important;
       }
@@ -95,8 +95,8 @@
       .mobile-bottom-nav a:active .mb-icon{transform:scale(.82)}
       .mobile-bottom-nav a.active .mb-icon{transform:scale(1.08)}
       .mobile-bottom-nav a:focus-visible{outline:2px solid #287452;outline-offset:-4px}
-      .mobile-bottom-nav a .mb-icon{width:27px!important;height:27px!important;font-size:23px!important}
-      .mobile-bottom-nav a .mb-icon svg{width:24px!important;height:24px!important}
+      .mobile-bottom-nav a .mb-icon{width:23px!important;height:23px!important;font-size:20px!important}
+      .mobile-bottom-nav a .mb-icon svg{width:21px!important;height:21px!important}
     }
     @media(max-width:360px){.mobile-bottom-nav{left:8px!important;right:8px!important}.mobile-bottom-nav a{font-size:10px!important}}
     @media(prefers-reduced-motion:reduce){.mobile-bottom-nav:before,.mobile-bottom-nav a{transition:none!important}}
@@ -106,7 +106,7 @@
   function injectMobileAppLink(){document.querySelector('.mobile-app-link')?.remove();if(isStandalone)return;const nav=document.querySelector('.site-header .nav');if(!nav)return;const a=document.createElement('a');a.className='mobile-app-link';a.href='/app-download.html';a.textContent='앱 설치';nav.appendChild(a);}
   function injectBottomNav(){document.querySelector('.mobile-bottom-nav')?.remove();const nav=document.createElement('nav');nav.className='mobile-bottom-nav';nav.setAttribute('aria-label','모바일 주요 메뉴');const items=[['⌂','홈','/'],[iconPlay,'설교','/sermons.html'],[iconNews,'소식','/news.html'],[iconPhoto,'사진','/gallery.html'],['☰','더보기','/menu.html']];const morePaths=['/menu.html','/about.html','/staff.html','/newcomers.html','/weekly-meditation.html','/worship.html','/transport.html','/visit.html','/sarangbang.html','/men-mission.html','/women-mission.html','/choir.html','/sunday-school.html','/young-adults.html','/mission-support.html','/app-download.html'];items.forEach(([icon,label,href])=>{const a=document.createElement('a');a.href=href;a.innerHTML=`<span class="mb-icon" aria-hidden="true">${icon}</span><span>${label}</span>`;const isMore=href==='/menu.html'&&morePaths.some(active);if(active(href)||isMore)a.classList.add('active');nav.appendChild(a)});const links=[...nav.querySelectorAll('a')];const current=links.findIndex(a=>a.classList.contains('active'));nav.style.setProperty('--nav-active-index',String(Math.max(0,current)));document.body.appendChild(nav);let previous=null;try{previous=sessionStorage.getItem('church-nav-last-index');sessionStorage.removeItem('church-nav-last-index')}catch(e){}if(previous!==null&&/^[0-4]$/.test(previous)&&Number(previous)!==current){nav.style.setProperty('--nav-active-index',previous);requestAnimationFrame(()=>requestAnimationFrame(()=>nav.style.setProperty('--nav-active-index',String(current))))}links.forEach((a,i)=>a.addEventListener('click',e=>{if(e.defaultPrevented||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0)return;const target=a.getAttribute('href');if(!target)return;const targetUrl=new URL(target,location.href);if(targetUrl.origin!==location.origin)return;e.preventDefault();nav.style.setProperty('--nav-active-index',String(i));links.forEach((link,j)=>link.classList.toggle('active',j===i));try{sessionStorage.setItem('church-nav-last-index',String(i))}catch(err){}if(targetUrl.pathname===location.pathname&&targetUrl.search===location.search)return;setTimeout(()=>{location.href=targetUrl.href},350)}));
     let drag=null,suppressClick=false;
-    const slot=()=>Math.max(1,(nav.clientWidth-12)/5);
+    const slot=()=>Math.max(1,(nav.clientWidth-8)/5);
     const setPill=(i,live)=>{nav.style.setProperty('--nav-active-index',String(i));nav.classList.toggle('nav-dragging',live)};
     nav.addEventListener('pointerdown',e=>{
       if(e.pointerType==='mouse'&&e.button!==0)return;
@@ -121,7 +121,7 @@
       if(!drag.moved&&Math.abs(dx)<7)return;
       if(!drag.moved){drag.moved=true;try{nav.setPointerCapture(e.pointerId)}catch(err){}}
       const rect=nav.getBoundingClientRect();
-      setPill(Math.max(0,Math.min(4,(e.clientX-rect.left-6)/slot()-.5)),true);
+      setPill(Math.max(0,Math.min(4,(e.clientX-rect.left-4)/slot()-.5)),true);
     });
     const finish=(e,cancel)=>{
       if(!drag||drag.id!==e.pointerId)return;
@@ -130,7 +130,7 @@
       suppressClick=true;setTimeout(()=>{suppressClick=false},450);
       if(cancel){setPill(current,false);return}
       const rect=nav.getBoundingClientRect();
-      const index=Math.max(0,Math.min(4,Math.floor((e.clientX-rect.left-6)/slot())));
+      const index=Math.max(0,Math.min(4,Math.floor((e.clientX-rect.left-4)/slot())));
       setPill(index,false);
       links.forEach((a,i)=>a.classList.toggle('active',i===index));
       try{sessionStorage.setItem('church-nav-last-index',String(index))}catch(err){}
