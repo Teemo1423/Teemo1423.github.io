@@ -131,6 +131,7 @@
       body.church-pwa-mode{padding-bottom:calc(90px + env(safe-area-inset-bottom))!important}
     }
     @media(max-width:900px) and (display-mode:standalone){.mobile-bottom-nav{bottom:calc(24px + env(safe-area-inset-bottom))!important}}
+    @media(max-width:900px) and (display-mode:standalone){body.compact-preview .mobile-bottom-nav{bottom:calc(env(safe-area-inset-bottom) - 24px)!important}}
     @media(max-width:360px){.mobile-bottom-nav{left:8px!important;right:8px!important}.mobile-bottom-nav a{font-size:10px!important}}
     @media(prefers-reduced-motion:reduce){.mobile-bottom-nav:before,.mobile-bottom-nav a{transition:none!important}}
   `;document.head.appendChild(s);}
