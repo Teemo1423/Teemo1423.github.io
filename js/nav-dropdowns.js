@@ -62,7 +62,7 @@
       .mobile-bottom-nav{
         display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;
         position:fixed!important;left:14px!important;right:14px!important;
-        bottom:6px!important;
+        bottom:0!important;
         width:auto!important;max-width:580px!important;margin:0 auto!important;
         padding:4px!important;min-height:58px!important;box-sizing:border-box!important;
         border:1px solid rgba(255,255,255,.84)!important;border-radius:999px!important;
