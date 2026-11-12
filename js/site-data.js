@@ -30,6 +30,8 @@
       body:has(.hero-photo-first) .quick-wrap{margin-top:18px!important}
     }
   `;
+  /* Subtle color correction for the first hero photo only (PC and mobile). */
+  style.textContent += '.hero-photo-first .hero-carousel-item[data-hero-slide="0"] .hero-photo-media{filter:brightness(.97) saturate(.90) contrast(.96)!important}';
   document.head.appendChild(style);
 
   function safeImg(el,src){
