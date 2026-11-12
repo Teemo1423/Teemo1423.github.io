@@ -55,7 +55,7 @@
     .mobile-bottom-nav.nav-dragging:before{transition:none!important}
     .mobile-bottom-nav.nav-pressed:before{filter:none!important;box-shadow:inset 0 1px 3px rgba(255,255,255,.65)!important}
     .mobile-bottom-nav a{touch-action:pan-y!important;user-select:none!important;-webkit-user-select:none!important}
-    @media (display-mode:standalone){.mobile-bottom-nav{bottom:calc(10px + env(safe-area-inset-bottom))!important}}
+    
     @media(max-width:900px){
       body{padding-bottom:calc(78px + env(safe-area-inset-bottom))!important}
       main{padding-bottom:24px!important}
@@ -130,6 +130,7 @@
       }
       body.church-pwa-mode{padding-bottom:calc(90px + env(safe-area-inset-bottom))!important}
     }
+    @media(max-width:900px) and (display-mode:standalone){.mobile-bottom-nav{bottom:calc(24px + env(safe-area-inset-bottom))!important}}
     @media(max-width:360px){.mobile-bottom-nav{left:8px!important;right:8px!important}.mobile-bottom-nav a{font-size:10px!important}}
     @media(prefers-reduced-motion:reduce){.mobile-bottom-nav:before,.mobile-bottom-nav a{transition:none!important}}
   `;document.head.appendChild(s);}
