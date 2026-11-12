@@ -53,7 +53,7 @@
     @media(max-width:900px){body{padding-bottom:0!important}main{padding-bottom:18px!important}.site-header{position:sticky!important;top:0!important;z-index:1000!important;background:rgba(255,255,255,.98)!important}.site-header .nav{height:70px!important;min-height:70px!important;padding:8px 16px!important;display:flex!important;align-items:center!important;justify-content:center!important;position:relative!important}.site-header .brand{max-width:calc(100% - 94px)!important;margin:auto!important}.site-header .brand-logo{width:38px!important;height:38px!important}.site-header .brand-copy strong{font-size:18px!important;white-space:nowrap!important}.site-header .brand-copy small{font-size:8px!important;white-space:nowrap!important}.site-header .navlinks{display:none!important}.mobile-app-link{display:inline-flex!important;position:absolute;right:14px;top:50%;transform:translateY(-50%);align-items:center;justify-content:center;min-height:34px;padding:0 4px;color:#2f6b4f!important;background:transparent!important;font-size:12px;font-weight:900;text-decoration:none;white-space:nowrap}.mobile-bottom-nav{display:grid!important;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:2000;background:rgba(255,255,255,.98);border-top:1px solid var(--line,#e4e4df);box-shadow:0 -8px 26px rgba(20,54,41,.10);padding:7px 6px calc(7px + env(safe-area-inset-bottom));min-height:72px}.mobile-bottom-nav a{display:flex;min-width:0;min-height:58px;align-items:center;justify-content:center;flex-direction:column;gap:3px;border-radius:12px;color:#66736d;font-size:11px;font-weight:800;line-height:1}.mobile-bottom-nav a .mb-icon{width:28px;height:28px;display:grid;place-items:center;font-size:22px}.mobile-bottom-nav a .mb-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.75}.mobile-bottom-nav a.active{color:var(--green,#2f6b4f);background:#eef5f1}}
     /* Floating glass bottom navigation: mobile only */
     .mobile-bottom-nav.nav-dragging:before{transition:none!important}
-    .mobile-bottom-nav.nav-pressed:before{filter:brightness(.96);box-shadow:inset 0 2px 7px rgba(25,67,45,.15),0 1px 4px rgba(25,67,45,.08)!important}
+    .mobile-bottom-nav.nav-pressed:before{filter:none!important;box-shadow:inset 0 1px 3px rgba(255,255,255,.65)!important}
     .mobile-bottom-nav a{touch-action:pan-y!important;user-select:none!important;-webkit-user-select:none!important}
     @media(max-width:900px){
       body{padding-bottom:calc(110px + env(safe-area-inset-bottom))!important}
@@ -65,17 +65,17 @@
         width:auto!important;max-width:580px!important;margin:0 auto!important;
         padding:4px!important;min-height:58px!important;box-sizing:border-box!important;
         border:1px solid rgba(255,255,255,.84)!important;border-radius:999px!important;
-        background:rgba(255,255,255,.24)!important;
-        -webkit-backdrop-filter:blur(12px) saturate(140%)!important;
-        backdrop-filter:blur(22px) saturate(175%)!important;
-        box-shadow:0 10px 36px rgba(18,55,42,.15),inset 0 1px 1px rgba(255,255,255,.96)!important;
+        background:rgba(255,255,255,.78)!important;
+        -webkit-backdrop-filter:blur(14px) saturate(105%)!important;
+        backdrop-filter:blur(14px) saturate(105%)!important;
+        box-shadow:0 5px 20px rgba(35,60,50,.09),inset 0 1px 1px rgba(255,255,255,.98)!important;
         isolation:isolate!important;overflow:hidden!important;
       }
       .mobile-bottom-nav:before{
         content:'';position:absolute;z-index:0;pointer-events:none;
         top:4px;bottom:4px;left:4px;width:calc((100% - 8px)/5);
         box-sizing:border-box;border-radius:999px;
-        background:rgba(218,234,225,.38);
+        background:rgba(223,240,232,.78);
         border:1px solid rgba(255,255,255,.76);
         box-shadow:inset 0 1px 2px rgba(255,255,255,.88),0 2px 8px rgba(29,78,56,.08);
         transform:translateX(calc(var(--nav-active-index,0)*100%));
@@ -85,7 +85,7 @@
         position:relative!important;z-index:1!important;
         min-height:50px!important;padding:4px 0!important;gap:1px!important;
         border-radius:999px!important;background:transparent!important;
-        color:#61736b!important;font-size:10px!important;font-weight:750!important;
+        color:#52665c!important;font-size:10px!important;font-weight:750!important;
         transition:color .2s ease,transform .2s ease!important;
         -webkit-tap-highlight-color:transparent!important;
       }
