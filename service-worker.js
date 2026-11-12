@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mohyeonsomang-pwa-v15-fresh-home';
+const CACHE_NAME = 'mohyeonsomang-pwa-v16-home-nav-align';
 const APP_SHELL = [
   '/app-download.html',
   '/app-logo.svg',
