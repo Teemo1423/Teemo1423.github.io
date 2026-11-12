@@ -99,6 +99,27 @@
       .mobile-bottom-nav a .mb-icon{width:23px!important;height:23px!important;font-size:20px!important}
       .mobile-bottom-nav a .mb-icon svg{width:21px!important;height:21px!important}
     }
+    /* Browser: familiar edge-to-edge navigation. Installed PWA: floating glass dock. */
+    @media(max-width:900px){
+      body:not(.church-pwa-mode) .mobile-bottom-nav{
+        left:0!important;right:0!important;bottom:0!important;
+        max-width:none!important;margin:0!important;padding:5px 8px calc(5px + env(safe-area-inset-bottom))!important;
+        min-height:64px!important;border-radius:0!important;
+        border:0!important;border-top:1px solid #dce7e0!important;
+        background:#fff!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+        box-shadow:0 -2px 12px rgba(20,54,41,.06)!important;
+      }
+      body:not(.church-pwa-mode) .mobile-bottom-nav:before{display:none!important}
+      body:not(.church-pwa-mode) .mobile-bottom-nav a{
+        min-height:52px!important;border-radius:10px!important;
+        transition:none!important;color:#607269!important;
+      }
+      body:not(.church-pwa-mode) .mobile-bottom-nav a.active{
+        color:#276b4d!important;background:#edf5f0!important;
+      }
+      body:not(.church-pwa-mode) .mobile-bottom-nav a .mb-icon{transform:none!important}
+      body.church-pwa-mode{padding-bottom:calc(90px + env(safe-area-inset-bottom))!important}
+    }
     @media(max-width:360px){.mobile-bottom-nav{left:8px!important;right:8px!important}.mobile-bottom-nav a{font-size:10px!important}}
     @media(prefers-reduced-motion:reduce){.mobile-bottom-nav:before,.mobile-bottom-nav a{transition:none!important}}
   `;document.head.appendChild(s);}
@@ -106,6 +127,7 @@
   function replaceQuickIcons(){const worship=document.querySelector('.quick-menu a[href="/worship.html"] .quick-icon');const sermon=document.querySelector('.quick-menu a[href="/sermons.html"] .quick-icon');const news=document.querySelector('.quick-menu a[href="/news.html"] .quick-icon');const gallery=document.querySelector('.quick-menu a[href="/gallery.html"] .quick-icon');const visit=document.querySelector('.quick-menu a[href="/visit.html"] .quick-icon');if(worship)worship.innerHTML=iconChurch;if(sermon)sermon.innerHTML=iconPlay;if(news)news.innerHTML=iconNews;if(gallery)gallery.innerHTML=iconAlbum;if(visit)visit.innerHTML=iconMap;}
   function injectMobileAppLink(){document.querySelector('.mobile-app-link')?.remove();if(isStandalone)return;const nav=document.querySelector('.site-header .nav');if(!nav)return;const a=document.createElement('a');a.className='mobile-app-link';a.href='/app-download.html';a.textContent='앱 설치';nav.appendChild(a);}
   function injectBottomNav(){document.querySelector('.mobile-bottom-nav')?.remove();const nav=document.createElement('nav');nav.className='mobile-bottom-nav';nav.setAttribute('aria-label','모바일 주요 메뉴');const items=[['⌂','홈','/'],[iconPlay,'설교','/sermons.html'],[iconNews,'소식','/news.html'],[iconPhoto,'사진','/gallery.html'],['☰','더보기','/menu.html']];const morePaths=['/menu.html','/about.html','/staff.html','/newcomers.html','/weekly-meditation.html','/worship.html','/transport.html','/visit.html','/sarangbang.html','/men-mission.html','/women-mission.html','/choir.html','/sunday-school.html','/young-adults.html','/mission-support.html','/app-download.html'];items.forEach(([icon,label,href])=>{const a=document.createElement('a');a.href=href;a.innerHTML=`<span class="mb-icon" aria-hidden="true">${icon}</span><span>${label}</span>`;const isMore=href==='/menu.html'&&morePaths.some(active);if(active(href)||isMore)a.classList.add('active');nav.appendChild(a)});const links=[...nav.querySelectorAll('a')];const current=links.findIndex(a=>a.classList.contains('active'));nav.style.setProperty('--nav-active-index',String(Math.max(0,current)));document.body.appendChild(nav);let previous=null;try{previous=sessionStorage.getItem('church-nav-last-index');sessionStorage.removeItem('church-nav-last-index')}catch(e){}if(previous!==null&&/^[0-4]$/.test(previous)&&Number(previous)!==current){nav.style.setProperty('--nav-active-index',previous);requestAnimationFrame(()=>requestAnimationFrame(()=>nav.style.setProperty('--nav-active-index',String(current))))}links.forEach((a,i)=>a.addEventListener('click',e=>{if(e.defaultPrevented||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0)return;const target=a.getAttribute('href');if(!target)return;const targetUrl=new URL(target,location.href);if(targetUrl.origin!==location.origin)return;e.preventDefault();nav.style.setProperty('--nav-active-index',String(i));links.forEach((link,j)=>link.classList.toggle('active',j===i));try{sessionStorage.setItem('church-nav-last-index',String(i))}catch(err){}if(targetUrl.pathname===location.pathname&&targetUrl.search===location.search)return;setTimeout(()=>{location.href=targetUrl.href},350)}));
+    if(!isStandalone)return;
     let drag=null,suppressClick=false;
     const slot=()=>Math.max(1,(nav.clientWidth-8)/5);
     const setPill=(i,live)=>{nav.style.setProperty('--nav-active-index',String(i));nav.classList.toggle('nav-dragging',live)};
@@ -147,6 +169,6 @@
   function loadCommonSeo(){loadScriptOnce('data-site-seo','/js/seo-meta.js?v=navseo2')}
   function loadChannelPopup(){if(!isHome)return;if(document.querySelector('script[data-channel-popup]'))return;loadScriptOnce('data-channel-popup','/js/channel-popup.js?v=popupdata1')}
   function loadContentEnhancements(){if(isHome)loadScriptOnce('data-home-enhancements','/js/home-enhancements.js?v=meditationpill1');if(active('/staff.html'))loadScriptOnce('data-staff-enhancements','/js/staff-enhancements.js?v=pastorbio1');if(active('/about.html'))loadScriptOnce('data-about-enhancements','/js/about-enhancements.js?v=contentupgrade1')}
-  function run(){injectStyles();normalizeBrand();document.querySelector('.home-app-cta-wrap')?.remove();document.querySelectorAll('.mobile-menu-toggle,.nav-backdrop').forEach(x=>x.remove());document.querySelectorAll('.navlinks').forEach(buildDesktop);replaceQuickIcons();injectMobileAppLink();ensureFooter();injectBottomNav();loadCommonImageAdjust();loadCommonSeo();loadChannelPopup();loadContentEnhancements();}
+  function run(){const pwa=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;document.body.classList.toggle('church-pwa-mode',pwa);injectStyles();normalizeBrand();document.querySelector('.home-app-cta-wrap')?.remove();document.querySelectorAll('.mobile-menu-toggle,.nav-backdrop').forEach(x=>x.remove());document.querySelectorAll('.navlinks').forEach(buildDesktop);replaceQuickIcons();injectMobileAppLink();ensureFooter();injectBottomNav();loadCommonImageAdjust();loadCommonSeo();loadChannelPopup();loadContentEnhancements();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
 })();
