@@ -6,7 +6,6 @@ const configs={
 };
 const records={};let loaded={};
 const escapeText=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-function key(){return window.currentPage || currentPage}
 function list(type){return document.getElementById(type+'List')}
 function mark(){dirty()}
 async function load(type){if(!token){status('먼저 GitHub 관리자 연결을 해주세요.',false);return}try{const d=await getJson(configs[type].path);records[type]=type==='schoolEditor'?(Array.isArray(d.weekly)?d.weekly:[]):Array.isArray(d)?d:[];loaded[type]=true;render(type)}catch(e){status(configs[type].title+' 로딩 실패: '+e.message,false)}}
@@ -15,5 +14,5 @@ async function save(type){if(!loaded[type])return;try{status(configs[type].title
 document.querySelectorAll('[data-weekly-add]').forEach(btn=>btn.addEventListener('click',async()=>{const type=btn.dataset.weeklyAdd;if(!loaded[type])await load(type);if(!loaded[type])return;const today=new Date();const date=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('.');records[type].unshift({date,title:'새 게시물',questions:type==='sharingEditor'?['','','']:undefined});render(type);mark()}));
 const originalGo=goPage;goPage=function(name){originalGo(name);if(configs[name]&&!loaded[name])load(name)};
 const originalSave=saveCurrent;saveCurrent=function(){if(configs[currentPage])return save(currentPage);return originalSave()};
-const originalAll=saveAll;saveAll=async function(){await originalAll();for(const type of Object.keys(configs)){if(loaded[type]&&document.getElementById('dirtyBadge')?.classList.contains('dirty'))await save(type)}};
+const originalAll=saveAll;saveAll=async function(){await originalAll();for(const type of Object.keys(configs)){if(loaded[type])await save(type)}};
 })();
