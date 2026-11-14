@@ -5,7 +5,7 @@
     {label:'은혜의 말씀',href:'/sermons.html',items:[['주일예배 설교','/sermons.html'],['이번 주 말씀묵상','/weekly-meditation.html']]},
     {label:'사랑방 모임 예배',href:'/sarangbang.html',items:[['사랑방 안내','/sarangbang.html'],['사랑방 나눔','/sarangbang-sharing.html']]},
     {label:'조직/부서',href:'/men-mission.html',items:[['남전도회','/men-mission.html'],['여전도회','/women-mission.html'],['성가대','/choir.html']]},
-    {label:'교회학교',href:'/sunday-school.html',items:[['주일학교','/sunday-school.html'],['주일학교 소식','/sunday-school-news.html'],['청년부','/young-adults.html']]},
+    {label:'교회학교',href:'/sunday-school.html',items:[['주일학교','/sunday-school.html'],['　└ 주일학교 소식','/sunday-school-news.html'],['청년부','/young-adults.html']]},
     {label:'선교·후원',href:'/mission-support.html',items:[]},
     {label:'교회소식',href:'/news.html',items:[['전체 교회소식','/news.html'],['모현소망 이야기','/news.html?category=story'],['사진첩','/gallery.html']]},
     {label:'앱 설치',href:'/app-download.html',items:[]}
