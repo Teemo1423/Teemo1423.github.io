@@ -9,15 +9,15 @@
   "heroImage": "/assets/uploads/1788523687959-IMG_7064.jpg",
   "weekly": [
     {
-      "date": "2026.08",
-      "title": "말씀 안에서 함께 자라요",
+      "date": "2026-11-14",
+      "title": "새 주일학교 소식",
       "scripture": "",
-      "summary": "이번 주 말씀과 활동 내용을 안내합니다.",
+      "summary": "",
       "activity": "",
-      "familyGuide": "가정에서도 오늘 배운 말씀을 함께 나누어 주세요.",
-      "prayer": "아이들이 말씀을 사랑하고 믿음 안에서 자라도록 기도해 주세요.",
-      "nextWeek": "다음 주에도 기쁨으로 만나요.",
-      "image": "/assets/uploads/1788445543550-BD664DED-E15B-459E-90BF-772A91757A35.jpg"
+      "familyGuide": "",
+      "prayer": "",
+      "nextWeek": "",
+      "image": ""
     }
   ]
 }
