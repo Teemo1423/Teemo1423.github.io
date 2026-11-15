@@ -33,7 +33,15 @@
     window.dataLayer = window.dataLayer || [];
     window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
     window.gtag("js", new Date());
-    window.gtag("config", measurementId);
+    // Do not send specific post titles or arbitrary URL query strings to GA4.
+    // Retain only campaign attribution parameters for Kakao channel reporting.
+    const allowedCampaignParams = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
+    const pageForAnalytics = new URL(location.origin + location.pathname);
+    allowedCampaignParams.forEach((name) => {
+      const value = new URLSearchParams(location.search).get(name);
+      if (value && value.length <= 120) pageForAnalytics.searchParams.set(name, value);
+    });
+    window.gtag("config", measurementId, { page_location: pageForAnalytics.href });
 
     const tag = document.createElement("script");
     tag.async = true;
