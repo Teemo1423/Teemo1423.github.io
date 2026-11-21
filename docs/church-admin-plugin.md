@@ -49,3 +49,14 @@ Node.js 20 이상에서 `node tools/church-admin-api/server.mjs`
 - 임시 게시물 식별은 배열 인덱스에 의존한다. SHA 재확인으로 동시 수정 덮어쓰기는 막지만, 운영 단계에서는 안정적인 게시물 ID를 추가해야 한다.
 - 로컬 실행 전 Node.js 20 이상과 환경변수를 준비하고, 비밀키를 저장소에 올리지 않는다.
 - **실제 실행·요청 테스트와 ChatGPT 플러그인 연결은 아직 완료되지 않았다.**
+
+
+## 3단계 — Primary 프로젝트 확인 및 인증 배포 보류 (2026-11-22)
+
+- Supabase Primary 계정에서 프로젝트 `mohyeon-workhub` (`oxlqmxjghelcfskloqkw`, ap-south-1, ACTIVE_HEALTHY)을 확인함.
+- 기존 WORKHUB의 DB 구조를 확인하는 `list_tables` 요청이 데이터베이스 연결 시간 초과로 2회 실패함.
+- 기존 데이터 보호를 위해 **DDL, 관리자 계정 생성, RLS 정책 변경, Edge Function 배포는 실행하지 않음**.
+- 추천: 기존 프로젝트 내 별도 비공개 `church_plugin` 스키마로 권한/감사 로그를 분리하되, 실제 적용 전 기존 테이블 및 인증 정책을 읽기 전용으로 확인할 것.
+- 권한 모델: 관리자 명단은 서버/DB의 신뢰할 수 있는 레코드로 관리하며 `user_metadata`로 권한을 판단하지 않음. 게시물 변경은 별도 API에서 인증·역할·명시적 승인·SHA 충돌 검사 수행.
+- 외부 ChatGPT 플러그인에 기존 로컬 API를 직접 연결하지 말 것. 기존 API는 로컬 공유키 테스트 코드이며 운영 인증이 아님.
+- 후속: DB 연결 복구 → 기존 Auth/테이블 확인 → 격리된 관리자 권한 테이블과 RLS 설계 → API의 검증된 OAuth/OIDC 토큰 검증 → 감사 로그/배포/통합 테스트.
