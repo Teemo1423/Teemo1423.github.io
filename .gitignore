@@ -1,3 +1,7 @@
 _site/
 .sass-cache/
 .jekyll-metadata
+
+# Local administrator credentials and audit records
+tools/church-admin-api/.env
+tools/church-admin-api/audit.local.jsonl
