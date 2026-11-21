@@ -1,0 +1,39 @@
+openapi: 3.1.0
+info:
+  title: Mohyeon Somang Church content API prototype
+  version: 0.1.0
+  description: Read-only local prototype. Not an authenticated administrator API.
+servers:
+  - url: http://localhost:8787
+paths:
+  /health:
+    get:
+      operationId: getHealth
+      summary: Check local prototype health
+      responses:
+        '200':
+          description: OK
+  /v1/posts:
+    get:
+      operationId: listChurchPosts
+      summary: List published church content
+      parameters:
+        - name: board
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [news, sermons, school, sharing]
+      responses:
+        '200':
+          description: Posts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  board: { type: string }
+                  count: { type: integer }
+                  posts:
+                    type: array
+                    items: { type: object }
