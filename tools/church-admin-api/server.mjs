@@ -25,6 +25,7 @@ const server=createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/v1/posts'){
    const data=JSON.parse(await readFile(resolve(root,boards[board]),'utf8'));
    const posts=board==='school'?data.weekly:data;
+   if(!Array.isArray(posts))return send(res,500,{error:'invalid_board_data'});
    return send(res,200,{board,count:posts.length,posts});
   }
   if(!authenticated(req))return send(res,401,{error:'admin_auth_required',hint:'Local staging requires CHURCH_ADMIN_API_KEY and CHURCH_GITHUB_TOKEN'});
