@@ -37,3 +37,15 @@ Node.js 20 이상에서 `node tools/church-admin-api/server.mjs`
 - 관리자 로그인 제공자(OAuth) 및 운영 백엔드 호스팅
 - 기존 GitHub JSON을 계속 원본으로 사용할지 여부
 - 초기 관리 범위(교회소식/설교/주일학교/사랑방)
+
+
+## 2단계 로컬 관리 API (2026-11-22)
+- `tools/church-admin-api/server.mjs`에 서버 전용 Bearer 키 확인, GitHub 저장소 읽기/쓰기, 변경 미리보기, 5분 만료 승인, SHA 충돌 방지, 로컬 감사 로그 추가.
+- **현재 인증은 OAuth가 아니라 로컬 스테이징용 공유 비밀키 방식이다.** 실제 ChatGPT 플러그인 연결 및 외부 배포 금지. OAuth, 사용자별 역할, rate limit, 영구 감사 로그, 보안 검토가 먼저 필요하다.
+- 서버는 127.0.0.1:8787에만 바인딩. 환경변수 `CHURCH_ADMIN_API_KEY` (무작위 32자 이상), `CHURCH_GITHUB_TOKEN` (최소 권한 contents write)가 없으면 쓰기 비활성화.
+- `GET /v1/posts?board=news|sermons|school|sharing` 공개 게시물 로컬 조회.
+- `POST /v1/changes/preview?board=...` 관리자 인증 필수. JSON body 예: `{"operation":"delete","index":0}` 또는 `{"operation":"create","post":{"date":"2026.11.22","title":"예시"}}`.
+- `POST /v1/changes/commit?board=...` 관리자 인증 필수. JSON body: `{"draftId":"미리보기 응답 ID","confirm":true}`.
+- 임시 게시물 식별은 배열 인덱스에 의존한다. SHA 재확인으로 동시 수정 덮어쓰기는 막지만, 운영 단계에서는 안정적인 게시물 ID를 추가해야 한다.
+- 로컬 실행 전 Node.js 20 이상과 환경변수를 준비하고, 비밀키를 저장소에 올리지 않는다.
+- **실제 실행·요청 테스트와 ChatGPT 플러그인 연결은 아직 완료되지 않았다.**
